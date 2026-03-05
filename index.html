@@ -72,7 +72,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(20,20,20,0.9
 .chat-send:disabled{background:#555;cursor:not-allowed;}
 
 /* ── HERO ── */
-.hero{height:calc(100vh - 66px);min-height:560px;max-height:780px;background:var(--dark);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding-top:66px;position:relative;overflow:hidden;}
+.hero{height:calc(50vh - 66px);min-height:300px;max-height:400px;background:var(--dark);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding-top:66px;position:relative;overflow:hidden;}
 .hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(255,255,255,.012) 60px,rgba(255,255,255,.012) 61px),repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(255,255,255,.012) 60px,rgba(255,255,255,.012) 61px);z-index:1;}
 .hero-accent{position:absolute;right:0;top:0;bottom:0;width:50%;background:linear-gradient(135deg,#1f1f1f,#111);clip-path:polygon(8% 0,100% 0,100% 100%,0% 100%);z-index:1;}
 .hero-accent::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(192,36,42,.15),transparent 60%);}
@@ -268,6 +268,35 @@ footer{background:#0d0d0d;border-top:2px solid var(--red);padding:32px 8%;}
 .fbot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #181818;padding-top:16px;}
 .fcopy{color:#333;font-size:11.5px;}
 .ftagline{font-style:italic;color:#3a3a3a;font-size:12.5px;}
+
+
+/* ── LANGUAGE SWITCHER ── */
+.lang-switcher{display:flex;align-items:center;gap:3px;background:#1e1e1e;border:1px solid #2a2a2a;border-radius:4px;padding:3px;}
+.lang-btn{background:none;border:none;color:#666;font-size:11px;font-weight:700;letter-spacing:.06em;padding:4px 7px;border-radius:3px;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.lang-btn.active{background:var(--red);color:#fff;}
+.lang-btn:hover:not(.active){color:#fff;background:#2a2a2a;}
+
+/* ── CUSTOMER LOGIN MODAL ── */
+.login-modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:700;display:none;align-items:center;justify-content:center;padding:20px;}
+.login-modal-ov.open{display:flex;}
+.login-modal{background:#111;border-radius:10px;width:100%;max-width:420px;border:1px solid #2a2a2a;overflow:hidden;}
+.login-modal-hdr{background:var(--red);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;}
+.login-modal-hdr h3{color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase;margin:0;}
+.login-modal-x{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;}
+.login-modal-body{padding:28px;}
+.login-tabs{display:flex;gap:0;margin-bottom:22px;border-bottom:2px solid #2a2a2a;}
+.login-tab{background:none;border:none;color:#555;font-size:13px;font-weight:700;padding:10px 16px;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;}
+.login-tab.active{color:var(--red);border-bottom-color:var(--red);}
+.login-form{display:none;}
+.login-form.active{display:block;}
+.login-fg{margin-bottom:14px;}
+.login-fg label{display:block;font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px;font-weight:600;}
+.login-fg input{width:100%;background:#1a1a1a;border:1px solid #2a2a2a;color:#fff;padding:10px 13px;border-radius:4px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;transition:border-color .2s;}
+.login-fg input:focus{border-color:var(--red);}
+.login-submit{width:100%;background:var(--red);color:#fff;border:none;padding:13px;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;border-radius:4px;cursor:pointer;transition:background .2s;margin-top:6px;}
+.login-submit:hover{background:#a01f24;}
+.login-forgot{text-align:center;margin-top:12px;font-size:12px;color:#555;}
+.login-forgot a{color:var(--copper);text-decoration:none;}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
 @keyframes fadeIn{from{opacity:0;transform:scale(.96);}to{opacity:1;transform:scale(1);}}
@@ -499,7 +528,13 @@ button,.btn-p,.btn-o,.nav-cart,.nav-cta{min-height:44px;}
       </li>
     </ul>
     <div class="nav-right">
-      <button class="nav-cart" onclick="openCart()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg><span class="ccnt" id="navCartCount">0</span></button>
+      <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('es')" id="btn-es">ES</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')" id="btn-fr">FR</button>
+    </div>
+    <button class="nav-cart" onclick="openLoginModal()" style="border-color:#B87333;color:#B87333;gap:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Mi Cuenta</button>
+    <button class="nav-cart" onclick="openCart()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg><span class="ccnt" id="navCartCount">0</span></button>
       <a href="https://wa.me/523223031895" target="_blank" class="nav-cta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp</a>
     </div>
   </div>
@@ -790,6 +825,67 @@ async function sendMessage() {
   // Scroll to bottom
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
+</script>
+
+
+<!-- LOGIN MODAL -->
+<div class="login-modal-ov" id="loginModal">
+  <div class="login-modal">
+    <div class="login-modal-hdr">
+      <h3>Portal de Clientes</h3>
+      <button class="login-modal-x" onclick="closeLoginModal()">✕</button>
+    </div>
+    <div class="login-modal-body">
+      <div class="login-tabs">
+        <button class="login-tab active" onclick="switchLoginTab('signin')">Iniciar Sesión</button>
+        <button class="login-tab" onclick="switchLoginTab('register')">Registrarse</button>
+      </div>
+      <!-- SIGN IN -->
+      <div class="login-form active" id="tab-signin">
+        <div class="login-fg"><label>Teléfono o Email</label><input type="text" placeholder="Ej: 322 303 1895 o tu correo"></div>
+        <div class="login-fg"><label>Contraseña</label><input type="password" placeholder="Tu contraseña"></div>
+        <button class="login-submit" onclick="handleLogin()">Iniciar Sesión</button>
+        <p class="login-forgot"><a href="#">¿Olvidaste tu contraseña?</a> · <a href="https://wa.me/523223031895" target="_blank">Soporte por WhatsApp</a></p>
+      </div>
+      <!-- REGISTER -->
+      <div class="login-form" id="tab-register">
+        <div class="login-fg"><label>Nombre Completo</label><input type="text" placeholder="Tu nombre"></div>
+        <div class="login-fg"><label>Teléfono</label><input type="tel" placeholder="322 303 0000"></div>
+        <div class="login-fg"><label>Email</label><input type="email" placeholder="tu@correo.com"></div>
+        <div class="login-fg"><label>Contraseña</label><input type="password" placeholder="Crea una contraseña"></div>
+        <button class="login-submit" onclick="handleRegister()">Crear Cuenta</button>
+        <p class="login-forgot"><a href="https://wa.me/523223031895" target="_blank">¿Necesitas ayuda? WhatsApp</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openLoginModal(){ document.getElementById('loginModal').classList.add('open'); }
+function closeLoginModal(){ document.getElementById('loginModal').classList.remove('open'); }
+function switchLoginTab(tab){
+  document.querySelectorAll('.login-tab').forEach((t,i)=>t.classList.toggle('active', (tab==='signin'&&i===0)||(tab==='register'&&i===1)));
+  document.getElementById('tab-signin').classList.toggle('active', tab==='signin');
+  document.getElementById('tab-register').classList.toggle('active', tab==='register');
+}
+function handleLogin(){ alert('Portal en construcción. Contáctanos al +52 322 303 1895 o por WhatsApp.'); }
+function handleRegister(){ alert('Registro próximamente disponible. Contáctanos al +52 322 303 1895 para crear tu cuenta.'); }
+
+// Language switcher
+const translations = {
+  es:{ 'mi-cuenta':'Mi Cuenta', 'portal':'Portal de Clientes', 'signin-tab':'Iniciar Sesión', 'register-tab':'Registrarse' },
+  en:{ 'mi-cuenta':'My Account', 'portal':'Customer Portal', 'signin-tab':'Sign In', 'register-tab':'Register' },
+  fr:{ 'mi-cuenta':'Mon Compte', 'portal':'Portail Client', 'signin-tab':'Se Connecter', 'register-tab':'S'inscrire' }
+};
+function setLang(lang){
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('btn-'+lang).classList.add('active');
+  localStorage.setItem('malinal-lang', lang);
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const saved = localStorage.getItem('malinal-lang');
+  if(saved) setLang(saved);
+});
 </script>
 
 </body>
