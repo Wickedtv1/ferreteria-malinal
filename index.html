@@ -298,6 +298,59 @@ footer{background:#0d0d0d;border-top:2px solid var(--red);padding:32px 8%;}
 .login-forgot{text-align:center;margin-top:12px;font-size:12px;color:#555;}
 .login-forgot a{color:var(--copper);text-decoration:none;}
 
+
+/* ── BRANDS SCROLLER ── */
+.brands-bar{background:#111;border-bottom:1px solid #1e1e1e;padding:16px 0;overflow:hidden;position:relative;}
+.brands-bar::before,.brands-bar::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;}
+.brands-bar::before{left:0;background:linear-gradient(to right,#111,transparent);}
+.brands-bar::after{right:0;background:linear-gradient(to left,#111,transparent);}
+.brands-track{display:flex;align-items:center;gap:0;animation:scrollBrands 25s linear infinite;width:max-content;}
+.brand-item{display:flex;align-items:center;padding:0 32px;border-right:1px solid #2a2a2a;position:relative;}
+.brand-name{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;color:#3a3a3a;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;transition:color .3s;}
+.brand-item:hover .brand-name{color:#fff;}
+@keyframes scrollBrands{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+
+/* ── CUSTOMER PORTAL ── */
+.portal-section{padding:80px 8%;background:var(--dark);}
+.portal-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;max-width:900px;margin:0 auto;}
+.portal-info .stitle{color:#fff;}
+.portal-info .stag{color:var(--copper);}
+.portal-info p{color:#777;font-size:14px;line-height:1.7;margin-top:16px;}
+.portal-features{display:flex;flex-direction:column;gap:12px;margin-top:24px;}
+.portal-feature{display:flex;align-items:center;gap:10px;color:#888;font-size:13px;}
+.portal-feature svg{width:16px;height:16px;stroke:var(--copper);flex-shrink:0;}
+.portal-box{background:#161616;border-radius:10px;padding:32px;border:1px solid #252525;}
+.portal-tabs{display:flex;border-bottom:1px solid #252525;margin-bottom:24px;}
+.portal-tab{background:none;border:none;color:#555;font-size:12px;font-weight:700;padding:10px 16px;cursor:pointer;letter-spacing:.08em;text-transform:uppercase;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s;}
+.portal-tab.active{color:var(--red);border-bottom-color:var(--red);}
+.portal-form{display:none;}
+.portal-form.active{display:block;}
+.pfg{margin-bottom:14px;}
+.pfg label{display:block;font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px;font-weight:600;}
+.pfg input{width:100%;background:#111;border:1px solid #2a2a2a;color:#fff;padding:10px 13px;border-radius:4px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;transition:border-color .2s;}
+.pfg input:focus{border-color:var(--red);}
+.pfg-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.portal-submit{width:100%;background:var(--red);color:#fff;border:none;padding:13px;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;border-radius:4px;cursor:pointer;transition:background .2s;margin-top:4px;}
+.portal-submit:hover{background:#a01f24;}
+.portal-msg{text-align:center;margin-top:12px;font-size:12px;color:#555;}
+.portal-msg a{color:var(--copper);text-decoration:none;}
+.portal-dashboard{display:none;padding:16px;}
+.portal-welcome{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:#fff;text-transform:uppercase;margin-bottom:20px;}
+.portal-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+.portal-card{background:#111;border:1px solid #252525;border-radius:6px;padding:16px;}
+.portal-card-num{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;color:var(--red);}
+.portal-card-lbl{font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.08em;margin-top:2px;}
+.portal-invoice-list{display:flex;flex-direction:column;gap:8px;}
+.portal-invoice{display:flex;justify-content:space-between;align-items:center;background:#111;border:1px solid #252525;border-radius:6px;padding:12px 16px;}
+.portal-invoice-id{font-family:'Barlow Condensed',sans-serif;font-size:14px;color:#fff;font-weight:700;}
+.portal-invoice-date{font-size:11px;color:#555;}
+.portal-invoice-amt{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:900;color:var(--red);}
+.portal-invoice-dl{background:none;border:1px solid #2a2a2a;color:#888;padding:5px 10px;border-radius:4px;font-size:11px;cursor:pointer;transition:all .2s;}
+.portal-invoice-dl:hover{border-color:var(--copper);color:var(--copper);}
+.portal-logout{background:none;border:1px solid #2a2a2a;color:#555;padding:8px 16px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;transition:all .2s;margin-top:16px;}
+.portal-logout:hover{border-color:var(--red);color:var(--red);}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
 @keyframes fadeIn{from{opacity:0;transform:scale(.96);}to{opacity:1;transform:scale(1);}}
 select option{background:#111;color:#fff;}
@@ -558,12 +611,42 @@ button,.btn-p,.btn-o,.nav-cart,.nav-cta{min-height:44px;}
   </div>
 </section>
 
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stat"><div class="stat-num">+5,000</div><div class="stat-label">Productos</div></div>
-  <div class="stat"><div class="stat-num">15+</div><div class="stat-label">Años de experiencia</div></div>
-  <div class="stat"><div class="stat-num">8am–7pm</div><div class="stat-label">Horario L–S</div></div>
-  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Compromiso</div></div>
+<!-- BRANDS SCROLLER -->
+<div class="brands-bar">
+  <div class="brands-track">
+    <div class="brand-item"><span class="brand-name">DeWalt</span></div>
+    <div class="brand-item"><span class="brand-name">Makita</span></div>
+    <div class="brand-item"><span class="brand-name">Milwaukee</span></div>
+    <div class="brand-item"><span class="brand-name">Bosch</span></div>
+    <div class="brand-item"><span class="brand-name">Ryobi</span></div>
+    <div class="brand-item"><span class="brand-name">Ridgid</span></div>
+    <div class="brand-item"><span class="brand-name">Porter-Cable</span></div>
+    <div class="brand-item"><span class="brand-name">Black+Decker</span></div>
+    <div class="brand-item"><span class="brand-name">Truper</span></div>
+    <div class="brand-item"><span class="brand-name">Urrea</span></div>
+    <div class="brand-item"><span class="brand-name">Surtek</span></div>
+    <div class="brand-item"><span class="brand-name">Pretul</span></div>
+    <div class="brand-item"><span class="brand-name">Volteck</span></div>
+    <div class="brand-item"><span class="brand-name">Hermex</span></div>
+    <div class="brand-item"><span class="brand-name">Foset</span></div>
+    <div class="brand-item"><span class="brand-name">Fiero</span></div>
+    <div class="brand-item"><span class="brand-name">DeWalt</span></div>
+    <div class="brand-item"><span class="brand-name">Makita</span></div>
+    <div class="brand-item"><span class="brand-name">Milwaukee</span></div>
+    <div class="brand-item"><span class="brand-name">Bosch</span></div>
+    <div class="brand-item"><span class="brand-name">Ryobi</span></div>
+    <div class="brand-item"><span class="brand-name">Ridgid</span></div>
+    <div class="brand-item"><span class="brand-name">Porter-Cable</span></div>
+    <div class="brand-item"><span class="brand-name">Black+Decker</span></div>
+    <div class="brand-item"><span class="brand-name">Truper</span></div>
+    <div class="brand-item"><span class="brand-name">Urrea</span></div>
+    <div class="brand-item"><span class="brand-name">Surtek</span></div>
+    <div class="brand-item"><span class="brand-name">Pretul</span></div>
+    <div class="brand-item"><span class="brand-name">Volteck</span></div>
+    <div class="brand-item"><span class="brand-name">Hermex</span></div>
+    <div class="brand-item"><span class="brand-name">Foset</span></div>
+    <div class="brand-item"><span class="brand-name">Fiero</span></div>
+  </div>
 </div>
 
 <!-- SALES -->
@@ -680,6 +763,71 @@ button,.btn-p,.btn-o,.nav-cart,.nav-cta{min-height:44px;}
     <button class="fsub" onclick="submitForm()">Enviar mensaje →</button>
   </div>
 </section>
+
+
+<!-- CUSTOMER PORTAL -->
+<section class="portal-section" id="mi-cuenta">
+  <div class="portal-grid">
+    <div class="portal-info">
+      <p class="stag" style="color:var(--copper)">Portal de Clientes</p>
+      <h2 class="stitle" style="color:#fff">Tu Cuenta<br>Malinal</h2>
+      <p>Accede a tu historial de compras, descarga facturas fiscales, realiza pedidos en línea y gestiona tu información de cuenta.</p>
+      <div class="portal-features">
+        <div class="portal-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Facturas fiscales descargables</div>
+        <div class="portal-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>Historial de pedidos completo</div>
+        <div class="portal-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Pagos en línea con Mercado Pago</div>
+        <div class="portal-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Promociones y descuentos exclusivos</div>
+      </div>
+    </div>
+    <div class="portal-box">
+      <div class="portal-tabs">
+        <button class="portal-tab active" onclick="switchPortalTab('login')">Iniciar Sesión</button>
+        <button class="portal-tab" onclick="switchPortalTab('register')">Crear Cuenta</button>
+      </div>
+      <!-- LOGIN FORM -->
+      <div class="portal-form active" id="portal-login">
+        <div class="pfg"><label>Email</label><input type="email" id="login-email" placeholder="tu@correo.com"></div>
+        <div class="pfg"><label>Contraseña</label><input type="password" id="login-password" placeholder="Tu contraseña"></div>
+        <button class="portal-submit" onclick="handlePortalLogin()">Iniciar Sesión</button>
+        <p class="portal-msg"><a href="#" onclick="switchPortalTab('reset')">¿Olvidaste tu contraseña?</a></p>
+      </div>
+      <!-- REGISTER FORM -->
+      <div class="portal-form" id="portal-register">
+        <div class="pfg-row">
+          <div class="pfg"><label>Nombre</label><input type="text" id="reg-firstname" placeholder="Nombre"></div>
+          <div class="pfg"><label>Apellido</label><input type="text" id="reg-lastname" placeholder="Apellido"></div>
+        </div>
+        <div class="pfg"><label>Email</label><input type="email" id="reg-email" placeholder="tu@correo.com"></div>
+        <div class="pfg"><label>Teléfono</label><input type="tel" id="reg-phone" placeholder="322 000 0000"></div>
+        <div class="pfg"><label>RFC (opcional)</label><input type="text" id="reg-rfc" placeholder="Para facturación fiscal"></div>
+        <div class="pfg"><label>Contraseña</label><input type="password" id="reg-password" placeholder="Mínimo 6 caracteres"></div>
+        <button class="portal-submit" onclick="handlePortalRegister()">Crear Mi Cuenta</button>
+        <p class="portal-msg">Al registrarte aceptas nuestros términos de uso.</p>
+      </div>
+      <!-- DASHBOARD (shown when logged in) -->
+      <div class="portal-dashboard" id="portal-dashboard">
+        <div class="portal-welcome" id="portal-welcome-name">Bienvenido</div>
+        <div class="portal-cards">
+          <div class="portal-card"><div class="portal-card-num" id="dash-orders">0</div><div class="portal-card-lbl">Pedidos</div></div>
+          <div class="portal-card"><div class="portal-card-num" id="dash-invoices">0</div><div class="portal-card-lbl">Facturas</div></div>
+        </div>
+        <div style="font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">Facturas Recientes</div>
+        <div class="portal-invoice-list" id="dash-invoice-list">
+          <div style="color:#444;font-size:13px;text-align:center;padding:20px;">No hay facturas aún.</div>
+        </div>
+        <button class="portal-logout" onclick="handlePortalLogout()">Cerrar Sesión</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">+5,000</div><div class="stat-label">Productos</div></div>
+  <div class="stat"><div class="stat-num">15+</div><div class="stat-label">Años de experiencia</div></div>
+  <div class="stat"><div class="stat-num">8am–7pm</div><div class="stat-label">Horario L–S</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Compromiso</div></div>
+</div>
 
 <footer>
   <div class="ftop">
@@ -885,6 +1033,161 @@ function setLang(lang){
 document.addEventListener('DOMContentLoaded',()=>{
   const saved = localStorage.getItem('malinal-lang');
   if(saved) setLang(saved);
+});
+</script>
+
+
+<script>
+// ── CUSTOMER PORTAL (Supabase backend) ──
+const SUPABASE_URL = 'https://your-project.supabase.co'; // Replace with actual Supabase URL
+const SUPABASE_KEY = 'your-anon-key'; // Replace with actual Supabase anon key
+
+let currentUser = null;
+
+function switchPortalTab(tab) {
+  document.querySelectorAll('.portal-tab').forEach((t,i) => {
+    t.classList.toggle('active', 
+      (tab==='login'&&i===0)||(tab==='register'&&i===1));
+  });
+  document.getElementById('portal-login').classList.toggle('active', tab==='login');
+  document.getElementById('portal-register').classList.toggle('active', tab==='register');
+}
+
+async function supabaseFetch(endpoint, method, body) {
+  try {
+    const res = await fetch(SUPABASE_URL + endpoint, {
+      method: method || 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + (currentUser?.access_token || SUPABASE_KEY)
+      },
+      body: body ? JSON.stringify(body) : undefined
+    });
+    return await res.json();
+  } catch(e) {
+    return { error: e.message };
+  }
+}
+
+async function handlePortalLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  if (!email || !password) { alert('Por favor llena todos los campos.'); return; }
+
+  const btn = document.querySelector('#portal-login .portal-submit');
+  btn.textContent = 'Iniciando sesión...';
+  btn.disabled = true;
+
+  const data = await supabaseFetch('/auth/v1/token?grant_type=password', 'POST', { email, password });
+
+  if (data.error || data.error_description) {
+    alert('Error: ' + (data.error_description || data.error || 'Credenciales incorrectas'));
+    btn.textContent = 'Iniciar Sesión';
+    btn.disabled = false;
+    return;
+  }
+
+  currentUser = data;
+  localStorage.setItem('malinal_user', JSON.stringify(data));
+  showDashboard(data);
+}
+
+async function handlePortalRegister() {
+  const firstName = document.getElementById('reg-firstname').value.trim();
+  const lastName = document.getElementById('reg-lastname').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const phone = document.getElementById('reg-phone').value.trim();
+  const rfc = document.getElementById('reg-rfc').value.trim();
+  const password = document.getElementById('reg-password').value;
+
+  if (!firstName || !email || !password) { alert('Por favor llena los campos requeridos.'); return; }
+  if (password.length < 6) { alert('La contraseña debe tener mínimo 6 caracteres.'); return; }
+
+  const btn = document.querySelector('#portal-register .portal-submit');
+  btn.textContent = 'Creando cuenta...';
+  btn.disabled = true;
+
+  const data = await supabaseFetch('/auth/v1/signup', 'POST', {
+    email, password,
+    data: { first_name: firstName, last_name: lastName, phone, rfc }
+  });
+
+  if (data.error || data.error_description) {
+    alert('Error: ' + (data.error_description || data.error));
+    btn.textContent = 'Crear Mi Cuenta';
+    btn.disabled = false;
+    return;
+  }
+
+  if (data.id || data.user) {
+    alert('¡Cuenta creada! Revisa tu email para confirmar tu registro.');
+    switchPortalTab('login');
+  }
+  btn.textContent = 'Crear Mi Cuenta';
+  btn.disabled = false;
+}
+
+async function showDashboard(userData) {
+  document.getElementById('portal-login').classList.remove('active');
+  document.getElementById('portal-register').classList.remove('active');
+  document.querySelectorAll('.portal-tab').forEach(t => t.style.display = 'none');
+  document.getElementById('portal-dashboard').style.display = 'block';
+
+  const name = userData.user?.user_metadata?.first_name || userData.user?.email?.split('@')[0] || 'Cliente';
+  document.getElementById('portal-welcome-name').textContent = '¡Hola, ' + name + '!';
+
+  // Load invoices from Supabase
+  const invoices = await supabaseFetch('/rest/v1/invoices?customer_email=eq.' + encodeURIComponent(userData.user?.email) + '&order=created_at.desc&limit=5');
+  
+  if (invoices && !invoices.error && invoices.length > 0) {
+    document.getElementById('dash-invoices').textContent = invoices.length;
+    document.getElementById('dash-orders').textContent = invoices.length;
+    const list = document.getElementById('dash-invoice-list');
+    list.innerHTML = invoices.map(inv => `
+      <div class="portal-invoice">
+        <div>
+          <div class="portal-invoice-id">#${inv.invoice_number || inv.id}</div>
+          <div class="portal-invoice-date">${new Date(inv.created_at).toLocaleDateString('es-MX')}</div>
+        </div>
+        <div class="portal-invoice-amt">$${inv.total?.toLocaleString('es-MX') || '0'}</div>
+        <button class="portal-invoice-dl" onclick="downloadInvoice('${inv.id}')">⬇ PDF</button>
+      </div>
+    `).join('');
+  }
+}
+
+function handlePortalLogout() {
+  currentUser = null;
+  localStorage.removeItem('malinal_user');
+  document.getElementById('portal-dashboard').style.display = 'none';
+  document.querySelectorAll('.portal-tab').forEach(t => t.style.display = '');
+  switchPortalTab('login');
+  document.getElementById('login-email').value = '';
+  document.getElementById('login-password').value = '';
+}
+
+function downloadInvoice(id) {
+  alert('Descargando factura... (Esta función estará disponible cuando se conecte el sistema de facturación)');
+}
+
+// Also update nav Mi Cuenta button to scroll to portal
+function openLoginModal() {
+  document.getElementById('mi-cuenta').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Check if user already logged in
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('malinal_user');
+  if (saved) {
+    try {
+      const userData = JSON.parse(saved);
+      if (userData.access_token) {
+        currentUser = userData;
+        showDashboard(userData);
+      }
+    } catch(e) {}
+  }
 });
 </script>
 
