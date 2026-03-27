@@ -1688,7 +1688,7 @@ function openCategoryPage(k){
     h+="<div class='subcat-grid'>";
     d.subcats.forEach(function(s){
       var count=s.products?s.products.length:0;
-      h+="<div class='subcat-card' onclick='openSubcatDetail(""+k+"",""+s.name+"")'>";
+      h+="<div class='subcat-card' onclick='openSubcatDetail(\""+k+"\",\""+s.name+"\")'>";
       h+="<div class='subcat-body'>";
       h+="<h3 class='subcat-name'>"+s.name+"</h3>";
       if(count>0)h+="<p class='subcat-desc'>"+count+" productos disponibles</p>";
