@@ -16,7 +16,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(20,20,20,0.9
 .nav-logo{height:58px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.6));flex-shrink:0;}
 .nav-links{display:flex;list-style:none;align-items:center;height:100%;}
 .nav-links>li{position:relative;height:100%;display:flex;align-items:center;}
-.nav-links>li>a{color:#bbb;text-decoration:none;font-size:12.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;padding:0 15px;height:100%;display:flex;align-items:center;gap:4px;transition:color .2s;white-space:nowrap;}
+.nav-links>li>a{color:#fff;text-decoration:none;font-size:12.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;padding:0 15px;height:100%;display:flex;align-items:center;gap:4px;transition:color .2s;white-space:nowrap;}
 .nav-links>li>a:hover,.nav-links>li:hover>a{color:var(--red);}
 .arr{font-size:8px;transition:transform .2s;opacity:.6;}
 .nav-links>li:hover>a .arr{transform:rotate(180deg);}
@@ -72,11 +72,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(20,20,20,0.9
 .chat-send:disabled{background:#555;cursor:not-allowed;}
 
 /* ── HERO ── */
-.hero{min-height:500px;background:var(--dark);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding-top:76px;position:relative;overflow:visible;}
+.hero{min-height:500px;background:var(--dark);display:grid;grid-template-columns:1fr 1fr;align-items:stretch;padding-top:0;position:relative;overflow:hidden;margin-top:76px;}
 .hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(255,255,255,.012) 60px,rgba(255,255,255,.012) 61px),repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(255,255,255,.012) 60px,rgba(255,255,255,.012) 61px);z-index:1;}
 .hero-accent{position:absolute;right:0;top:0;bottom:0;width:50%;background:linear-gradient(135deg,#1f1f1f,#111);clip-path:polygon(8% 0,100% 0,100% 100%,0% 100%);z-index:1;}
 .hero-accent::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(192,36,42,.15),transparent 60%);}
-.hero-left{padding:100px 5% 40px 8%;position:relative;z-index:2;animation:fadeUp .8s ease forwards;}
+.hero-left{padding:60px 5% 60px 8%;position:relative;z-index:2;animation:fadeUp .8s ease forwards;}
 .hero-tag{display:inline-block;background:var(--red);color:#fff;padding:3px 10px;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px;}
 .hero-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(28px,3.5vw,48px);font-weight:900;line-height:1.2;color:#fff;text-transform:uppercase;margin-bottom:6px;}
 .hero-title .accent{color:var(--red);}
@@ -625,14 +625,10 @@ button,.btn-p,.btn-o,.nav-cart,.nav-cta{min-height:44px;}
       <a href="#contacto" class="btn-o" data-i18n="btn-contact">Contáctanos</a>
     </div>
   </div>
-  <div class="hero-right" style="display:flex;align-items:center;justify-content:center;position:relative;z-index:2;padding:40px 5% 40px 0;">
-    <div style="position:relative;width:100%;max-width:520px;border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.6);background:#1a1a1a;">
-      <img src="/images/store-front.jpg" alt="Ferretería Malinal" style="width:100%;height:420px;object-fit:cover;object-position:center top;display:block;">
-      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5) 0%,transparent 50%);"></div>
-      <div style="position:absolute;bottom:20px;left:20px;right:20px;">
-        <img src="/images/logo-new.png" alt="Logo Ferretería Malinal" style="height:70px;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,0,0,.8));">
-      </div>
-    </div>
+  <div class="hero-right" style="position:relative;height:100%;min-height:500px;overflow:hidden;">
+    <img src="/images/store-front.jpg" alt="Ferretería Malinal" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right, var(--dark) 0%, rgba(20,20,20,0.3) 40%, transparent 70%);"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);"></div>
 </div>
 </section>
 

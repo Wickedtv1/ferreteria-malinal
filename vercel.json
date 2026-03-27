@@ -2,11 +2,15 @@
     "version": 2,
     "builds": [
           { "src": "api/*.js", "use": "@vercel/node" },
-          { "src": "index.html", "use": "@vercel/static" }
+          { "src": "index.html", "use": "@vercel/static" },
+          { "src": "images/**", "use": "@vercel/static" },
+          { "src": "products.json", "use": "@vercel/static" }
     ],
     "routes": [
           { "src": "/api/products", "dest": "/api/products.js" },
           { "src": "/api/chat", "dest": "/api/chat.js" },
+          { "src": "/images/(.*)", "dest": "/images/$1" },
+          { "src": "/products.json", "dest": "/products.json" },
           { "src": "/(.*)", "dest": "/index.html" }
     ]
 }
