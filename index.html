@@ -82,7 +82,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(20,20,20,0.9
 .hero-title .accent{color:var(--red);}
 .hero-sub{font-family:'Barlow Condensed',sans-serif;font-size:clamp(12px,1.2vw,16px);font-weight:400;color:#666;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;}
 .hero-tagline{font-size:13px;color:#888;font-style:italic;margin-bottom:24px;}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;position:relative;z-index:3;}
 .btn-p{background:var(--red);color:#fff;padding:9px 20px;border-radius:4px;text-decoration:none;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;transition:all .2s;border:2px solid var(--red);}
 .btn-p:hover{background:transparent;color:var(--red);}
 .btn-o{background:transparent;color:#fff;padding:9px 20px;border-radius:4px;text-decoration:none;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border:2px solid #3a3a3a;transition:all .2s;}
@@ -148,8 +148,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(20,20,20,0.9
 .cat-card:nth-child(1) .cat-icon{width:36px;height:36px;}
 .cat-name{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;color:#fff;text-transform:uppercase;line-height:1;}
 .cat-card:nth-child(1) .cat-name{font-size:28px;}
-.cat-subs{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px;opacity:0;transform:translateY(6px);transition:all .25s;}
-.cat-card:hover .cat-subs{opacity:1;transform:translateY(0);}
+.cat-subs{display:none;}
+.cat-card:hover .cat-subs{display:none;}
 .cat-sub{background:rgba(255,255,255,.15);backdrop-filter:blur(4px);color:#fff;font-size:10px;padding:3px 8px;border-radius:12px;letter-spacing:.04em;white-space:nowrap;}
 
 /* row heights */
@@ -527,75 +527,75 @@ button,.btn-p,.btn-o,.nav-cart,.nav-cta{min-height:44px;}
         <a href="#tienda"><span data-i18n="nav-tienda">Tienda</span> <span class="arr">▾</span></a>
         <div class="mega">
           <div class="mcol">
-            <div class="mhead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 12l-8.5 8.5a2.12 2.12 0 01-3-3L12 9"/><path d="M17.64 15L22 10.36 16.85 5.22 12.5 9.56"/><path d="M20 7l-4.5-4.5"/></svg>Herramientas</div>
+            <div class="mhead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 12l-8.5 8.5a2.12 2.12 0 01-3-3L12 9"/><path d="M17.64 15L22 10.36 16.85 5.22 12.5 9.56"/><path d="M20 7l-4.5-4.5"/></svg><span data-i18n="cat-herramientas">Herramientas</span></div>
             <a class="mlink" href="#" onclick="openCategoryPage('herramientas');return false;" data-i18n="nav-manuales">Manuales</a>
             <a class="mlink" href="#" onclick="openCategoryPage('herramientas');return false;" data-i18n="nav-desarmadores">Desarmadores</a>
             <a class="mlink" href="#" onclick="openCategoryPage('herramientas');return false;" data-i18n="nav-llaves">Llaves y dados</a>
             <a class="mlink" href="#" onclick="openCategoryPage('herramientas');return false;" data-i18n="nav-pinzas">Pinzas y alicates</a>
             <a class="mlink" href="#" onclick="openCategoryPage('herramientas');return false;" data-i18n="nav-metros">Metros y niveles</a>
-            <div class="mhead" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Eléctricas</div>
+            <div class="mhead" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span data-i18n="cat-electricas">Eléctricas</span></div>
             <a class="mlink" href="#" onclick="openCategoryPage('electricas');return false;" data-i18n="nav-taladros">Taladros</a>
             <a class="mlink" href="#" onclick="openCategoryPage('electricas');return false;" data-i18n="nav-esmeriles">Esmeriles</a>
             <a class="mlink" href="#" onclick="openCategoryPage('electricas');return false;" data-i18n="nav-sierras">Sierras eléctricas</a>
             <a class="mlink" href="#" onclick="openCategoryPage('electricas');return false;" data-i18n="nav-atornilladores">Atornilladores</a>
           </div>
           <div class="mcol">
-            <div class="mhead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg>Plomería</div>
+            <div class="mhead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg><span data-i18n="cat-plomeria">Plomería</span></div>
             <a class="mlink" href="#" onclick="openCategoryPage('plomeria');return false;" data-i18n="nav-tuberia">Tuberías PVC/CPVC</a>
             <a class="mlink" href="#" onclick="openCategoryPage('plomeria');return false;" data-i18n="nav-llavespaso">Llaves de paso</a>
             <a class="mlink" href="#" onclick="openCategoryPage('plomeria');return false;" data-i18n="nav-conexiones">Conexiones y codos</a>
             <a class="mlink" href="#" onclick="openCategoryPage('plomeria');return false;" data-i18n="nav-mangueras">Mangueras</a>
             <a class="mlink" href="#" onclick="openCategoryPage('plomeria');return false;" data-i18n="nav-bombas">Bombas de agua</a>
-            <div class="mhead" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.37 2.63L14 7l-1.59-1.59a2 2 0 00-2.82 0L8 7l9 9 1.59-1.59a2 2 0 000-2.82L17 10l4.37-4.37a2.12 2.12 0 00-3-3z"/><path d="M9 8c-2 3-4 3.5-7 4l8 8c1-.5 3.5-2 4-7"/></svg>Pintura</div>
+            <div class="mhead" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.37 2.63L14 7l-1.59-1.59a2 2 0 00-2.82 0L8 7l9 9 1.59-1.59a2 2 0 000-2.82L17 10l4.37-4.37a2.12 2.12 0 00-3-3z"/><path d="M9 8c-2 3-4 3.5-7 4l8 8c1-.5 3.5-2 4-7"/></svg><span data-i18n="cat-pintura">Pintura</span></div>
             <a class="mlink" href="#" onclick="openCategoryPage('pintura');return false;" data-i18n="nav-pintint">Pintura interior</a>
             <a class="mlink" href="#" onclick="openCategoryPage('pintura');return false;" data-i18n="nav-pintext">Pintura exterior</a>
             <a class="mlink" href="#" onclick="openCategoryPage('pintura');return false;" data-i18n="nav-esmaltes">Esmaltes</a>
             <a class="mlink" href="#" onclick="openCategoryPage('pintura');return false;" data-i18n="nav-brochas">Brochas y rodillos</a>
           </div>
           <div class="mcol">
-            <div class="mhead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22V12h6v10"/><path d="M8 7h.01M12 7h.01M16 7h.01M8 11h.01M16 11h.01"/></svg>Construcción</div>
-            <a class="mlink" href="#" onclick="openCategoryPage('construccion');return false;">Cemento</a>
-            <a class="mlink" href="#" onclick="openCategoryPage('construccion');return false;">Varilla y malla</a>
-            <a class="mlink" href="#" onclick="openCategoryPage('construccion');return false;">Tablaroca / Drywall</a>
-            <a class="mlink" href="#" onclick="openCategoryPage('construccion');return false;">Madera y triplay</a>
-            <a class="mlink" href="#" onclick="openCategoryPage('construccion');return false;">Arena y grava</a>
-            <a class="mlink" href="#" onclick="openCategoryPage('construccion');return false;">Impermeabilizantes</a>
-            <div class="mhead" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Fijación</div>
+            <div class="mhead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22V12h6v10"/><path d="M8 7h.01M12 7h.01M16 7h.01M8 11h.01M16 11h.01"/></svg><span data-i18n="cat-construccion">Construcción</span></div>
+            <a class="mlink" href="#" onclick="openCategoryPage('construccion');return false;" data-i18n="nav-cemento">Cemento</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('construccion');return false;" data-i18n="nav-varilla">Varilla y malla</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('construccion');return false;" data-i18n="nav-drywall">Tablaroca / Drywall</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('construccion');return false;" data-i18n="nav-madera">Madera y triplay</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('construccion');return false;" data-i18n="nav-arena">Arena y grava</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('construccion');return false;" data-i18n="nav-impermeabilizantes">Impermeabilizantes</a>
+            <div class="mhead" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg><span data-i18n="cat-fijacion">Fijación</span></div>
             <a class="mlink" href="#" onclick="openCategoryPage('fijacion');return false;" data-i18n="nav-tornillos">Tornillos</a>
             <a class="mlink" href="#" onclick="openCategoryPage('fijacion');return false;" data-i18n="nav-clavos">Clavos</a>
             <a class="mlink" href="#" onclick="openCategoryPage('fijacion');return false;" data-i18n="nav-anclas">Anclas y taquetes</a>
           </div>
           <div class="mcol">
-            <div class="mhead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Cerrajería</div>
+            <div class="mhead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span data-i18n="cat-cerrajeria">Cerrajería</span></div>
             <a class="mlink" href="#" onclick="openCategoryPage('cerrajeria');return false;" data-i18n="nav-cerraduras">Cerraduras</a>
             <a class="mlink" href="#" onclick="openCategoryPage('cerrajeria');return false;" data-i18n="nav-candados">Candados</a>
             <a class="mlink" href="#" onclick="openCategoryPage('cerrajeria');return false;" data-i18n="nav-bisagras">Bisagras</a>
             <a class="mlink" href="#" onclick="openCategoryPage('cerrajeria');return false;" data-i18n="nav-chapas">Chapas y picaportes</a>
-            <div class="mhead" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Eléctrico</div>
+            <div class="mhead" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span data-i18n="cat-electrico">Eléctrico</span></div>
             <a class="mlink" href="#" onclick="openCategoryPage('electrico');return false;" data-i18n="nav-cables">Cables y canaletas</a>
             <a class="mlink" href="#" onclick="openCategoryPage('electrico');return false;" data-i18n="nav-contactos">Contactos e interruptores</a>
             <a class="mlink" href="#" onclick="openCategoryPage('electrico');return false;" data-i18n="nav-focos">Focos y luminarias</a>
             <a class="mlink" href="#" onclick="openCategoryPage('electrico');return false;" data-i18n="nav-tableros">Tableros eléctricos</a>
-            <div class="mhead" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Ofertas</div>
-            <a class="mlink" href="#ofertas">Ver todas las ofertas</a>
+            <div class="mhead" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg><span data-i18n="nav-ofertas">Ofertas</span></div>
+            <a class="mlink" href="#ofertas" data-i18n="nav-ver-ofertas">Ver todas las ofertas</a>
           </div>
         </div>
       </li>
       <li><a href="#categorias" data-i18n="nav-cats">Categorías</a></li>
       <li>
-        <a href="#rentas">Rentas <span class="arr">▾</span></a>
+        <a href="#rentas"><span data-i18n="nav-rentas">Rentas</span> <span class="arr">▾</span></a>
         <div class="sdrop">
-          <a href="#rentas">Renta de Herramientas</a>
-          <a href="#rentas">Disponibilidad</a>
-          <a href="#rentas">Tarifas y depósitos</a>
+          <a href="#rentas" data-i18n="nav-rent-herramientas">Renta de Herramientas</a>
+          <a href="#rentas" data-i18n="nav-rent-disponibilidad">Disponibilidad</a>
+          <a href="#rentas" data-i18n="nav-rent-tarifas">Tarifas y depósitos</a>
         </div>
       </li>
       <li>
-        <a href="#facturas">Facturas <span class="arr">▾</span></a>
+        <a href="#facturas"><span data-i18n="nav-facturas">Facturas</span> <span class="arr">▾</span></a>
         <div class="sdrop">
-          <a href="#facturas">Mis Facturas</a>
-          <a href="#facturas">Mi Cuenta</a>
-          <a href="#facturas">Historial de pagos</a>
+          <a href="#facturas" data-i18n="nav-mis-facturas">Mis Facturas</a>
+          <a href="#facturas" data-i18n="nav-mi-cuenta">Mi Cuenta</a>
+          <a href="#facturas" data-i18n="nav-historial">Historial de pagos</a>
         </div>
       </li>
     </ul>
@@ -607,7 +607,7 @@ button,.btn-p,.btn-o,.nav-cart,.nav-cta{min-height:44px;}
     </div>
     
     <button class="nav-cart" onclick="openCart()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg><span class="ccnt" id="navCartCount">0</span></button>
-    <button class="nav-cart" onclick="document.getElementById('mi-cuenta').scrollIntoView({behavior:'smooth'})" style="border-color:#B87333;color:#B87333;gap:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Mi Cuenta</button>
+    <button class="nav-cart" onclick="document.getElementById('mi-cuenta').scrollIntoView({behavior:'smooth'})" style="border-color:#B87333;color:#B87333;gap:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="nav-mi-cuenta">Mi Cuenta</span></button>
     </div>
   </div>
 </nav>
@@ -621,13 +621,13 @@ button,.btn-p,.btn-o,.nav-cart,.nav-cta{min-height:44px;}
     <p class="hero-sub" data-i18n="hero-sub">Ferretería Malinal</p>
     <p class="hero-tagline" data-i18n="hero-tagline">¡Te ayudamos a hacer todo posible!</p>
     <div class="hero-btns">
-      <a href="#tienda" class="btn-p">Comprar ahora</a>
-      <a href="#contacto" class="btn-o" data-i18n="btn-contact" data-i18n="btn-contact">Contáctanos</a>
+      <a href="#tienda" class="btn-p" data-i18n="btn-shop">Comprar ahora</a>
+      <a href="#contacto" class="btn-o" data-i18n="btn-contact">Contáctanos</a>
     </div>
   </div>
   <div class="hero-right" style="display:flex;align-items:center;justify-content:center;position:relative;z-index:2;padding:20px 5%;">
-    <div style="position:relative;width:100%;max-width:520px;border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.6);">
-      <img src="/images/store-front.jpg" alt="Ferretería Malinal" style="width:100%;height:420px;object-fit:cover;display:block;">
+    <div style="position:relative;width:100%;max-width:520px;border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.6);background:#1a1a1a;">
+      <img src="/images/store-front.jpg" alt="Ferretería Malinal" style="width:100%;height:420px;object-fit:cover;object-position:center top;display:block;">
       <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5) 0%,transparent 50%);"></div>
       <div style="position:absolute;bottom:20px;left:20px;right:20px;">
         <img src="/images/logo-new.png" alt="Logo Ferretería Malinal" style="height:70px;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,0,0,.8));">
@@ -1364,6 +1364,12 @@ const i18n = {
     'about-title':'Nuestra Historia',
     'map-tag':'Encuéntranos',
     'map-title':'Nuestras Ubicaciones',
+    'cat-tag':'EXPLORA POR DEPARTAMENTO',
+    'promo-tag':'PROMOCIONES ESPECIALES',
+    'contact-dir':'DIRECCIÓN',
+    'contact-tel':'TELÉFONO / WHATSAPP',
+    'contact-email':'CORREO',
+    'contact-hours':'HORARIO',
     'nav-manuales':'Herramientas Manuales','nav-desarmadores':'Desarmadores','nav-llaves':'Llaves y dados',
     'nav-pinzas':'Pinzas y alicates','nav-metros':'Metros y niveles',
     'nav-taladros':'Taladros','nav-esmeriles':'Esmeriles','nav-sierras':'Sierras eléctricas','nav-atornilladores':'Atornilladores',
@@ -1403,6 +1409,12 @@ const i18n = {
     'about-title':'Our Story',
     'map-tag':'Find Us',
     'map-title':'Our Locations',
+    'cat-tag':'EXPLORE BY DEPARTMENT',
+    'promo-tag':'SPECIAL PROMOTIONS',
+    'contact-dir':'ADDRESS',
+    'contact-tel':'PHONE / WHATSAPP',
+    'contact-email':'EMAIL',
+    'contact-hours':'HOURS',
     'nav-manuales':'Hand Tools','nav-desarmadores':'Screwdrivers','nav-llaves':'Wrenches & Sockets',
     'nav-pinzas':'Pliers & Clamps','nav-metros':'Tape Measures & Levels',
     'nav-taladros':'Drills','nav-esmeriles':'Grinders','nav-sierras':'Electric Saws','nav-atornilladores':'Screwdrivers',
