@@ -62,7 +62,10 @@ async function searchOdooInventory(query) {
 
 export default async function handler(req, res) {
     // CORS - only allow your domain
-    res.setHeader('Access-Control-Allow-Origin', 'https://ferreteriamalinal.com');
+    const allowedOrigins = ['https://ferreteriamalinal.com', 'https://ferreteria-malinal.vercel.app'];
+    const origin = req.headers.origin || '';
+    const isAllowed = allowedOrigins.includes(origin) || origin.includes('vercel.app');
+    res.setHeader('Access-Control-Allow-Origin', isAllowed ? origin : allowedOrigins[0]);
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
