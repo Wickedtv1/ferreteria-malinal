@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ferretería Malinal</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--red:#C0242A;--dark:#1A1A1A;--copper:#B87333;--warm:#F5F0EB;--gray:#6B6B6B;--light:#EFEFEF;--green:#25D366;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Barlow',sans-serif;background:#fff;color:var(--dark);overflow-x:hidden;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(20,20,20,0.98);backdrop-filter:blur(12px);height:76px;border-bottom:2px solid var(--red);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:100%;gap:16px;}
+.nav-logo{height:58px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.6));flex-shrink:0;}
+.nav-links{display:flex;list-style:none;align-items:center;height:100%;}
+.nav-links>li{position:relative;height:100%;display:flex;align-items:center;}
+.nav-links>li>a{color:#fff;text-decoration:none;font-size:12.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;padding:0 15px;height:100%;display:flex;align-items:center;gap:4px;transition:color .2s;white-space:nowrap;}
+.nav-links>li>a:hover,.nav-links>li:hover>a{color:var(--red);}
+.arr{font-size:8px;transition:transform .2s;opacity:.6;}
+.nav-links>li:hover>a .arr{transform:rotate(180deg);}
+
+/* mega menu */
+.mega{position:absolute;top:76px;left:-10px;width:660px;background:#141414;border:1px solid #252525;border-top:3px solid var(--red);border-radius:0 0 10px 10px;opacity:0;pointer-events:none;transform:translateY(-8px);transition:all .22s cubic-bezier(.4,0,.2,1);z-index:300;box-shadow:0 24px 60px rgba(0,0,0,.7);display:grid;grid-template-columns:repeat(4,1fr);}
+.nav-links>li:hover .mega{opacity:1;pointer-events:all;transform:translateY(0);}
+.mcol{padding:18px 0;border-right:1px solid #1e1e1e;}
+.mcol:last-child{border-right:none;}
+.mhead{padding:5px 16px 9px;font-size:10px;color:var(--red);text-transform:uppercase;letter-spacing:.14em;font-weight:700;border-bottom:1px solid #1e1e1e;margin-bottom:5px;display:flex;align-items:center;gap:7px;}
+.mhead svg{width:13px;height:13px;stroke:var(--red);flex-shrink:0;}
+.mlink{display:block;padding:6px 16px;color:#888;text-decoration:none;font-size:12px;letter-spacing:.03em;transition:all .14s;border-left:2px solid transparent;}
+.mlink:hover{color:#fff;background:rgba(192,36,42,.1);border-left-color:var(--red);padding-left:21px;}
+
+/* simple drop */
+.sdrop{position:absolute;top:76px;left:0;min-width:220px;background:#141414;border:1px solid #252525;border-top:3px solid var(--red);border-radius:0 0 8px 8px;opacity:0;pointer-events:none;transform:translateY(-8px);transition:all .22s;z-index:300;box-shadow:0 16px 48px rgba(0,0,0,.6);}
+.nav-links>li:hover .sdrop{opacity:1;pointer-events:all;transform:translateY(0);}
+.sdrop a{display:flex;align-items:center;gap:10px;padding:11px 16px;color:#aaa;text-decoration:none;font-size:12.5px;transition:all .14s;border-bottom:1px solid #1e1e1e;}
+.sdrop a:last-child{border-bottom:none;}
+.sdrop a svg{width:14px;height:14px;flex-shrink:0;opacity:.7;}
+.sdrop a:hover{background:rgba(192,36,42,.1);color:#fff;padding-left:22px;}
+
+.nav-right{display:flex;align-items:center;gap:9px;flex-shrink:0;}
+.nav-cta{background:var(--red);color:#fff;padding:8px 16px;border-radius:4px;text-decoration:none;font-weight:700;font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;transition:background .2s;display:flex;align-items:center;gap:7px;white-space:nowrap;}
+.nav-cta svg{width:14px;height:14px;fill:#fff;}
+.nav-cta:hover{background:#a01f24;}
+.nav-cart{background:none;border:1.5px solid #3a3a3a;color:#fff;padding:8px 13px;border-radius:4px;cursor:pointer;font-size:12px;font-weight:700;transition:all .2s;display:flex;align-items:center;gap:7px;}
+.nav-cart svg{width:15px;height:15px;}
+.nav-cart:hover{border-color:var(--copper);color:var(--copper);}
+.ccnt{background:var(--red);color:#fff;font-size:10px;font-weight:900;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+
+/* ── AI CHAT WIDGET ── */
+.chat-widget{position:fixed;bottom:26px;right:26px;z-index:999;font-family:'Barlow',sans-serif;}
+.chat-bubble{width:56px;height:56px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 16px rgba(192,36,42,.4);transition:all .3s;border:none;}
+.chat-bubble:hover{transform:scale(1.05);box-shadow:0 6px 24px rgba(192,36,42,.6);}
+.chat-bubble svg{width:28px;height:28px;fill:#fff;}
+.chat-panel{position:fixed;bottom:90px;right:26px;width:380px;height:600px;background:var(--dark);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.6);display:none;flex-direction:column;border:1px solid #2a2a2a;}
+.chat-panel.active{display:flex;}
+.chat-header{background:var(--red);color:#fff;padding:16px;border-radius:12px 12px 0 0;display:flex;align-items:center;justify-content:space-between;}
+.chat-header h3{font-size:16px;font-weight:700;margin:0;}
+.chat-close{background:none;border:none;color:#fff;font-size:24px;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:4px;transition:background .2s;}
+.chat-close:hover{background:rgba(255,255,255,.2);}
+.chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;}
+.chat-message{max-width:85%;padding:10px 14px;border-radius:8px;font-size:14px;line-height:1.4;}
+.chat-message.user{background:var(--red);color:#fff;align-self:flex-end;border-bottom-right-radius:2px;}
+.chat-message.assistant{background:#2a2a2a;color:#e0e0e0;align-self:flex-start;border-bottom-left-radius:2px;}
+.chat-message.typing{background:#2a2a2a;color:#888;align-self:flex-start;}
+.chat-input-container{padding:16px;border-top:1px solid #2a2a2a;display:flex;gap:8px;}
+.chat-input{flex:1;background:#2a2a2a;border:1px solid #3a3a3a;color:#fff;padding:10px 12px;border-radius:6px;font-size:14px;font-family:'Barlow',sans-serif;outline:none;}
+.chat-input:focus{border-color:var(--red);}
+.chat-send{background:var(--red);color:#fff;border:none;padding:10px 16px;border-radius:6px;cursor:pointer;font-weight:700;font-size:14px;transition:background .2s;}
+.chat-send:hover{background:#a01f24;}
+.chat-send:disabled{background:#555;cursor:not-allowed;}
+
+/* ── HERO ── */
+.hero{min-height:500px;background:var(--dark);display:grid;grid-template-columns:1fr 1fr;align-items:stretch;padding-top:0;position:relative;overflow:hidden;margin-top:76px;}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(255,255,255,.012) 60px,rgba(255,255,255,.012) 61px),repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(255,255,255,.012) 60px,rgba(255,255,255,.012) 61px);z-index:1;}
+.hero-accent{position:absolute;right:0;top:0;bottom:0;width:50%;background:linear-gradient(135deg,#1f1f1f,#111);clip-path:polygon(8% 0,100% 0,100% 100%,0% 100%);z-index:1;}
+.hero-accent::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(192,36,42,.15),transparent 60%);}
+.hero-left{padding:60px 5% 60px 8%;position:relative;z-index:2;animation:fadeUp .8s ease forwards;}
+.hero-tag{display:inline-block;background:var(--red);color:#fff;padding:3px 10px;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px;}
+.hero-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(28px,3.5vw,48px);font-weight:900;line-height:1.2;color:#fff;text-transform:uppercase;margin-bottom:6px;}
+.hero-title .accent{color:var(--red);}
+.hero-sub{font-family:'Barlow Condensed',sans-serif;font-size:clamp(12px,1.2vw,16px);font-weight:400;color:#666;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;}
+.hero-tagline{font-size:13px;color:#888;font-style:italic;margin-bottom:24px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;position:relative;z-index:3;}
+.btn-p{background:var(--red);color:#fff;padding:9px 20px;border-radius:4px;text-decoration:none;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;transition:all .2s;border:2px solid var(--red);}
+.btn-p:hover{background:transparent;color:var(--red);}
+.btn-o{background:transparent;color:#fff;padding:9px 20px;border-radius:4px;text-decoration:none;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border:2px solid #3a3a3a;transition:all .2s;}
+.btn-o:hover{border-color:var(--copper);color:var(--copper);}
+
+/* logo picker */
+.hero-right{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;position:relative;z-index:2;padding:0 4%;animation:fadeIn 1s ease .3s both;}
+.lp-label{color:#888;font-size:9px;letter-spacing:.18em;text-transform:uppercase;}
+.logo-main{width:240px;height:240px;display:flex;align-items:center;justify-content:center;}
+.logo-main img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 16px 40px rgba(0,0,0,.7));transition:opacity .3s;}
+.logo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;max-width:320px;width:100%;}
+.logo-thumb-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;}
+.logo-thumb{width:56px;height:56px;border-radius:5px;border:2px solid #2a2a2a;background:#161616;padding:3px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.logo-thumb img{width:100%;height:100%;object-fit:contain;}
+.logo-thumb.active,.logo-thumb:hover{border-color:var(--copper);box-shadow:0 0 12px rgba(184,115,51,.35);}
+.logo-thumb-label{font-size:7.5px;color:#888;letter-spacing:.05em;text-transform:uppercase;text-align:center;line-height:1.2;}
+.logo-thumb-wrap.active .logo-thumb-label{color:var(--copper);}
+
+/* ── STATS ── */
+.stats-bar{background:var(--red);display:grid;grid-template-columns:repeat(4,1fr);}
+.stat{padding:22px 16px;text-align:center;border-right:1px solid rgba(255,255,255,.2);}
+.stat:last-child{border-right:none;}
+.stat-num{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;color:#fff;line-height:1;}
+.stat-label{font-size:11px;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.09em;margin-top:3px;}
+
+/* ── SHARED ── */
+.stag{font-size:11px;color:var(--red);text-transform:uppercase;letter-spacing:.14em;font-weight:700;margin-bottom:7px;}
+.stitle{font-family:'Barlow Condensed',sans-serif;font-size:clamp(28px,3.5vw,48px);font-weight:800;text-transform:uppercase;line-height:1;}
+.sheader{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;border-bottom:1px solid #ddd;padding-bottom:20px;}
+.slink{color:var(--gray);font-size:12.5px;text-decoration:none;letter-spacing:.07em;text-transform:uppercase;border-bottom:1px solid #ddd;padding-bottom:2px;transition:color .2s,border-color .2s;white-space:nowrap;}
+.slink:hover{color:var(--red);border-color:var(--red);}
+
+/* ── SALES ── */
+.sales-section{background:var(--warm);padding:72px 8%;}
+.sales-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch;}
+.sale-card{display:flex;flex-direction:column;height:100%;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);transition:transform .3s,box-shadow .3s;position:relative;}
+.sale-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.13);}
+.sale-card:first-child{grid-column:span 2;}
+.sale-badge{position:absolute;top:14px;left:14px;background:var(--red);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:900;padding:5px 13px;border-radius:4px;z-index:2;}
+.sale-img{flex-shrink:0;width:100%;height:210px;object-fit:cover;display:block;}
+.sale-card:first-child .sale-img{flex-shrink:0;height:265px;}
+.sale-body{padding:18px 22px 22px;}
+.sale-name{font-family:'Barlow Condensed',sans-serif;font-size:21px;font-weight:800;text-transform:uppercase;margin-bottom:5px;}
+.sale-desc{font-size:13.5px;color:var(--gray);margin-bottom:14px;line-height:1.5;}
+.sale-prices{display:flex;align-items:baseline;gap:9px;}
+.sale-old{font-size:14px;color:#bbb;text-decoration:line-through;}
+.sale-new{font-family:'Barlow Condensed',sans-serif;font-size:27px;font-weight:900;color:var(--red);}
+.sale-cta{display:inline-block;margin-top:14px;background:var(--dark);color:#fff;padding:9px 18px;border-radius:4px;font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;border:none;transition:background .2s;}
+.sale-cta:hover{background:var(--red);}
+.sale-exp{font-size:11px;color:#bbb;margin-top:8px;letter-spacing:.06em;text-transform:uppercase;}
+
+/* ── CATEGORIES - clean grid ── */
+.cat-section{padding:80px 8%;background:#fff;}
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto;gap:4px;}
+.cat-card{position:relative;overflow:hidden;cursor:pointer;border-radius:2px;}
+.cat-card:nth-child(1){grid-column:span 2;grid-row:span 2;}
+.cat-photo{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .55s ease;}
+.cat-card:hover .cat-photo{transform:scale(1.07);}
+.cat-dark{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.82) 0%,rgba(0,0,0,.15) 55%,rgba(0,0,0,.05) 100%);transition:background .3s;}
+.cat-card:hover .cat-dark{background:linear-gradient(to top,rgba(160,31,36,.88) 0%,rgba(0,0,0,.3) 65%,rgba(0,0,0,.05) 100%);}
+.cat-body{position:absolute;bottom:0;left:0;right:0;padding:18px 20px;}
+.cat-icon{width:28px;height:28px;color:#fff;margin-bottom:7px;opacity:.9;}
+.cat-card:nth-child(1) .cat-icon{width:36px;height:36px;}
+.cat-name{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;color:#fff;text-transform:uppercase;line-height:1;}
+.cat-card:nth-child(1) .cat-name{font-size:28px;}
+.cat-subs{display:none;}
+.cat-card:hover .cat-subs{display:none;}
+.cat-sub{background:rgba(255,255,255,.15);backdrop-filter:blur(4px);color:#fff;font-size:10px;padding:3px 8px;border-radius:12px;letter-spacing:.04em;white-space:nowrap;}
+
+/* row heights */
+.cat-card:nth-child(1){height:440px;}
+.cat-card:nth-child(n+2){height:218px;}
+
+/* ── SHOP ── */
+.shop-section{padding:80px 8%;background:#f7f7f7;}
+.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:32px;}
+.fbtn{background:none;border:1.5px solid var(--light);color:var(--gray);padding:8px 18px;border-radius:50px;font-size:12.5px;font-weight:600;cursor:pointer;transition:all .2s;letter-spacing:.04em;display:flex;align-items:center;gap:6px;}
+.fbtn svg{width:12px;height:12px;}
+.fbtn:hover,.fbtn.active{background:var(--red);border-color:var(--red);color:#fff;}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.pcard{border:1px solid #e5e5e5;border-radius:9px;overflow:hidden;transition:all .25s;position:relative;background:#fff;}
+.pcard:hover{box-shadow:0 8px 28px rgba(0,0,0,.1);transform:translateY(-3px);}
+.pcard.hidden{display:none;}
+.pimg{width:100%;height:195px;object-fit:cover;display:block;}
+.pbody{padding:15px 17px 17px;}
+.pcat{font-size:10px;color:var(--red);text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:3px;}
+.pname{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:800;text-transform:uppercase;margin-bottom:5px;}
+.pdesc{font-size:12.5px;color:var(--gray);margin-bottom:12px;line-height:1.4;}
+.pfoot{display:flex;align-items:center;justify-content:space-between;}
+.pprice{font-family:'Barlow Condensed',sans-serif;font-size:25px;font-weight:900;}
+.padd{background:var(--red);color:#fff;border:none;padding:8px 14px;border-radius:4px;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+.padd:hover{background:#a01f24;}
+.pbadge{position:absolute;top:11px;left:11px;background:var(--red);color:#fff;font-size:10px;font-weight:900;padding:3px 9px;border-radius:3px;}
+
+/* ── CART ── */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:400;opacity:0;pointer-events:none;transition:opacity .3s;}
+.cart-overlay.open{opacity:1;pointer-events:all;}
+.cart-drawer{position:fixed;right:0;top:0;bottom:0;width:400px;max-width:95vw;background:#111;z-index:500;transform:translateX(100%);transition:transform .33s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;}
+.cart-drawer.open{transform:translateX(0);}
+.cart-hdr{padding:20px 22px;border-bottom:1px solid #1e1e1e;display:flex;align-items:center;justify-content:space-between;}
+.cart-ttl{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:#fff;text-transform:uppercase;}
+.cart-x{background:none;border:none;color:#555;font-size:22px;cursor:pointer;transition:color .2s;}
+.cart-x:hover{color:#fff;}
+.cart-items{flex:1;overflow-y:auto;padding:16px 20px;}
+.cart-empty{color:#888;text-align:center;padding:50px 0;font-size:13px;text-transform:uppercase;letter-spacing:.06em;}
+.citem{display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-bottom:1px solid #1a1a1a;}
+.cimg{width:56px;height:56px;border-radius:4px;object-fit:cover;background:#1e1e1e;flex-shrink:0;}
+.cinfo{flex:1;}
+.cname{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;color:#fff;text-transform:uppercase;}
+.cprice{font-size:12.5px;color:var(--red);font-weight:600;margin-top:2px;}
+.cqty{display:flex;align-items:center;gap:9px;margin-top:7px;}
+.qbtn{background:#1e1e1e;border:1px solid #2a2a2a;color:#fff;width:25px;height:25px;border-radius:4px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.qbtn:hover{background:#2a2a2a;}
+.qnum{color:#fff;font-size:13px;font-weight:600;min-width:18px;text-align:center;}
+.cremove{background:none;border:none;color:#3a3a3a;cursor:pointer;font-size:17px;transition:color .2s;}
+.cremove:hover{color:var(--red);}
+.cart-ftr{padding:20px;border-top:1px solid #1e1e1e;}
+.ctotal{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.ctotal-lbl{color:#777;font-size:12px;text-transform:uppercase;letter-spacing:.1em;}
+.ctotal-amt{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:900;color:#fff;}
+.pay-btn{width:100%;background:var(--red);color:#fff;border:none;padding:14px;font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;border-radius:4px;cursor:pointer;transition:background .2s;margin-bottom:9px;}
+.pay-btn:hover{background:#a01f24;}
+.wa-btn{width:100%;background:var(--green);color:#fff;border:none;padding:12px;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;border-radius:4px;cursor:pointer;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:7px;}
+.wa-btn:hover{background:#1ebe5d;}
+.wa-btn svg{width:16px;height:16px;fill:#fff;}
+
+/* ── PAY MODAL ── */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:600;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-ov.open{display:flex;}
+.modal{background:#111;border-radius:10px;width:100%;max-width:480px;border:1px solid #1e1e1e;overflow:hidden;}
+.mhdr{padding:20px 24px;border-bottom:1px solid #1e1e1e;display:flex;align-items:center;justify-content:space-between;}
+.mttl{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:#fff;text-transform:uppercase;}
+.mx{background:none;border:none;color:#555;font-size:20px;cursor:pointer;}
+.mbody{padding:24px;}
+.pay-amt{text-align:center;margin-bottom:22px;}
+.pay-amt-lbl{font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.1em;}
+.pay-amt-num{font-family:'Barlow Condensed',sans-serif;font-size:44px;font-weight:900;color:#fff;}
+.pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.pm{border:2px solid #2a2a2a;border-radius:7px;padding:13px;text-align:center;cursor:pointer;transition:all .2s;}
+.pm:hover,.pm.sel{border-color:var(--red);background:rgba(192,36,42,.1);}
+.pm-icon{font-size:24px;display:block;margin-bottom:4px;}
+.pm-lbl{font-size:12px;font-weight:600;color:#fff;}
+.pm-sub{font-size:10px;color:#555;margin-top:1px;}
+.pay-note{background:#161616;border-radius:5px;padding:13px;margin-bottom:17px;font-size:12.5px;color:#777;line-height:1.6;border:1px solid #222;}
+.pay-ok{width:100%;background:var(--red);color:#fff;border:none;padding:14px;font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;border-radius:5px;cursor:pointer;transition:background .2s;}
+.pay-ok:hover{background:#a01f24;}
+
+/* ── CONTACT ── */
+.contact-section{background:var(--dark);padding:80px 8%;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+.ci .stitle{color:#fff;}
+.ci .stag{color:var(--copper);}
+.cdesc{color:#777;font-size:15px;line-height:1.7;margin:20px 0 32px;}
+.citems{display:flex;flex-direction:column;gap:16px;}
+.citem{display:flex;align-items:flex-start;gap:13px;}
+.cicon{width:40px;height:40px;flex-shrink:0;background:rgba(192,36,42,.12);border:1px solid rgba(192,36,42,.25);border-radius:4px;display:flex;align-items:center;justify-content:center;}
+.cicon svg{width:16px;height:16px;stroke:#C0242A;}
+.ctext strong{display:block;color:#fff;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1px;}
+.ctext span,.ctext a{color:#666;font-size:14px;text-decoration:none;}
+.ctext a:hover{color:var(--copper);}
+.socrow{display:flex;gap:9px;margin-top:26px;flex-wrap:wrap;}
+.socbtn{display:flex;align-items:center;gap:7px;background:#1a1a1a;border:1px solid #252525;color:#888;padding:8px 13px;border-radius:6px;text-decoration:none;font-size:12.5px;font-weight:600;transition:all .2s;}
+.socbtn svg{width:13px;height:13px;opacity:.7;}
+.socbtn:hover{border-color:var(--copper);color:var(--copper);}
+.cform{background:#1c1c1c;border-radius:8px;padding:32px;border:1px solid #252525;}
+.form-ttl{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#fff;text-transform:uppercase;margin-bottom:22px;}
+.fg{margin-bottom:16px;}
+.fg label{display:block;font-size:10.5px;color:#555;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;font-weight:600;}
+.fg input,.fg textarea,.fg select{width:100%;background:#111;border:1px solid #2a2a2a;color:#fff;padding:10px 13px;border-radius:4px;font-family:'Barlow',sans-serif;font-size:13.5px;transition:border-color .2s;outline:none;}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--red);}
+.fg textarea{resize:vertical;min-height:85px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.fsub{width:100%;background:var(--red);color:#fff;border:none;padding:13px;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:4px;cursor:pointer;transition:background .2s;margin-top:5px;}
+.fsub:hover{background:#a01f24;}
+.mapbox{background:#111;border:1px solid #252525;border-radius:4px;height:155px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#333;font-size:11.5px;margin-top:20px;gap:7px;text-transform:uppercase;letter-spacing:.06em;}
+
+/* ── FOOTER ── */
+footer{background:#0d0d0d;border-top:2px solid var(--red);padding:32px 8%;}
+.ftop{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+.flogo{height:44px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.6));}
+.flinks{display:flex;gap:20px;flex-wrap:wrap;}
+.flinks a{color:#888;font-size:12px;text-decoration:none;letter-spacing:.06em;transition:color .2s;}
+.flinks a:hover{color:var(--red);}
+.fbot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #181818;padding-top:16px;}
+.fcopy{color:#777;font-size:11.5px;}
+.ftagline{font-style:italic;color:#3a3a3a;font-size:12.5px;}
+
+
+/* ── LANGUAGE SWITCHER ── */
+.lang-switcher{display:flex;align-items:center;gap:3px;background:#1e1e1e;border:1px solid #2a2a2a;border-radius:4px;padding:3px;}
+.lang-btn{background:none;border:none;color:#666;font-size:11px;font-weight:700;letter-spacing:.06em;padding:4px 7px;border-radius:3px;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.lang-btn.active{background:var(--red);color:#fff;}
+.lang-btn:hover:not(.active){color:#fff;background:#2a2a2a;}
+
+/* ── CUSTOMER LOGIN MODAL ── */
+.login-modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:700;display:none;align-items:center;justify-content:center;padding:20px;}
+.login-modal-ov.open{display:flex;}
+.login-modal{background:#111;border-radius:10px;width:100%;max-width:420px;border:1px solid #2a2a2a;overflow:hidden;}
+.login-modal-hdr{background:var(--red);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;}
+.login-modal-hdr h3{color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase;margin:0;}
+.login-modal-x{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;}
+.login-modal-body{padding:28px;}
+.login-tabs{display:flex;gap:0;margin-bottom:22px;border-bottom:2px solid #2a2a2a;}
+.login-tab{background:none;border:none;color:#555;font-size:13px;font-weight:700;padding:10px 16px;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;}
+.login-tab.active{color:var(--red);border-bottom-color:var(--red);}
+.login-form{display:none;}
+.login-form.active{display:block;}
+.login-fg{margin-bottom:14px;}
+.login-fg label{display:block;font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px;font-weight:600;}
+.login-fg input{width:100%;background:#1a1a1a;border:1px solid #2a2a2a;color:#fff;padding:10px 13px;border-radius:4px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;transition:border-color .2s;}
+.login-fg input:focus{border-color:var(--red);}
+.login-submit{width:100%;background:var(--red);color:#fff;border:none;padding:13px;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;border-radius:4px;cursor:pointer;transition:background .2s;margin-top:6px;}
+.login-submit:hover{background:#a01f24;}
+.login-forgot{text-align:center;margin-top:12px;font-size:12px;color:#555;}
+.login-forgot a{color:var(--copper);text-decoration:none;}
+
+
+/* ── BRANDS SCROLLER ── */
+.brands-bar{background:#111;border-bottom:1px solid #1e1e1e;padding:16px 0;overflow:hidden;position:relative;}
+.brands-bar::before,.brands-bar::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;}
+.brands-bar::before{left:0;background:linear-gradient(to right,#111,transparent);}
+.brands-bar::after{right:0;background:linear-gradient(to left,#111,transparent);}
+.brands-track{display:flex;align-items:center;gap:0;animation:scrollBrands 25s linear infinite;width:max-content;}
+.brand-item{display:flex;align-items:center;padding:0 32px;border-right:1px solid #2a2a2a;position:relative;}
+.brand-name{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;color:#888;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;transition:color .3s;}
+.brand-item:hover .brand-name{color:#fff;}
+@keyframes scrollBrands{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+
+/* ── CUSTOMER PORTAL ── */
+.portal-section{padding:80px 8%;background:var(--dark);}
+.portal-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;max-width:900px;margin:0 auto;}
+.portal-info .stitle{color:#fff;}
+.portal-info .stag{color:var(--copper);}
+.portal-info p{color:#777;font-size:14px;line-height:1.7;margin-top:16px;}
+.portal-features{display:flex;flex-direction:column;gap:12px;margin-top:24px;}
+.portal-feature{display:flex;align-items:center;gap:10px;color:#888;font-size:13px;}
+.portal-feature svg{width:16px;height:16px;stroke:var(--copper);flex-shrink:0;}
+.portal-box{background:#161616;border-radius:10px;padding:32px;border:1px solid #252525;}
+.portal-tabs{display:flex;border-bottom:1px solid #252525;margin-bottom:24px;}
+.portal-tab{background:none;border:none;color:#555;font-size:12px;font-weight:700;padding:10px 16px;cursor:pointer;letter-spacing:.08em;text-transform:uppercase;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s;}
+.portal-tab.active{color:var(--red);border-bottom-color:var(--red);}
+.portal-form{display:none;}
+.portal-form.active{display:block;}
+.pfg{margin-bottom:14px;}
+.pfg label{display:block;font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px;font-weight:600;}
+.pfg input{width:100%;background:#111;border:1px solid #2a2a2a;color:#fff;padding:10px 13px;border-radius:4px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;transition:border-color .2s;}
+.pfg input:focus{border-color:var(--red);}
+.pfg-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.portal-submit{width:100%;background:var(--red);color:#fff;border:none;padding:13px;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;border-radius:4px;cursor:pointer;transition:background .2s;margin-top:4px;}
+.portal-submit:hover{background:#a01f24;}
+.portal-msg{text-align:center;margin-top:12px;font-size:12px;color:#555;}
+.portal-msg a{color:var(--copper);text-decoration:none;}
+.portal-dashboard{display:none;padding:16px;}
+.portal-welcome{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:#fff;text-transform:uppercase;margin-bottom:20px;}
+.portal-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+.portal-card{background:#111;border:1px solid #252525;border-radius:6px;padding:16px;}
+.portal-card-num{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;color:var(--red);}
+.portal-card-lbl{font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.08em;margin-top:2px;}
+.portal-invoice-list{display:flex;flex-direction:column;gap:8px;}
+.portal-invoice{display:flex;justify-content:space-between;align-items:center;background:#111;border:1px solid #252525;border-radius:6px;padding:12px 16px;}
+.portal-invoice-id{font-family:'Barlow Condensed',sans-serif;font-size:14px;color:#fff;font-weight:700;}
+.portal-invoice-date{font-size:11px;color:#555;}
+.portal-invoice-amt{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:900;color:var(--red);}
+.portal-invoice-dl{background:none;border:1px solid #2a2a2a;color:#888;padding:5px 10px;border-radius:4px;font-size:11px;cursor:pointer;transition:all .2s;}
+.portal-invoice-dl:hover{border-color:var(--copper);color:var(--copper);}
+.portal-logout{background:none;border:1px solid #2a2a2a;color:#555;padding:8px 16px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;transition:all .2s;margin-top:16px;}
+.portal-logout:hover{border-color:var(--red);color:var(--red);}
+
+
+/* ── HERO ENHANCEMENTS ── */
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(
+  -55deg,transparent,transparent 60px,rgba(192,36,42,.03) 60px,rgba(192,36,42,.03) 61px
+);pointer-events:none;z-index:1;}
+.hero::after{content:'';position:absolute;right:0;top:0;bottom:0;width:45%;
+  background:linear-gradient(135deg,transparent 0%,rgba(184,115,51,.04) 100%);
+  pointer-events:none;z-index:1;}
+.hero-title .accent{color:var(--red);position:relative;}
+.hero-title .accent::after{content:'';position:absolute;left:0;bottom:-4px;width:100%;height:3px;background:var(--red);border-radius:2px;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(192,36,42,.12);
+  border:1px solid rgba(192,36,42,.25);color:var(--red);padding:5px 12px;border-radius:3px;
+  font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px;
+  animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(192,36,42,.2);}50%{box-shadow:0 0 0 6px rgba(192,36,42,0);}}
+.hero-features{display:flex;gap:20px;margin-top:16px;flex-wrap:wrap;}
+.hero-feature{display:flex;align-items:center;gap:6px;color:#555;font-size:11px;letter-spacing:.04em;}
+.hero-feature svg{width:12px;height:12px;stroke:var(--copper);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;transform:scale(.96);}to{opacity:1;transform:scale(1);}}
+select option{background:#111;color:#fff;}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(18px);background:#1e1e1e;color:#fff;padding:10px 20px;border-radius:6px;font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;z-index:9999;opacity:0;transition:all .3s;border-left:3px solid var(--red);white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ────────────────────────────────────────────────────────────────
+   MOBILE RESPONSIVE STYLES
+──────────────────────────────────────────────────────────────── */
+
+/* Tablet & Mobile - 768px and below */
+@media (max-width:768px){
+/* Nav */
+nav{height:60px;}
+.nav-links{display:none;}
+.nav-logo{height:40px;}
+.nav-cart{padding:6px 10px;font-size:11px;}
+.nav-cart svg{width:13px;height:13px;}
+.nav-cta{padding:6px 12px;font-size:11px;}
+
+/* Hero */
+.hero{grid-template-columns:1fr;min-height:auto;max-height:none;height:auto;padding-top:60px;}
+.hero-left{padding:40px 5%;text-align:center;}
+.hero-right{padding:30px 5%;}
+.hero-title{font-size:clamp(32px,8vw,48px);}
+.hero-sub{font-size:clamp(14px,3vw,18px);}
+.hero-btns{justify-content:center;}
+.logo-main{width:180px;height:180px;}
+.logo-grid{max-width:280px;}
+.logo-thumb{width:48px;height:48px;}
+
+/* Stats Bar - 2x2 grid */
+.stats-bar{grid-template-columns:repeat(2,1fr);}
+.stat{padding:18px 12px;}
+.stat-num{font-size:28px;}
+
+/* Sales Grid */
+.sales-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch;}
+
+/* Category Grid - 2 columns */
+.cat-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
+
+/* Products Grid - 2 columns on tablet */
+.prod-grid{grid-template-columns:repeat(2,1fr);gap:16px;}
+
+/* Contact */
+.contact-grid{grid-template-columns:1fr;}
+
+/* Cart Drawer */
+.cart-drawer{width:100%;}
+
+/* Chat Widget */
+.chat-panel{width:calc(100vw - 32px);right:16px;bottom:80px;height:500px;}
+.chat-bubble{width:52px;height:52px;bottom:20px;right:20px;}
+}
+
+/* Mobile - 480px and below */
+@media (max-width:480px){
+/* Hero */
+.hero-left{padding:30px 5%;}
+.hero-tag{font-size:10px;padding:3px 10px;}
+.hero-title{font-size:clamp(28px,9vw,36px);}
+.hero-sub{font-size:clamp(12px,3.5vw,16px);}
+.hero-tagline{font-size:13px;}
+.btn-p,.btn-o{padding:11px 20px;font-size:12px;}
+.logo-main{width:160px;height:160px;}
+
+/* Products Grid - 1 column on mobile */
+.prod-grid{grid-template-columns:1fr;}
+
+/* Footer */
+.ftop{grid-template-columns:1fr;gap:30px;}
+.flogo{width:140px;}
+
+/* General Typography */
+.stitle{font-size:clamp(24px,7vw,32px);}
+.sheader{flex-direction:column;align-items:flex-start;gap:12px;}
+
+/* Touch-friendly buttons - minimum 44px tap targets */
+button,.btn-p,.btn-o,.nav-cart,.nav-cta{min-height:44px;}
+.chat-bubble{min-width:52px;min-height:52px;}
+
+/* Chat Widget Mobile */
+.chat-panel{width:calc(100vw - 20px);right:10px;bottom:70px;height:450px;}
+.chat-bubble{right:10px;bottom:10px;}
+}
+
+</style>
+</head>
+<body>
+
+<!-- WA FLOAT -->
+
+<!-- AI CHAT WIDGET -->
+<div class="chat-widget">
+  <button class="chat-bubble" onclick="toggleChat()" aria-label="Abrir chat">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+    </svg>
+  </button>
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <h3>Asistente Malinal</h3>
+      <button class="chat-close" onclick="toggleChat()">&times;</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-message assistant">
+        ¡Hola! Soy el asistente de Ferretería Malinal. ¿En qué puedo ayudarte hoy?
+      </div>
+    </div>
+    <div class="chat-input-container">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Escribe tu mensaje..." onkeypress="if(event.key==='Enter') sendMessage()">
+      <button class="chat-send" onclick="sendMessage()" id="sendBtn">Enviar</button>
+    </div>
+  </div>
+</div>
+
+<!-- CART -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-hdr"><span class="cart-ttl">Tu Pedido</span><button class="cart-x" onclick="closeCart()">×</button></div>
+  <div class="cart-items" id="cartItems"><div class="cart-empty" id="cartEmpty">Tu carrito está vacío</div></div>
+  <div class="cart-ftr">
+    <div class="ctotal"><span class="ctotal-lbl">Total</span><span class="ctotal-amt" id="cartTotal">$0</span></div>
+    <button class="pay-btn" onclick="openPayment()">Pagar en línea</button>
+    <button class="wa-btn" onclick="sendWAOrder()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Enviar pedido por WhatsApp</button>
+  </div>
+</div>
+
+<!-- PAY MODAL -->
+<div class="modal-ov" id="paymentModal">
+  <div class="modal">
+    <div class="mhdr"><span class="mttl">Pago en línea</span><button class="mx" onclick="closePayment()">×</button></div>
+    <div class="mbody">
+      <div class="pay-amt"><div class="pay-amt-lbl">Total a pagar</div><div class="pay-amt-num" id="payTotal">$0</div></div>
+      <div class="pay-methods">
+        <div class="pm sel" onclick="selPay(this)"><span class="pm-icon">💳</span><div class="pm-lbl">Tarjeta</div><div class="pm-sub">Crédito / Débito</div></div>
+        <div class="pm" onclick="selPay(this)"><span class="pm-icon">🏦</span><div class="pm-lbl">Transferencia</div><div class="pm-sub">SPEI / OXXO</div></div>
+        <div class="pm" onclick="selPay(this)"><span class="pm-icon" style="font-size:18px;line-height:2.2">PayPal</span><div class="pm-lbl">PayPal</div><div class="pm-sub">Cuenta PayPal</div></div>
+        <div class="pm" onclick="selPay(this)"><span class="pm-icon">🏪</span><div class="pm-lbl">En tienda</div><div class="pm-sub">Paga al recoger</div></div>
+      </div>
+      <div class="pay-note">✅ Pedido <strong style="color:#fff">reservado</strong> y listo para recoger.<br>✅ Confirmación por WhatsApp al +52 322 303 1895.<br>✅ Sin fila — llega directo a tu pedido.</div>
+      <button class="pay-ok" onclick="confirmPay()">Confirmar pedido →</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <img class="nav-logo" id="navLogo" src="/images/logo-new.png" alt="Ferretería Malinal">
+    <ul class="nav-links">
+      <li><a href="#ofertas" data-i18n="nav-ofertas">Ofertas</a></li>
+      <li>
+        <a href="#tienda"><span data-i18n="nav-tienda">Tienda</span> <span class="arr">▾</span></a>
+        <div class="mega">
+          <div class="mcol">
+            <div class="mhead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 12l-8.5 8.5a2.12 2.12 0 01-3-3L12 9"/><path d="M17.64 15L22 10.36 16.85 5.22 12.5 9.56"/><path d="M20 7l-4.5-4.5"/></svg><span data-i18n="cat-herramientas">Herramientas</span></div>
+            <a class="mlink" href="#" onclick="openCategoryPage('herramientas');return false;" data-i18n="nav-manuales">Manuales</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('herramientas');return false;" data-i18n="nav-desarmadores">Desarmadores</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('herramientas');return false;" data-i18n="nav-llaves">Llaves y dados</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('herramientas');return false;" data-i18n="nav-pinzas">Pinzas y alicates</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('herramientas');return false;" data-i18n="nav-metros">Metros y niveles</a>
+            <div class="mhead" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span data-i18n="cat-electricas">Eléctricas</span></div>
+            <a class="mlink" href="#" onclick="openCategoryPage('electricas');return false;" data-i18n="nav-taladros">Taladros</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('electricas');return false;" data-i18n="nav-esmeriles">Esmeriles</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('electricas');return false;" data-i18n="nav-sierras">Sierras eléctricas</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('electricas');return false;" data-i18n="nav-atornilladores">Atornilladores</a>
+          </div>
+          <div class="mcol">
+            <div class="mhead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg><span data-i18n="cat-plomeria">Plomería</span></div>
+            <a class="mlink" href="#" onclick="openCategoryPage('plomeria');return false;" data-i18n="nav-tuberia">Tuberías PVC/CPVC</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('plomeria');return false;" data-i18n="nav-llavespaso">Llaves de paso</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('plomeria');return false;" data-i18n="nav-conexiones">Conexiones y codos</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('plomeria');return false;" data-i18n="nav-mangueras">Mangueras</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('plomeria');return false;" data-i18n="nav-bombas">Bombas de agua</a>
+            <div class="mhead" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.37 2.63L14 7l-1.59-1.59a2 2 0 00-2.82 0L8 7l9 9 1.59-1.59a2 2 0 000-2.82L17 10l4.37-4.37a2.12 2.12 0 00-3-3z"/><path d="M9 8c-2 3-4 3.5-7 4l8 8c1-.5 3.5-2 4-7"/></svg><span data-i18n="cat-pintura">Pintura</span></div>
+            <a class="mlink" href="#" onclick="openCategoryPage('pintura');return false;" data-i18n="nav-pintint">Pintura interior</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('pintura');return false;" data-i18n="nav-pintext">Pintura exterior</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('pintura');return false;" data-i18n="nav-esmaltes">Esmaltes</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('pintura');return false;" data-i18n="nav-brochas">Brochas y rodillos</a>
+          </div>
+          <div class="mcol">
+            <div class="mhead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22V12h6v10"/><path d="M8 7h.01M12 7h.01M16 7h.01M8 11h.01M16 11h.01"/></svg><span data-i18n="cat-construccion">Construcción</span></div>
+            <a class="mlink" href="#" onclick="openCategoryPage('construccion');return false;" data-i18n="nav-cemento">Cemento</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('construccion');return false;" data-i18n="nav-varilla">Varilla y malla</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('construccion');return false;" data-i18n="nav-drywall">Tablaroca / Drywall</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('construccion');return false;" data-i18n="nav-madera">Madera y triplay</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('construccion');return false;" data-i18n="nav-arena">Arena y grava</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('construccion');return false;" data-i18n="nav-impermeabilizantes">Impermeabilizantes</a>
+            <div class="mhead" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg><span data-i18n="cat-fijacion">Fijación</span></div>
+            <a class="mlink" href="#" onclick="openCategoryPage('fijacion');return false;" data-i18n="nav-tornillos">Tornillos</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('fijacion');return false;" data-i18n="nav-clavos">Clavos</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('fijacion');return false;" data-i18n="nav-anclas">Anclas y taquetes</a>
+          </div>
+          <div class="mcol">
+            <div class="mhead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span data-i18n="cat-cerrajeria">Cerrajería</span></div>
+            <a class="mlink" href="#" onclick="openCategoryPage('cerrajeria');return false;" data-i18n="nav-cerraduras">Cerraduras</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('cerrajeria');return false;" data-i18n="nav-candados">Candados</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('cerrajeria');return false;" data-i18n="nav-bisagras">Bisagras</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('cerrajeria');return false;" data-i18n="nav-chapas">Chapas y picaportes</a>
+            <div class="mhead" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span data-i18n="cat-electrico">Eléctrico</span></div>
+            <a class="mlink" href="#" onclick="openCategoryPage('electrico');return false;" data-i18n="nav-cables">Cables y canaletas</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('electrico');return false;" data-i18n="nav-contactos">Contactos e interruptores</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('electrico');return false;" data-i18n="nav-focos">Focos y luminarias</a>
+            <a class="mlink" href="#" onclick="openCategoryPage('electrico');return false;" data-i18n="nav-tableros">Tableros eléctricos</a>
+            <div class="mhead" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg><span data-i18n="nav-ofertas">Ofertas</span></div>
+            <a class="mlink" href="#ofertas" data-i18n="nav-ver-ofertas">Ver todas las ofertas</a>
+          </div>
+        </div>
+      </li>
+      <li><a href="#categorias" data-i18n="nav-cats">Categorías</a></li>
+      <li>
+        <a href="#rentas"><span data-i18n="nav-rentas">Rentas</span> <span class="arr">▾</span></a>
+        <div class="sdrop">
+          <a href="#rentas" data-i18n="nav-rent-herramientas">Renta de Herramientas</a>
+          <a href="#rentas" data-i18n="nav-rent-disponibilidad">Disponibilidad</a>
+          <a href="#rentas" data-i18n="nav-rent-tarifas">Tarifas y depósitos</a>
+        </div>
+      </li>
+      <li>
+        <a href="#facturas"><span data-i18n="nav-facturas">Facturas</span> <span class="arr">▾</span></a>
+        <div class="sdrop">
+          <a href="#facturas" data-i18n="nav-mis-facturas">Mis Facturas</a>
+          <a href="#facturas" data-i18n="nav-mi-cuenta">Mi Cuenta</a>
+          <a href="#facturas" data-i18n="nav-historial">Historial de pagos</a>
+        </div>
+      </li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('es')" id="btn-es">ES</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')" id="btn-fr">FR</button>
+    </div>
+    
+    <button class="nav-cart" onclick="openCart()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg><span class="ccnt" id="navCartCount">0</span></button>
+    <button class="nav-cart" onclick="document.getElementById('mi-cuenta').scrollIntoView({behavior:'smooth'})" style="border-color:#B87333;color:#B87333;gap:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="nav-mi-cuenta">Mi Cuenta</span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-accent"></div>
+  <div class="hero-left">
+    <span class="hero-tag" data-i18n="hero-tag">Ferretería — Valle Dorado, Nayarit</span>
+    <h1 class="hero-title"><span data-i18n="hero-t1">TODO LO</span><br><span class="accent" data-i18n="hero-t2">QUE NECESITAS,</span><br><span data-i18n="hero-t3">EN UN LUGAR.</span></h1>
+    <p class="hero-sub" data-i18n="hero-sub">Ferretería Malinal</p>
+    <p class="hero-tagline" data-i18n="hero-tagline">¡Te ayudamos a hacer todo posible!</p>
+    <div class="hero-btns">
+      <a href="#tienda" class="btn-p" data-i18n="btn-shop">Comprar ahora</a>
+      <a href="#contacto" class="btn-o" data-i18n="btn-contact">Contáctanos</a>
+    </div>
+  </div>
+  <div class="hero-right" style="display:flex;align-items:center;justify-content:center;position:relative;z-index:2;padding:40px 5%;">
+    <div style="position:relative;width:280px;max-width:100%;border-radius:10px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.5);border:2px solid #2a2a2a;">
+      <img src="/images/store-front.jpg" alt="Ferretería Malinal" style="width:100%;height:auto;display:block;object-fit:cover;">
+      <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 100%);padding:14px 16px 12px;">
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.08em;">Sucursal Valle Dorado</span>
+      </div>
+    </div>
+</div>
+</section>
+
+<!-- BRANDS SCROLLER -->
+<div class="brands-bar" aria-label="Marcas disponibles">
+  <div class="brands-fade brands-fade-l"></div>
+  <div class="brands-track">
+    <span class="brand-item"><span class="brand-name">DeWalt</span></span>
+    <span class="brand-item"><span class="brand-name">Makita</span></span>
+    <span class="brand-item"><span class="brand-name">Milwaukee</span></span>
+    <span class="brand-item"><span class="brand-name">Bosch</span></span>
+    <span class="brand-item"><span class="brand-name">Ryobi</span></span>
+    <span class="brand-item"><span class="brand-name">Ridgid</span></span>
+    <span class="brand-item"><span class="brand-name">Porter-Cable</span></span>
+    <span class="brand-item"><span class="brand-name">Black+Decker</span></span>
+    <span class="brand-item"><span class="brand-name">Truper</span></span>
+    <span class="brand-item"><span class="brand-name">Urrea</span></span>
+    <span class="brand-item"><span class="brand-name">Surtek</span></span>
+    <span class="brand-item"><span class="brand-name">Pretul</span></span>
+    <span class="brand-item"><span class="brand-name">Volteck</span></span>
+    <span class="brand-item"><span class="brand-name">Hermex</span></span>
+    <span class="brand-item"><span class="brand-name">Foset</span></span>
+    <span class="brand-item"><span class="brand-name">Fiero</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="brand-item"><span class="brand-name">DeWalt</span></span>
+    <span class="brand-item"><span class="brand-name">Makita</span></span>
+    <span class="brand-item"><span class="brand-name">Milwaukee</span></span>
+    <span class="brand-item"><span class="brand-name">Bosch</span></span>
+    <span class="brand-item"><span class="brand-name">Ryobi</span></span>
+    <span class="brand-item"><span class="brand-name">Ridgid</span></span>
+    <span class="brand-item"><span class="brand-name">Porter-Cable</span></span>
+    <span class="brand-item"><span class="brand-name">Black+Decker</span></span>
+    <span class="brand-item"><span class="brand-name">Truper</span></span>
+    <span class="brand-item"><span class="brand-name">Urrea</span></span>
+    <span class="brand-item"><span class="brand-name">Surtek</span></span>
+    <span class="brand-item"><span class="brand-name">Pretul</span></span>
+  </div>
+  <div class="brands-fade brands-fade-r"></div>
+</div>
+
+
+
+
+<!-- WEEKLY FLYER -->
+<section style="background:#141414;padding:70px 8%;border-top:1px solid #222;" id="flyer">
+  <div style="max-width:900px;margin:0 auto;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:16px;">
+      <div>
+        <p class="stag" style="color:var(--copper)"><span data-i18n="flyer-tag">Promociones</span></p>
+        <h2 class="stitle" style="color:#fff;margin:0;"><span data-i18n="flyer-title">Volante de la Semana</span></h2>
+      </div>
+      <div style="background:#1e1e1e;border:1px solid #2e2e2e;border-radius:6px;padding:10px 16px;display:flex;align-items:center;gap:8px;">
+        <div style="width:8px;height:8px;background:#25D366;border-radius:50%;animation:pulse 2s infinite;"></div>
+        <span style="color:#888;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;">Actualizado esta semana</span>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;">
+      <!-- Flyer image placeholder - replace src with actual flyer image -->
+      <div style="background:#1e1e1e;border:1px solid #2e2e2e;border-radius:10px;overflow:hidden;">
+        <div style="background:var(--red);padding:12px 20px;display:flex;align-items:center;justify-content:between;">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:18px;color:#fff;text-transform:uppercase;letter-spacing:.05em;">📄 Volante Actual</span>
+        </div>
+        <div style="padding:20px;display:flex;align-items:center;justify-content:center;min-height:320px;position:relative;">
+          <!-- Placeholder - swap this img src for the actual flyer jpg/png -->
+          <div style="text-align:center;color:#333;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="width:64px;height:64px;margin-bottom:16px;opacity:.3"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;color:#444;text-transform:uppercase;letter-spacing:.08em;">Sube tu volante aquí</div>
+            <div style="font-size:12px;color:#333;margin-top:8px;">Reemplaza la imagen cada semana</div>
+          </div>
+        </div>
+      </div>
+      <!-- Weekly deals list -->
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--copper);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">Ofertas Destacadas</div>
+        <div style="background:#1e1e1e;border:1px solid #2e2e2e;border-radius:8px;padding:16px;display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="color:#fff;font-size:14px;font-weight:600;">Tornillería y Fijación</div><div style="color:#555;font-size:12px;margin-top:2px;">Selección completa</div></div>
+          <div style="background:var(--red);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:18px;padding:4px 12px;border-radius:4px;">-20%</div>
+        </div>
+        <div style="background:#1e1e1e;border:1px solid #2e2e2e;border-radius:8px;padding:16px;display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="color:#fff;font-size:14px;font-weight:600;">Pintura Comex</div><div style="color:#555;font-size:12px;margin-top:2px;">Interior y exterior</div></div>
+          <div style="background:var(--red);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:18px;padding:4px 12px;border-radius:4px;">2x1</div>
+        </div>
+        <div style="background:#1e1e1e;border:1px solid #2e2e2e;border-radius:8px;padding:16px;display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="color:#fff;font-size:14px;font-weight:600;">Herramientas Truper</div><div style="color:#555;font-size:12px;margin-top:2px;">Stock limitado</div></div>
+          <div style="background:var(--copper);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:18px;padding:4px 12px;border-radius:4px;">-15%</div>
+        </div>
+        <div style="background:#1e1e1e;border:1px solid #2e2e2e;border-radius:8px;padding:16px;display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="color:#fff;font-size:14px;font-weight:600;">Material Eléctrico</div><div style="color:#555;font-size:12px;margin-top:2px;">Volteck y más</div></div>
+          <div style="background:var(--copper);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:18px;padding:4px 12px;border-radius:4px;">-10%</div>
+        </div>
+        <a href="https://wa.me/523223031895?text=Hola! Vi las ofertas del volante y quiero más información" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;padding:13px;border-radius:6px;text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:.06em;margin-top:4px;">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;stroke:none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Aprovechar Oferta
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SALES -->
+<section class="sales-section" id="ofertas">
+  <div class="sheader"><div><p class="stag">Promociones especiales</p><h2 class="stitle">Ofertas de la semana</h2></div><a href="#" class="slink">Ver todas →</a></div>
+  <div class="sales-grid">
+    <div class="sale-card"><span class="sale-badge">NUEVO</span><img class="sale-img" src="/images/promo1.jpg" alt="Rotomartillo Inalámbrico SDS Plus"><div class="sale-body"><div class="sale-name">Rotomartillo Inalámbrico SDS Plus</div><div class="sale-desc">2 Joules. Disponible en Ferretería Malinal Valle Dorado.</div><div class="sale-prices"><span class="sale-new">$4,950</span></div><a class="sale-cta" href="https://wa.me/523223031895?text=Hola%21%20Me%20interesa%20el%20Rotomartillo%20SDS%20Plus" target="_blank" style="text-decoration:none;text-align:center;">Preguntar por WhatsApp</a><p class="sale-exp">Llámanos: 322 303 1895</p></div></div>
+    <div class="sale-card"><span class="sale-badge">2x1</span><img class="sale-img" src="/images/promo2.jpg" alt="Pintura"><div class="sale-body"><div class="sale-name">Pintura vinílica 20L</div><div class="sale-desc">Interior y exterior. Colores seleccionados.</div><div class="sale-prices"><span class="sale-old">$680</span><span class="sale-new">$680 c/u</span></div><button class="sale-cta" onclick="addToCart('Pintura Vinílica 20L',680,'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=100')">+ Agregar al carrito</button><p class="sale-exp">Hasta agotar existencias</p></div></div>
+    <div class="sale-card"><span class="sale-badge">20% OFF</span><img class="sale-img" src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&q=80" alt="Plomería"><div class="sale-body"><div class="sale-name">Kit de plomería</div><div class="sale-desc">Conexiones, llaves de paso, mangueras y accesorios.</div><div class="sale-prices"><span class="sale-old">$1,200</span><span class="sale-new">$960</span></div><button class="sale-cta" onclick="addToCart('Kit de Plomería',960,'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=100')">+ Agregar al carrito</button><p class="sale-exp">Válido hasta el 20 de marzo</p></div></div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="cat-section" id="categorias">
+  <div class="sheader"><div><p class="stag">Explora por departamento</p><h2 class="stitle">Categorías</h2></div><a href="#tienda" class="slink">Ver tienda →</a></div>
+  <div class="cat-grid">
+    <div class="cat-card" onclick="openCategoryPage('herramientas')">
+      <div class="cat-photo" style="background-image:url('https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=1000&q=85')"></div>
+      <div class="cat-dark"></div>
+      <div class="cat-body"><svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 12l-8.5 8.5a2.12 2.12 0 01-3-3L12 9"/><path d="M17.64 15L22 10.36 16.85 5.22 12.5 9.56"/><path d="M20 7l-4.5-4.5"/></svg><div class="cat-name">Herramientas Manuales</div><div class="cat-subs"><span class="cat-sub">Martillos</span><span class="cat-sub">Llaves</span><span class="cat-sub">Desarmadores</span><span class="cat-sub">Pinzas</span><span class="cat-sub">Metros</span></div></div>
+    </div>
+    <div class="cat-card" onclick="openCategoryPage('electricas')">
+      <div class="cat-photo" style="background-image:url('https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&q=85')"></div>
+      <div class="cat-dark"></div>
+      <div class="cat-body"><svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><div class="cat-name">Herr. Eléctricas</div><div class="cat-subs"><span class="cat-sub">Taladros</span><span class="cat-sub">Esmeriles</span><span class="cat-sub">Sierras</span></div></div>
+    </div>
+    <div class="cat-card" onclick="openCategoryPage('construccion')">
+      <div class="cat-photo" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=85')"></div>
+      <div class="cat-dark"></div>
+      <div class="cat-body"><svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22V12h6v10"/><path d="M8 7h.01M12 7h.01M16 7h.01M8 11h.01M16 11h.01"/></svg><div class="cat-name">Construcción</div><div class="cat-subs"><span class="cat-sub">Cemento</span><span class="cat-sub">Drywall</span><span class="cat-sub">Madera</span><span class="cat-sub">Varilla</span></div></div>
+    </div>
+    <div class="cat-card" onclick="openCategoryPage('pintura')">
+      <div class="cat-photo" style="background-image:url('https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=700&q=85')"></div>
+      <div class="cat-dark"></div>
+      <div class="cat-body"><svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.37 2.63L14 7l-1.59-1.59a2 2 0 00-2.82 0L8 7l9 9 1.59-1.59a2 2 0 000-2.82L17 10l4.37-4.37a2.12 2.12 0 00-3-3z"/><path d="M9 8c-2 3-4 3.5-7 4l8 8c1-.5 3.5-2 4-7"/></svg><div class="cat-name">Pintura</div><div class="cat-subs"><span class="cat-sub">Interior</span><span class="cat-sub">Exterior</span><span class="cat-sub">Esmalte</span><span class="cat-sub">Brochas</span></div></div>
+    </div>
+    <div class="cat-card" onclick="openCategoryPage('plomeria')">
+      <div class="cat-photo" style="background-image:url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&q=85')"></div>
+      <div class="cat-dark"></div>
+      <div class="cat-body"><svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg><div class="cat-name">Plomería</div><div class="cat-subs"><span class="cat-sub">Tuberías</span><span class="cat-sub">Llaves</span><span class="cat-sub">Conexiones</span></div></div>
+    </div>
+    <div class="cat-card" onclick="openCategoryPage('fijacion')">
+      <div class="cat-photo" style="background-image:url('https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=600&q=85')"></div>
+      <div class="cat-dark"></div>
+      <div class="cat-body"><svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg><div class="cat-name">Fijación</div><div class="cat-subs"><span class="cat-sub">Tornillos</span><span class="cat-sub">Clavos</span><span class="cat-sub">Anclas</span></div></div>
+    </div>
+    <div class="cat-card" onclick="openCategoryPage('cerrajeria')">
+      <div class="cat-photo" style="background-image:url('https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=800&q=85')"></div>
+      <div class="cat-dark"></div>
+      <div class="cat-body"><svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><div class="cat-name">Cerrajería</div><div class="cat-subs"><span class="cat-sub">Cerraduras</span><span class="cat-sub">Candados</span><span class="cat-sub">Bisagras</span></div></div>
+    </div>
+    <div class="cat-card" onclick="openCategoryPage('electrico')">
+      <div class="cat-photo" style="background-image:url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&q=85')"></div>
+      <div class="cat-dark"></div>
+      <div class="cat-body"><svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><div class="cat-name">Eléctrico</div><div class="cat-subs"><span class="cat-sub">Cables</span><span class="cat-sub">Contactos</span><span class="cat-sub">Focos</span><span class="cat-sub">Tableros</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section class="shop-section" id="tienda">
+  <div class="sheader"><div><p class="stag">Catálogo — 7,859 productos</p><h2 class="stitle">Nuestra Tienda</h2></div></div>
+
+  <div style="padding:0 var(--pad) 18px;max-width:1000px;margin:0 auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+    <input id="cat-search" type="text" placeholder="🔍 Buscar producto o SKU..." oninput="searchProducts(this.value)"
+      style="flex:1;min-width:200px;padding:11px 16px;border-radius:6px;border:1px solid #2a2a2a;background:#1a1a1a;color:#fff;font-size:14px;outline:none;">
+    <input id="barcode-input" type="text" placeholder="📷 Escanear código de barras..." onkeydown="if(event.key==='Enter')lookupBarcode(this.value)"
+      style="width:240px;padding:11px 16px;border-radius:6px;border:1px solid #333;background:#0d0d0d;color:#fff;font-size:13px;outline:none;">
+  </div>
+
+  <div class="filters" style="flex-wrap:wrap;gap:6px;">
+    <button class="fbtn active" onclick="loadCat('',this)">Todos</button>
+    <button class="fbtn" onclick="loadCat('Herramientas Manuales',this)">Herramientas Manuales</button>
+    <button class="fbtn" onclick="loadCat('Herramientas Eléctricas',this)">Herramientas Eléctricas</button>
+    <button class="fbtn" onclick="loadCat('Plomería',this)">Plomería</button>
+    <button class="fbtn" onclick="loadCat('Electricidad',this)">Electricidad</button>
+    <button class="fbtn" onclick="loadCat('Materiales Eléctricos',this)">Mat. Eléctricos</button>
+    <button class="fbtn" onclick="loadCat('Fijaciones y Tornillería',this)">Fijaciones</button>
+    <button class="fbtn" onclick="loadCat('Pinturas y Acabados',this)">Pinturas</button>
+    <button class="fbtn" onclick="loadCat('Construcción',this)">Construcción</button>
+    <button class="fbtn" onclick="loadCat('Carretillas y Transporte',this)">Carretillas</button>
+    <button class="fbtn" onclick="loadCat('Aceites y Lubricantes',this)">Aceites</button>
+    <button class="fbtn" onclick="loadCat('Seguridad',this)">Seguridad</button>
+    <button class="fbtn" onclick="loadCat('Aire Acondicionado',this)">Aire A/C</button>
+    <button class="fbtn" onclick="loadCat('Jardín y Exterior',this)">Jardín</button>
+    <button class="fbtn" onclick="loadCat('Limpieza y Mantenimiento',this)">Limpieza</button>
+    <button class="fbtn" onclick="loadCat('General',this)">General</button>
+  </div>
+
+  <div id="cat-status" style="padding:8px var(--pad);color:#888;font-size:13px;"></div>
+  <div class="pgrid" id="product-grid">
+    <div id="grid-loading" style="grid-column:1/-1;text-align:center;padding:60px;color:#888;font-size:15px;">Cargando productos...</div>
+  </div>
+  <div style="text-align:center;padding:24px;display:none;" id="load-more-wrap">
+    <button onclick="loadMore()" style="background:var(--red);color:#fff;border:none;padding:12px 36px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:700;">Cargar más →</button>
+  </div>
+</section>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div id="product-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.88);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;max-width:480px;width:90%;padding:32px;position:relative;max-height:90vh;overflow-y:auto;">
+    <button onclick="closeProductModal()" style="position:absolute;top:14px;right:16px;background:none;border:none;color:#666;font-size:22px;cursor:pointer;line-height:1;">✕</button>
+    <div id="pm-cat" style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--red);margin-bottom:8px;font-weight:700;"></div>
+    <div id="pm-name" style="font-size:18px;font-weight:800;color:#fff;margin-bottom:6px;line-height:1.3;"></div>
+    <div id="pm-sku" style="font-size:11px;color:#444;margin-bottom:18px;font-family:monospace;"></div>
+    <div id="pm-price" style="font-size:32px;font-weight:900;color:var(--red);margin-bottom:8px;"></div>
+    <div id="pm-stock" style="font-size:13px;color:#666;margin-bottom:24px;"></div>
+    <button id="pm-add" style="width:100%;background:var(--red);color:#fff;border:none;padding:14px;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:.04em;">+ AGREGAR AL CARRITO</button>
+    <button onclick="closeProductModal()" style="width:100%;background:none;border:1px solid #2a2a2a;color:#888;padding:10px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:10px;">Cerrar</button>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contacto">
+  <div class="ci">
+    <p class="stag">Estamos aquí para ti</p>
+    <h2 class="stitle">Visítanos o<br>Escríbenos</h2>
+    <p class="cdesc">Tenemos todo lo que necesitas. Visítanos en tienda o contáctanos — con gusto te asesoramos.</p>
+    <div class="citems">
+      <div class="citem"><div class="cicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="ctext"><strong>Dirección</strong><span>Av. Valle De México #2 Int. 6, Col. Valle Dorado</span></div></div>
+      <div class="citem"><div class="cicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.12 2.18 2 2 0 012.11 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.46-.46a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div><div class="ctext"><strong>Teléfono / WhatsApp</strong><a href="tel:+523223031895">+52 322 303 1895</a></div></div>
+      <div class="citem"><div class="cicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="ctext"><strong>Correo</strong><a href="mailto:ferreteriamalinal@icloud.com">ferreteriamalinal@icloud.com</a></div></div>
+      <div class="citem"><div class="cicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="ctext"><strong>Horario</strong><span>Lunes – Sábado: 8:00am – 7:00pm</span></div></div>
+    </div>
+    <div class="socrow">
+      <a class="socbtn" href="https://facebook.com/ferreteriaMalinal" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>Facebook</a>
+      <a class="socbtn" href="https://instagram.com/malinalferreteria" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Instagram</a>
+      <a class="socbtn" href="https://wa.me/523223031895" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor" style="stroke:none;width:13px;height:13px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
+    </div>
+    <div class="mapbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Av. Valle De México #2, Valle Dorado</span></div>
+  </div>
+  <div class="cform">
+    <div class="form-ttl">Envíanos un mensaje</div>
+    <div class="form-row"><div class="fg"><label>Nombre</label><input type="text" placeholder="Tu nombre"></div><div class="fg"><label>Teléfono</label><input type="tel" placeholder="+52 322 303 1895"></div></div>
+    <div class="fg"><label>¿Qué necesitas?</label><select><option value="">Selecciona categoría</option><option>Herramientas manuales</option><option>Herramientas eléctricas</option><option>Plomería</option><option>Pintura</option><option>Fijación</option><option>Cerrajería</option><option>Construcción</option><option>Eléctrico</option><option>Otro</option></select></div>
+    <div class="fg"><label>Mensaje</label><textarea placeholder="Cuéntanos sobre tu proyecto…"></textarea></div>
+    <button class="fsub" onclick="submitForm()">Enviar mensaje →</button>
+  </div>
+</section>
+
+
+
+
+
+<!-- DELIVERY -->
+<section style="background:#181818;padding:60px 8%;border-top:1px solid #262626;">
+  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
+    <div>
+      <p class="stag" style="color:var(--copper)" data-i18n="del-tag">Servicio a Domicilio</p>
+      <h2 class="stitle" style="color:#fff" data-i18n="del-title">Hacemos Entregas</h2>
+      <p style="color:#999;font-size:14px;line-height:1.8;margin-top:16px;">Llevamos tus materiales y herramientas directamente a tu obra o domicilio. <strong style="color:#fff;">Entrega GRATIS en compras mayores a $1,500 MXN</strong> en Valle Dorado y zonas cercanas. Consulta disponibilidad por WhatsApp.</p>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:24px;">
+        <div style="display:flex;align-items:center;gap:12px;color:#888;font-size:13px;"><svg style="width:18px;height:18px;stroke:var(--copper);flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Valle Dorado y alrededores</div>
+        <div style="display:flex;align-items:center;gap:12px;color:#888;font-size:13px;"><svg style="width:18px;height:18px;stroke:var(--copper);flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Materiales de construcción, herramientas y más</div>
+        <div style="display:flex;align-items:center;gap:12px;color:#888;font-size:13px;"><svg style="width:18px;height:18px;stroke:var(--copper);flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Lunes a Sábado 8am – 7pm</div>
+      </div>
+      <a href="https://wa.me/523223031895?text=Hola! Me interesa el servicio de entrega a domicilio" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:12px 24px;border-radius:4px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-top:24px;">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;stroke:none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Consultar Entrega
+      </a>
+    </div>
+    <div style="background:#161616;border-radius:10px;overflow:hidden;border:1px solid #252525;">
+      <div style="background:var(--red);padding:20px 24px;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:.05em;">Zonas de Entrega</div>
+      </div>
+      <div style="padding:24px;display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #252525;">
+          <span style="color:#ccc;font-size:13px;">Valle Dorado</span>
+          <span style="color:#25D366;font-size:11px;font-weight:700;text-transform:uppercase;">✓ Disponible</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #252525;">
+          <span style="color:#ccc;font-size:13px;">Nuevo Vallarta</span>
+          <span style="color:#25D366;font-size:11px;font-weight:700;text-transform:uppercase;">✓ Disponible</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #252525;">
+          <span style="color:#ccc;font-size:13px;">Mezcales</span>
+          <span style="color:#25D366;font-size:11px;font-weight:700;text-transform:uppercase;">✓ Disponible</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #252525;">
+          <span style="color:#ccc;font-size:13px;">San Vicente</span>
+          <span style="color:#25D366;font-size:11px;font-weight:700;text-transform:uppercase;">✓ Disponible</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;">
+          <span style="color:#ccc;font-size:13px;">Otras zonas</span>
+          <span style="color:var(--copper);font-size:11px;font-weight:700;text-transform:uppercase;">Consultar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ABOUT US -->
+<section style="background:#161616;padding:80px 8%;border-top:1px solid #242424;" id="nosotros">
+  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+    <div>
+      <p class="stag" style="color:var(--copper)" data-i18n="about-tag">Quiénes Somos</p>
+      <h2 class="stitle" style="color:#fff" data-i18n="about-title">Nuestra Historia</h2>
+      <p style="color:#999;font-size:14px;line-height:1.9;margin-top:20px;" data-i18n="about-p1">Ferretería Malinal nació con el sueño de ser la ferretería de confianza de Valle Dorado y toda la zona de Nayarit. Llevamos más de 15 años ayudando a constructores, contratistas y familias a hacer realidad sus proyectos.</p>
+      <p style="color:#888;font-size:14px;line-height:1.9;margin-top:14px;" data-i18n="about-p2">Contamos con dos sucursales para servirte mejor — en Valle Dorado y en Carr. Mezcales — con más de 5,000 productos en stock, las mejores marcas, y un equipo que realmente conoce su trabajo.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px;">
+        <div style="background:#1e1e1e;border:1px solid #2e2e2e;border-radius:8px;padding:20px;text-align:center;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;color:var(--red);">15+</div>
+          <div style="font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.08em;margin-top:4px;" data-i18n="about-years">Años de Experiencia</div>
+        </div>
+        <div style="background:#1e1e1e;border:1px solid #2e2e2e;border-radius:8px;padding:20px;text-align:center;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;color:var(--red);">2</div>
+          <div style="font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.08em;margin-top:4px;" data-i18n="about-locations">Sucursales</div>
+        </div>
+        <div style="background:#1e1e1e;border:1px solid #2e2e2e;border-radius:8px;padding:20px;text-align:center;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;color:var(--red);">+5,000</div>
+          <div style="font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.08em;margin-top:4px;" data-i18n="about-products">Productos</div>
+        </div>
+        <div style="background:#1e1e1e;border:1px solid #2e2e2e;border-radius:8px;padding:20px;text-align:center;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;color:var(--red);">100%</div>
+          <div style="font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.08em;margin-top:4px;" data-i18n="about-commitment">Compromiso</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="background:#161616;border-radius:10px;padding:24px;border:1px solid #252525;border-left:3px solid var(--red);">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;color:#fff;text-transform:uppercase;margin-bottom:8px;">📍 Sucursal Valle Dorado</div>
+        <div style="color:#666;font-size:13px;line-height:1.7;">Valle de México 2-int. #6<br>Valle Dorado, 63735 Plaza Dorada<br>📞 322 303 1895<br>⏰ Lun–Sáb 8:00–7:00pm</div>
+      </div>
+      <div style="background:#161616;border-radius:10px;padding:24px;border:1px solid #252525;border-left:3px solid var(--copper);">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;color:#fff;text-transform:uppercase;margin-bottom:8px;">📍 Sucursal Mezcales</div>
+        <div style="color:#666;font-size:13px;line-height:1.7;">Carr. Mezcales – San Vicente<br>110-LOCAL B, 63735<br>📞 322 239 4072<br>⏰ Lun–Vie 8:00–7:00pm | Sáb 8:00–3:00pm</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- MAP -->
+<section style="background:#1a1a1a;padding:60px 8% 0;border-top:1px solid #282828;" id="mapa">
+  <div style="max-width:900px;margin:0 auto;">
+    <p class="stag" style="color:var(--copper);text-align:center;" data-i18n="map-tag">Encuéntranos</p>
+    <h2 class="stitle" style="color:#fff;text-align:center;margin-bottom:32px;" data-i18n="map-title">Nuestras Ubicaciones</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:0;">
+      <div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--copper);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">Sucursal Valle Dorado</div>
+        <iframe src="https://maps.google.com/maps?q=20.7252,-105.2785&hl=es&z=16&output=embed&iwloc=near" width="100%" height="250" style="border-radius:8px;border:1px solid #2a2a2a;border-radius:8px;" allowfullscreen="" loading="lazy"></iframe>
+        <div style="background:#1e1e1e;border:1px solid #2e2e2e;border-radius:0 0 8px 8px;padding:12px 16px;margin-top:-4px;">
+          <div style="color:#ccc;font-size:12px;">Valle de México 2-int. #6, Valle Dorado · <span style="color:var(--copper)">322 303 1895</span></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--copper);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">Sucursal Mezcales</div>
+        <iframe src="https://maps.google.com/maps?q=20.7689,-105.2647&hl=es&z=16&output=embed&iwloc=near" width="100%" height="250" style="border-radius:8px;border:1px solid #2a2a2a;border-radius:8px;" allowfullscreen="" loading="lazy"></iframe>
+        <div style="background:#1e1e1e;border:1px solid #2e2e2e;border-radius:0 0 8px 8px;padding:12px 16px;margin-top:-4px;">
+          <div style="color:#ccc;font-size:12px;">Carr. Mezcales – San Vicente 110-B · <span style="color:var(--copper)">322 239 4072</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- CUSTOMER PORTAL -->
+<section class="portal-section" id="mi-cuenta">
+  <div class="portal-grid">
+    <div class="portal-info">
+      <p class="stag" style="color:var(--copper)">Portal de Clientes</p>
+      <h2 class="stitle" style="color:#fff">Tu Cuenta<br>Malinal</h2>
+      <p>Accede a tu historial de compras, descarga facturas fiscales, realiza pedidos en línea y gestiona tu información de cuenta.</p>
+      <div class="portal-features">
+        <div class="portal-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Facturas fiscales descargables</div>
+        <div class="portal-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>Historial de pedidos completo</div>
+        <div class="portal-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Pagos en línea con Mercado Pago</div>
+        <div class="portal-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Promociones y descuentos exclusivos</div>
+      </div>
+    </div>
+    <div class="portal-box">
+      <div class="portal-tabs">
+        <button class="portal-tab active" onclick="switchPortalTab('login')">Iniciar Sesión</button>
+        <button class="portal-tab" onclick="switchPortalTab('register')">Crear Cuenta</button>
+      </div>
+      <!-- LOGIN FORM -->
+      <div class="portal-form active" id="portal-login">
+        <div class="pfg"><label>Email</label><input type="email" id="login-email" placeholder="tu@correo.com"></div>
+        <div class="pfg"><label>Contraseña</label><input type="password" id="login-password" placeholder="Tu contraseña"></div>
+        <button class="portal-submit" onclick="handlePortalLogin()">Iniciar Sesión</button>
+        <p class="portal-msg"><a href="#" onclick="switchPortalTab('reset')">¿Olvidaste tu contraseña?</a></p>
+      </div>
+      <!-- REGISTER FORM -->
+      <div class="portal-form" id="portal-register">
+        <div class="pfg-row">
+          <div class="pfg"><label>Nombre</label><input type="text" id="reg-firstname" placeholder="Nombre"></div>
+          <div class="pfg"><label>Apellido</label><input type="text" id="reg-lastname" placeholder="Apellido"></div>
+        </div>
+        <div class="pfg"><label>Email</label><input type="email" id="reg-email" placeholder="tu@correo.com"></div>
+        <div class="pfg"><label>Teléfono</label><input type="tel" id="reg-phone" placeholder="322 000 0000"></div>
+        <div class="pfg"><label>RFC (opcional)</label><input type="text" id="reg-rfc" placeholder="Para facturación fiscal"></div>
+        <div class="pfg"><label>Contraseña</label><input type="password" id="reg-password" placeholder="Mínimo 6 caracteres"></div>
+        <button class="portal-submit" onclick="handlePortalRegister()">Crear Mi Cuenta</button>
+        <p class="portal-msg">Al registrarte aceptas nuestros términos de uso.</p>
+      </div>
+      <!-- DASHBOARD (shown when logged in) -->
+      <div class="portal-dashboard" id="portal-dashboard">
+        <div class="portal-welcome" id="portal-welcome-name">Bienvenido</div>
+        <div class="portal-cards">
+          <div class="portal-card"><div class="portal-card-num" id="dash-orders">0</div><div class="portal-card-lbl">Pedidos</div></div>
+          <div class="portal-card"><div class="portal-card-num" id="dash-invoices">0</div><div class="portal-card-lbl">Facturas</div></div>
+        </div>
+        <div style="font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">Facturas Recientes</div>
+        <div class="portal-invoice-list" id="dash-invoice-list">
+          <div style="color:#888;font-size:13px;text-align:center;padding:20px;">No hay facturas aún.</div>
+        </div>
+        <button class="portal-logout" onclick="handlePortalLogout()">Cerrar Sesión</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">+5,000</div><div class="stat-label" data-i18n="stat-prod">Productos</div></div>
+  <div class="stat"><div class="stat-num">15+</div><div class="stat-label" data-i18n="stat-exp">Años de experiencia</div></div>
+  <div class="stat"><div class="stat-num">8am–7pm</div><div class="stat-label" data-i18n="stat-hrs">Horario L–S</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label" data-i18n="stat-comp">Compromiso</div></div>
+</div>
+
+<footer>
+  <div class="ftop">
+    <img class="flogo" id="footerLogo" src="/images/logo-new.png" alt="Ferretería Malinal">
+    <div class="flinks"><a href="#ofertas" data-i18n="nav-ofertas">Ofertas</a><a href="#tienda" data-i18n="nav-tienda">Tienda</a><a href="#categorias" data-i18n="nav-cats">Categorías</a><a href="#nosotros">Nosotros</a><a href="#mapa">Ubicaciones</a></div>
+  <div style="display:flex;align-items:center;gap:20px;margin-top:16px;">
+    <a href="https://facebook.com/ferreteriaMalinal" target="_blank" title="Facebook"  style="color:#1877F2!important"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+    <a href="https://instagram.com/malinalferreteria" target="_blank" title="Instagram"  style="color:#E1306C!important"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+    <a href="https://wa.me/523223031895" target="_blank" title="WhatsApp"  style="color:#25D366!important"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+    <a href="tel:+523223031895" title="Teléfono"  style="color:var(--copper)!important"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.12 2.18 2 2 0 012.11 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.46-.46a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
+  </div>
+  </div>
+  <div class="fbot">
+    <p class="fcopy">© 2025 Ferretería Malinal · Av. Valle De México #2, Valle Dorado · +52 322 303 1895</p>
+    <p class="ftagline">¡Te ayudamos a hacer todo posible!</p>
+  </div>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const logoData={ 1: { src: "/images/logo-new.png", label: "Ferretería Malinal" } };
+function switchLogo(n){const s=logoData[n].src;['navLogo','heroLogoImg','footerLogo'].forEach(id=>document.getElementById(id).src=s);for(let i=1;i<=11;i++){document.getElementById('thumb'+i).classList.toggle('active',i===n);document.getElementById('wrap'+i).classList.toggle('active',i===n);}}
+function filterCat(cat,btn){loadCat(cat,btn);}
+
+// ── LIVE PRODUCT CATALOG ─────────────────────────────────
+let currentPage=0,pageSize=48,currentCat='',currentSearch='',searchTimer;
+
+async function loadCat(cat,btn){
+  currentCat=cat;currentPage=0;currentSearch='';
+  if(document.getElementById('cat-search'))document.getElementById('cat-search').value='';
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  renderLocalProducts();
+}
+
+function searchProducts(q){
+  clearTimeout(searchTimer);
+  searchTimer=setTimeout(()=>{currentSearch=q;currentPage=0;renderLocalProducts();},250);
+}
+
+async function lookupBarcode(code){
+  if(!code)return;
+  const status=document.getElementById('cat-status');
+  if(status)status.textContent='Buscando: '+code+'...';
+  if(window.LOCAL_PRODUCTS){
+    const all=Object.entries(window.LOCAL_PRODUCTS).flatMap(([cat,items])=>items.map(p=>({...p,cat})));
+    const found=all.find(p=>p.sku===code||p.sku===code.replace(/^0+/,''));
+    if(found){openProductModalLocal(found);if(document.getElementById('barcode-input'))document.getElementById('barcode-input').value='';return;}
+  }
+  if(status)status.textContent='Producto no encontrado: '+code;
+}
+
+function renderLocalProducts(){
+  const grid=document.getElementById('product-grid');
+  const status=document.getElementById('cat-status');
+  if(!grid)return;
+  // clear old cards
+  grid.querySelectorAll('.pcard').forEach(c=>c.remove());
+  const loading=document.getElementById('grid-loading');
+  if(!window.LOCAL_PRODUCTS){if(loading)loading.style.display='block';return;}
+  if(loading)loading.style.display='none';
+
+  let items=[];
+  if(currentCat&&window.LOCAL_PRODUCTS[currentCat]){
+    items=window.LOCAL_PRODUCTS[currentCat].map(p=>({...p,cat:currentCat}));
+  } else if(!currentCat){
+    items=Object.entries(window.LOCAL_PRODUCTS).flatMap(([cat,ps])=>ps.map(p=>({...p,cat})));
+  }
+  if(currentSearch){
+    const q=currentSearch.toLowerCase();
+    items=items.filter(p=>p.name.toLowerCase().includes(q)||p.sku.toLowerCase().includes(q));
+  }
+  const total=items.length;
+  const page=items.slice(currentPage*pageSize,(currentPage+1)*pageSize);
+  if(status)status.textContent=total.toLocaleString()+' productos'+(currentCat?' en '+currentCat:'')+(currentSearch?' · "'+currentSearch+'"':'');
+
+  page.forEach(p=>{
+    const card=document.createElement('div');
+    card.className='pcard';
+    card.style.cursor='pointer';
+    card.onclick=()=>openProductModalLocal(p);
+    card.innerHTML=`<div class="pbody" style="padding:16px 18px;">
+      <div class="pcat" style="font-size:10px;color:var(--red);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;font-weight:700;">${p.cat||''}</div>
+      <div class="pname" style="font-size:13px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.35;">${p.name}</div>
+      <div style="font-size:10px;color:#444;margin-bottom:12px;font-family:monospace;">SKU: ${p.sku}</div>
+      <div class="pfoot"><span class="pprice" style="font-size:17px;">${p.price}</span>
+      <button class="padd" onclick="event.stopPropagation();addToCart(this.dataset.n,parseFloat(this.dataset.p),'')" data-n="${p.name.replace(/"/g,'&quot;')}" data-p="${p.price.replace(/[$,]/g,'')||0}">+ Agregar</button></div>
+    </div>`;
+    grid.appendChild(card);
+  });
+
+  const wrap=document.getElementById('load-more-wrap');
+  if(wrap)wrap.style.display=total>(currentPage+1)*pageSize?'block':'none';
+}
+
+function loadMore(){currentPage++;renderLocalProducts();}
+
+function openProductModalLocal(p){
+  document.getElementById('pm-cat').textContent=p.cat||currentCat||'';
+  document.getElementById('pm-name').textContent=p.name;
+  document.getElementById('pm-sku').textContent='SKU: '+p.sku;
+  document.getElementById('pm-price').textContent=p.price;
+  document.getElementById('pm-stock').textContent='';
+  const price=parseFloat((p.price||'0').replace(/[$,]/g,''))||0;
+  document.getElementById('pm-add').onclick=()=>{addToCart(p.name,price,'');closeProductModal();};
+  document.getElementById('product-modal').style.display='flex';
+}
+function closeProductModal(){document.getElementById('product-modal').style.display='none';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeProductModal();});
+
+document.addEventListener('DOMContentLoaded',async()=>{
+  try{
+    const r=await fetch('/products.json');
+    window.LOCAL_PRODUCTS=await r.json();
+  }catch(e){console.warn('products.json not loaded:',e);}
+  renderLocalProducts();
+});
+let cart=[];
+function addToCart(name,price,img){const ex=cart.find(i=>i.name===name);if(ex)ex.qty++;else cart.push({name,price,img,qty:1});updateUI();showToast('✓ '+name+' agregado');openCart();}
+function removeFromCart(name){cart=cart.filter(i=>i.name!==name);updateUI();}
+function changeQty(name,d){const it=cart.find(i=>i.name===name);if(!it)return;it.qty+=d;if(it.qty<=0)removeFromCart(name);else updateUI();}
+function getTotal(){return cart.reduce((s,i)=>s+i.price*i.qty,0);}
+function updateUI(){
+  const cnt=cart.reduce((s,i)=>s+i.qty,0);document.getElementById('navCartCount').textContent=cnt;
+  const t=getTotal();document.getElementById('cartTotal').textContent='$'+t.toLocaleString();document.getElementById('payTotal').textContent='$'+t.toLocaleString();
+  const c=document.getElementById('cartItems');c.querySelectorAll('.citem').forEach(e=>e.remove());
+  document.getElementById('cartEmpty').style.display=cart.length?'none':'block';
+  cart.forEach(it=>{const d=document.createElement('div');d.className='citem';d.innerHTML=`<img class="cimg" src="${it.img}" alt=""><div class="cinfo"><div class="cname">${it.name}</div><div class="cprice">$${it.price.toLocaleString()}</div><div class="cqty"><button class="qbtn" onclick="changeQty('${it.name}',-1)">−</button><span class="qnum">${it.qty}</span><button class="qbtn" onclick="changeQty('${it.name}',1)">+</button></div></div><button class="cremove" onclick="removeFromCart('${it.name}')">×</button>`;c.appendChild(d);});
+}
+function openCart(){document.getElementById('cartDrawer').classList.add('open');document.getElementById('cartOverlay').classList.add('open');}
+function closeCart(){document.getElementById('cartDrawer').classList.remove('open');document.getElementById('cartOverlay').classList.remove('open');}
+function openPayment(){if(!cart.length){showToast('Carrito vacío');return;}closeCart();document.getElementById('paymentModal').classList.add('open');}
+function closePayment(){document.getElementById('paymentModal').classList.remove('open');}
+function selPay(el){document.querySelectorAll('.pm').forEach(m=>m.classList.remove('sel'));el.classList.add('sel');}
+function confirmPay(){showToast('✓ Pedido confirmado — te contactaremos por WhatsApp');closePayment();cart=[];updateUI();}
+function sendWAOrder(){if(!cart.length){showToast('Carrito vacío');return;}let msg='🔩 *Pedido - Ferretería Malinal*%0A%0A';cart.forEach(i=>{msg+=`• ${i.name} x${i.qty} = $${(i.price*i.qty).toLocaleString()}%0A`;});msg+=`%0A*Total: $${getTotal().toLocaleString()}*%0APor favor confirmar disponibilidad 🙏`;window.open('https://wa.me/523223031895?text='+msg,'_blank');}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+function submitForm(){showToast('✓ Mensaje enviado — te contactamos pronto');}
+</script>
+
+<script>
+// Chat Widget Functionality
+function toggleChat() {
+  const panel = document.getElementById('chatPanel');
+  panel.classList.toggle('active');
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const messagesContainer = document.getElementById('chatMessages');
+  const sendBtn = document.getElementById('sendBtn');
+  
+  const userMessage = input.value.trim();
+  if (!userMessage) return;
+  
+  // Add user message to chat
+  const userDiv = document.createElement('div');
+  userDiv.className = 'chat-message user';
+  userDiv.textContent = userMessage;
+  messagesContainer.appendChild(userDiv);
+  
+  // Clear input
+  input.value = '';
+  
+  // Disable send button
+  sendBtn.disabled = true;
+  
+  // Add typing indicator
+  const typingDiv = document.createElement('div');
+  typingDiv.className = 'chat-message typing';
+  typingDiv.textContent = 'Escribiendo...';
+  typingDiv.id = 'typingIndicator';
+  messagesContainer.appendChild(typingDiv);
+  
+  // Scroll to bottom
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  
+  try {
+    // Call via secure API route - no exposed keys
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        messages: [{
+          role: 'user',
+          content: userMessage
+        }]
+      })
+    });
+    
+    // Remove typing indicator
+    const typing = document.getElementById('typingIndicator');
+    if (typing) typing.remove();
+    
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    const assistantMessage = data.content[0].text;
+    
+    // Add assistant response
+    const assistantDiv = document.createElement('div');
+    assistantDiv.className = 'chat-message assistant';
+    assistantDiv.textContent = assistantMessage;
+    messagesContainer.appendChild(assistantDiv);
+    
+  } catch (error) {
+    console.error('Chat error:', error);
+    
+    // Remove typing indicator
+    const typing = document.getElementById('typingIndicator');
+    if (typing) typing.remove();
+    
+    // Show error message
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'chat-message assistant';
+    errorDiv.textContent = 'Lo siento, hubo un error. Por favor intenta de nuevo o llámanos al +52 322 303 1895.';
+    messagesContainer.appendChild(errorDiv);
+  }
+  
+  // Re-enable send button
+  sendBtn.disabled = false;
+  
+  // Scroll to bottom
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+</script>
+
+
+<!-- LOGIN MODAL -->
+<div class="login-modal-ov" id="loginModal">
+  <div class="login-modal">
+    <div class="login-modal-hdr">
+      <h3>Portal de Clientes</h3>
+      <button class="login-modal-x" onclick="closeLoginModal()">✕</button>
+    </div>
+    <div class="login-modal-body">
+      <div class="login-tabs">
+        <button class="login-tab active" onclick="switchLoginTab('signin')">Iniciar Sesión</button>
+        <button class="login-tab" onclick="switchLoginTab('register')">Registrarse</button>
+      </div>
+      <!-- SIGN IN -->
+      <div class="login-form active" id="tab-signin">
+        <div class="login-fg"><label>Teléfono o Email</label><input type="text" placeholder="Ej: 322 303 1895 o tu correo"></div>
+        <div class="login-fg"><label>Contraseña</label><input type="password" placeholder="Tu contraseña"></div>
+        <button class="login-submit" onclick="handleLogin()">Iniciar Sesión</button>
+        <p class="login-forgot"><a href="#">¿Olvidaste tu contraseña?</a> · <a href="https://wa.me/523223031895" target="_blank">Soporte por WhatsApp</a></p>
+      </div>
+      <!-- REGISTER -->
+      <div class="login-form" id="tab-register">
+        <div class="login-fg"><label>Nombre Completo</label><input type="text" placeholder="Tu nombre"></div>
+        <div class="login-fg"><label>Teléfono</label><input type="tel" placeholder="322 303 0000"></div>
+        <div class="login-fg"><label>Email</label><input type="email" placeholder="tu@correo.com"></div>
+        <div class="login-fg"><label>Contraseña</label><input type="password" placeholder="Crea una contraseña"></div>
+        <button class="login-submit" onclick="handleRegister()">Crear Cuenta</button>
+        <p class="login-forgot"><a href="https://wa.me/523223031895" target="_blank">¿Necesitas ayuda? WhatsApp</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openLoginModal(){ document.getElementById('loginModal').classList.add('open'); }
+function closeLoginModal(){ document.getElementById('loginModal').classList.remove('open'); }
+function switchLoginTab(tab){
+  document.querySelectorAll('.login-tab').forEach((t,i)=>t.classList.toggle('active', (tab==='signin'&&i===0)||(tab==='register'&&i===1)));
+  document.getElementById('tab-signin').classList.toggle('active', tab==='signin');
+  document.getElementById('tab-register').classList.toggle('active', tab==='register');
+}
+function handleLogin(){ alert('Portal en construcción. Contáctanos al +52 322 303 1895 o por WhatsApp.'); }
+function handleRegister(){ alert('Registro próximamente disponible. Contáctanos al +52 322 303 1895 para crear tu cuenta.'); }
+
+// Language switcher (old translations object removed - using i18n below)
+
+const i18n = {
+  es: {
+    'nav-ofertas':'Ofertas',
+    'nav-tienda':'Tienda',
+    'nav-cats':'Categorías',
+    'nav-rentas':'Rentas',
+    'nav-facturas':'Facturas',
+    'hero-badge':'Ferretería de Confianza',
+    'hero-tag':'Ferretería — Valle Dorado, Nayarit',
+    'hero-t1':'TODO LO',
+    'hero-t2':'QUE NECESITAS,',
+    'hero-t3':'EN UN LUGAR.',
+    'hero-sub':'Ferretería Malinal',
+    'hero-tagline':'¡Te ayudamos a hacer todo posible!',
+    'btn-shop':'Comprar Ahora',
+    'btn-contact':'Contáctanos',
+    'stat-prod':'Productos',
+    'stat-exp':'Años de Experiencia',
+    'stat-hrs':'Horario L–S',
+    'stat-comp':'Compromiso',
+    'sales-tag':'Promociones Especiales',
+    'sales-title':'Ofertas de la Semana',
+    'flyer-tag':'Promociones',
+    'flyer-title':'Volante de la Semana',
+    'del-tag':'Servicio a Domicilio',
+    'del-title':'Hacemos Entregas',
+    'about-tag':'Quiénes Somos',
+    'about-title':'Nuestra Historia',
+    'map-tag':'Encuéntranos',
+    'map-title':'Nuestras Ubicaciones',
+    'nav-mi-cuenta':'Mi Cuenta',
+    'nav-mis-facturas':'Mis Facturas',
+    'nav-historial':'Historial de Pedidos',
+    'nav-ver-ofertas':'Ver Todas las Ofertas',
+    'nav-cemento':'Cemento',
+    'nav-drywall':'Tablaroca / Drywall',
+    'nav-madera':'Madera y Triplay',
+    'nav-varilla':'Varilla y Malla',
+    'nav-arena':'Arena y Grava',
+    'nav-impermeabilizantes':'Impermeabilizantes',
+    'nav-rent-herramientas':'Renta de Herramientas',
+    'nav-rent-tarifas':'Tarifas',
+    'nav-rent-disponibilidad':'Verificar Disponibilidad',
+    'cat-tag':'EXPLORA POR DEPARTAMENTO',
+    'promo-tag':'PROMOCIONES ESPECIALES',
+    'contact-dir':'DIRECCIÓN',
+    'contact-tel':'TELÉFONO / WHATSAPP',
+    'contact-email':'CORREO',
+    'contact-hours':'HORARIO',
+    'nav-manuales':'Herramientas Manuales','nav-desarmadores':'Desarmadores','nav-llaves':'Llaves y dados',
+    'nav-pinzas':'Pinzas y alicates','nav-metros':'Metros y niveles',
+    'nav-taladros':'Taladros','nav-esmeriles':'Esmeriles','nav-sierras':'Sierras eléctricas','nav-atornilladores':'Atornilladores',
+    'nav-tuberia':'Tuberías PVC/CPVC','nav-llavespaso':'Llaves de paso','nav-conexiones':'Conexiones y codos',
+    'nav-mangueras':'Mangueras','nav-bombas':'Bombas de agua',
+    'nav-pintint':'Pintura interior','nav-pintext':'Pintura exterior','nav-esmaltes':'Esmaltes','nav-brochas':'Brochas y rodillos',
+    'nav-tornillos':'Tornillos','nav-clavos':'Clavos','nav-anclas':'Anclas y taquetes',
+    'nav-cerraduras':'Cerraduras','nav-candados':'Candados','nav-bisagras':'Bisagras','nav-chapas':'Chapas y picaportes',
+    'nav-cables':'Cables y canaletas','nav-contactos':'Contactos e interruptores','nav-focos':'Focos y luminarias','nav-tableros':'Tableros eléctricos',
+    'about-p1':'Ferretería Malinal nació con el sueño de ser la ferretería de confianza de Valle Dorado y toda la zona de Nayarit. Llevamos más de 15 años ayudando a constructores, contratistas y familias a hacer realidad sus proyectos.',
+    'about-p2':'Contamos con dos sucursales para servirte mejor — en Valle Dorado y en Carr. Mezcales — con más de 5,000 productos en stock, las mejores marcas, y un equipo que realmente conoce su trabajo.',
+    'about-years':'Años de Experiencia','about-locations':'Sucursales','about-products':'Productos','about-commitment':'Compromiso'
+  },
+  en: {
+    'nav-ofertas':'Deals',
+    'nav-tienda':'Shop',
+    'nav-cats':'Categories',
+    'nav-rentas':'Rentals',
+    'nav-facturas':'Invoices',
+    'hero-badge':'Trusted Hardware Store',
+    'hero-tag':'Hardware Store — Valle Dorado, Nayarit',
+    'hero-t1':'EVERYTHING',
+    'hero-t2':'YOU NEED,',
+    'hero-t3':'IN ONE PLACE.',
+    'hero-sub':'Ferretería Malinal',
+    'hero-tagline':'We help you make anything possible!',
+    'btn-shop':'Shop Now',
+    'btn-contact':'Contact Us',
+    'stat-prod':'Products',
+    'stat-exp':'Years of Experience',
+    'stat-hrs':'Hours M–S',
+    'stat-comp':'Commitment',
+    'sales-tag':'Special Promotions',
+    'sales-title':'Deals of the Week',
+    'flyer-tag':'Promotions',
+    'flyer-title':'Weekly Flyer',
+    'del-tag':'Delivery Service',
+    'del-title':'We Deliver',
+    'about-tag':'About Us',
+    'about-title':'Our Story',
+    'map-tag':'Find Us',
+    'map-title':'Our Locations',
+    'nav-mi-cuenta':'My Account',
+    'nav-mis-facturas':'My Invoices',
+    'nav-historial':'Order History',
+    'nav-ver-ofertas':'View All Deals',
+    'nav-cemento':'Cement',
+    'nav-drywall':'Drywall',
+    'nav-madera':'Wood & Plywood',
+    'nav-varilla':'Rebar & Mesh',
+    'nav-arena':'Sand & Gravel',
+    'nav-impermeabilizantes':'Waterproofing',
+    'nav-rent-herramientas':'Tool Rentals',
+    'nav-rent-tarifas':'Rental Rates',
+    'nav-rent-disponibilidad':'Check Availability',
+    'cat-tag':'EXPLORE BY DEPARTMENT',
+    'promo-tag':'SPECIAL PROMOTIONS',
+    'contact-dir':'ADDRESS',
+    'contact-tel':'PHONE / WHATSAPP',
+    'contact-email':'EMAIL',
+    'contact-hours':'HOURS',
+    'nav-manuales':'Hand Tools','nav-desarmadores':'Screwdrivers','nav-llaves':'Wrenches & Sockets',
+    'nav-pinzas':'Pliers & Clamps','nav-metros':'Tape Measures & Levels',
+    'nav-taladros':'Drills','nav-esmeriles':'Grinders','nav-sierras':'Electric Saws','nav-atornilladores':'Screwdrivers',
+    'nav-tuberia':'PVC/CPVC Pipe','nav-llavespaso':'Shutoff Valves','nav-conexiones':'Fittings & Elbows',
+    'nav-mangueras':'Hoses','nav-bombas':'Water Pumps',
+    'nav-pintint':'Interior Paint','nav-pintext':'Exterior Paint','nav-esmaltes':'Enamels','nav-brochas':'Brushes & Rollers',
+    'nav-tornillos':'Screws','nav-clavos':'Nails','nav-anclas':'Anchors & Plugs',
+    'nav-cerraduras':'Locks','nav-candados':'Padlocks','nav-bisagras':'Hinges','nav-chapas':'Latches',
+    'nav-cables':'Wire & Conduit','nav-contactos':'Outlets & Switches','nav-focos':'Bulbs & Lighting','nav-tableros':'Breaker Panels',
+    'cat-herramientas':'Hand Tools','cat-electricas':'Power Tools','cat-construccion':'Construction',
+    'cat-pintura':'Paint','cat-plomeria':'Plumbing','cat-fijacion':'Fasteners',
+    'cat-cerrajeria':'Hardware','cat-electrico':'Electrical','cat-seguridad':'Safety',
+    'tienda-title':'Our Store','contact-title':'Contact Us','footer-copy':'All rights reserved',
+    'about-p1':'Ferretería Malinal was born with the dream of being the trusted hardware store of Valle Dorado and the entire Nayarit area. We have been helping builders, contractors and families make their projects a reality for over 15 years.',
+    'about-p2':'We have two branches to serve you better — in Valle Dorado and Carr. Mezcales — with more than 5,000 products in stock, the best brands, and a team that really knows their job.',
+    'about-years':'Years of Experience','about-locations':'Locations','about-products':'Products','about-commitment':'Commitment'
+  },
+  fr: {
+    'nav-ofertas':'Offres',
+    'nav-tienda':'Boutique',
+    'nav-cats':'Catégories',
+    'nav-rentas':'Locations',
+    'nav-facturas':'Factures',
+    'hero-badge':'Quincaillerie de Confiance',
+    'hero-tag':'Quincaillerie — Valle Dorado, Nayarit',
+    'hero-t1':'TOUT CE',
+    'hero-t2':'DONT VOUS AVEZ BESOIN,',
+    'hero-t3':'EN UN LIEU.',
+    'hero-sub':'Ferretería Malinal',
+    'hero-tagline':'Nous vous aidons à tout réaliser!',
+    'btn-shop':'Acheter',
+    'btn-contact':'Nous Contacter',
+    'stat-prod':'Produits',
+    'stat-exp':'Ans d\'Expérience',
+    'stat-hrs':'Horaire L–S',
+    'stat-comp':'Engagement',
+    'sales-tag':'Promotions Spéciales',
+    'sales-title':'Offres de la Semaine',
+    'flyer-tag':'Promotions',
+    'flyer-title':'Dépliant Hebdo',
+    'del-tag':'Livraison à Domicile',
+    'del-title':'Nous Livrons',
+    'about-tag':'À Propos',
+    'about-title':'Notre Histoire',
+    'map-tag':'Nous Trouver',
+    'map-title':'Nos Emplacements',
+    'nav-mi-cuenta':'Mon Compte',
+    'nav-mis-facturas':'Mes Factures',
+    'nav-historial':'Historique des Commandes',
+    'nav-ver-ofertas':'Voir Toutes les Offres',
+    'nav-cemento':'Ciment',
+    'nav-drywall':'Placoplatre',
+    'nav-madera':'Bois et Contreplaqué',
+    'nav-varilla':'Barres d\'Armature',
+    'nav-arena':'Sable et Gravier',
+    'nav-impermeabilizantes':'Imperméabilisants',
+    'nav-rent-herramientas':'Location d\'Outils',
+    'nav-rent-tarifas':'Tarifs',
+    'nav-rent-disponibilidad':'Vérifier Disponibilité',
+    'cat-tag':'EXPLORER PAR DÉPARTEMENT',
+    'promo-tag':'PROMOTIONS SPÉCIALES',
+    'contact-dir':'ADRESSE',
+    'contact-tel':'TÉLÉPHONE / WHATSAPP',
+    'contact-email':'COURRIEL',
+    'contact-hours':'HEURES',
+    'nav-manuales':'Outils à Main',
+    'nav-desarmadores':'Tournevis',
+    'nav-llaves':'Clés et Douilles',
+    'nav-pinzas':'Pinces et Étaux',
+    'nav-metros':'Mètres et Niveaux',
+    'nav-taladros':'Perceuses',
+    'nav-esmeriles':'Meuleuses',
+    'nav-sierras':'Scies Électriques',
+    'nav-atornilladores':'Visseuses',
+    'nav-tuberia':'Tuyaux PVC/CPVC',
+    'nav-llavespaso':'Vannes d\'Arrêt',
+    'nav-conexiones':'Raccords et Coudes',
+    'nav-mangueras':'Tuyaux',
+    'nav-bombas':'Pompes à Eau',
+    'nav-pintint':'Peinture Intérieure',
+    'nav-pintext':'Peinture Extérieure',
+    'nav-esmaltes':'Émaux',
+    'nav-brochas':'Pinceaux et Rouleaux',
+    'nav-tornillos':'Vis',
+    'nav-clavos':'Clous',
+    'nav-anclas':'Ancrages et Chevilles',
+    'nav-cerraduras':'Serrures',
+    'nav-candados':'Cadenas',
+    'nav-bisagras':'Charnières',
+    'nav-chapas':'Loquets',
+    'nav-cables':'Câbles et Conduits',
+    'nav-contactos':'Prises et Interrupteurs',
+    'nav-focos':'Ampoules et Luminaires',
+    'nav-tableros':'Tableaux Électriques',
+    'cat-herramientas':'Outils à Main',
+    'cat-electricas':'Outils Électriques',
+    'cat-construccion':'Construction',
+    'cat-pintura':'Peinture',
+    'cat-plomeria':'Plomberie',
+    'cat-fijacion':'Fixations',
+    'cat-cerrajeria':'Quincaillerie',
+    'cat-electrico':'Électrique',
+    'cat-seguridad':'Sécurité',
+    'tienda-title':'Notre Boutique',
+    'contact-title':'Nous Contacter',
+    'footer-copy':'Tous droits réservés',
+    'about-p1':'Ferretería Malinal est née avec le rêve d\'être la quincaillerie de confiance de Valle Dorado et de toute la région de Nayarit. Depuis plus de 15 ans, nous aidons les constructeurs, entrepreneurs et familles à réaliser leurs projets.',
+    'about-p2':'Nous avons deux succursales pour mieux vous servir — à Valle Dorado et Carr. Mezcales — avec plus de 5 000 produits en stock, les meilleures marques et une équipe qui connaît vraiment son travail.',
+    'about-years':'Ans d\'Expérience','about-locations':'Succursales','about-products':'Produits','about-commitment':'Engagement'
+  }
+};
+
+function setLang(lang) {
+  if (!i18n[lang]) { console.warn('No translations for:', lang); return; }
+  // Update active button
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  var btn = document.getElementById('btn-' + lang);
+  if (btn) btn.classList.add('active');
+  // Save preference
+  localStorage.setItem('malinal-lang', lang);
+  // Update all tagged elements
+  var count = 0;
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
+    if (i18n[lang][key] !== undefined) {
+      el.textContent = i18n[lang][key];
+      count++;
+    }
+  });
+  console.log('setLang:', lang, '— updated', count, 'elements');
+  document.documentElement.lang = lang;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var saved = localStorage.getItem('malinal-lang') || 'es';
+  setLang(saved);
+});
+</script>
+
+
+<script>
+// ── CUSTOMER PORTAL (localStorage auth - works immediately) ──
+let currentUser = null;
+
+function getUsers() {
+  try { return JSON.parse(localStorage.getItem('malinal_users') || '{}'); } catch(e) { return {}; }
+}
+function saveUsers(users) {
+  localStorage.setItem('malinal_users', JSON.stringify(users));
+}
+
+function switchPortalTab(tab) {
+  document.querySelectorAll('.portal-tab').forEach((t,i) => {
+    t.classList.toggle('active', 
+      (tab==='login'&&i===0)||(tab==='register'&&i===1));
+  });
+  document.getElementById('portal-login').classList.toggle('active', tab==='login');
+  document.getElementById('portal-register').classList.toggle('active', tab==='register');
+}
+
+async function supabaseFetch(endpoint, method, body) {
+  try {
+    const res = await fetch(SUPABASE_URL + endpoint, {
+      method: method || 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + (currentUser?.access_token || SUPABASE_KEY)
+      },
+      body: body ? JSON.stringify(body) : undefined
+    });
+    return await res.json();
+  } catch(e) {
+    return { error: e.message };
+  }
+}
+
+function handlePortalLogin() {
+  const email = document.getElementById('login-email').value.trim().toLowerCase();
+  const password = document.getElementById('login-password').value;
+  if (!email || !password) { showPortalMsg('login', 'Por favor llena todos los campos.', 'error'); return; }
+
+  const users = getUsers();
+  const user = users[email];
+  if (!user) { showPortalMsg('login', 'No existe una cuenta con ese email. ¿Quieres registrarte?', 'error'); return; }
+  if (user.password !== btoa(password)) { showPortalMsg('login', 'Contraseña incorrecta.', 'error'); return; }
+
+  currentUser = user;
+  localStorage.setItem('malinal_session', JSON.stringify(user));
+  showDashboard(user);
+}
+
+function handlePortalRegister() {
+  const firstName = document.getElementById('reg-firstname').value.trim();
+  const lastName = document.getElementById('reg-lastname').value.trim();
+  const email = document.getElementById('reg-email').value.trim().toLowerCase();
+  const phone = document.getElementById('reg-phone').value.trim();
+  const rfc = document.getElementById('reg-rfc').value.trim();
+  const password = document.getElementById('reg-password').value;
+
+  if (!firstName || !email || !password) { showPortalMsg('register', 'Por favor llena nombre, email y contraseña.', 'error'); return; }
+  if (!/^[^@]+@[^@]+\.[^@]+$/.test(email)) { showPortalMsg('register', 'Email inválido.', 'error'); return; }
+  if (password.length < 6) { showPortalMsg('register', 'La contraseña debe tener mínimo 6 caracteres.', 'error'); return; }
+
+  const users = getUsers();
+  if (users[email]) { showPortalMsg('register', 'Ya existe una cuenta con ese email.', 'error'); return; }
+
+  const newUser = { firstName, lastName, email, phone, rfc, password: btoa(password), createdAt: new Date().toISOString(), orders: [], invoices: [] };
+  users[email] = newUser;
+  saveUsers(users);
+
+  currentUser = newUser;
+  localStorage.setItem('malinal_session', JSON.stringify(newUser));
+  showPortalMsg('register', '¡Cuenta creada exitosamente!', 'success');
+  setTimeout(() => showDashboard(newUser), 800);
+}
+
+function showPortalMsg(form, msg, type) {
+  const id = form === 'login' ? 'portal-login' : 'portal-register';
+  let el = document.getElementById(id + '-msg');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = id + '-msg';
+    el.style.cssText = 'margin-top:10px;padding:10px;border-radius:4px;font-size:13px;text-align:center;';
+    document.getElementById(id).appendChild(el);
+  }
+  el.style.background = type === 'error' ? 'rgba(192,36,42,.15)' : 'rgba(37,211,102,.15)';
+  el.style.color = type === 'error' ? '#ff6b6b' : '#25D366';
+  el.style.border = type === 'error' ? '1px solid #c0242a44' : '1px solid #25D36644';
+  el.textContent = msg;
+}
+
+function showDashboard(userData) {
+  document.getElementById('portal-login').classList.remove('active');
+  document.getElementById('portal-register').classList.remove('active');
+  document.querySelectorAll('.portal-tab').forEach(t => t.style.display = 'none');
+  document.getElementById('portal-dashboard').style.display = 'block';
+
+  const name = userData.firstName || userData.email?.split('@')[0] || 'Cliente';
+  document.getElementById('portal-welcome-name').textContent = '¡Hola, ' + name + '!';
+
+  const orders = userData.orders || [];
+  const invoices = userData.invoices || [];
+  document.getElementById('dash-orders').textContent = orders.length;
+  document.getElementById('dash-invoices').textContent = invoices.length;
+
+  const list = document.getElementById('dash-invoice-list');
+  if (invoices.length === 0) {
+    list.innerHTML = '<div style="color:#444;font-size:13px;text-align:center;padding:20px;">No hay facturas aún.<br><span style="color:#666;font-size:11px;">Tus facturas aparecerán aquí después de tu primera compra.</span></div>';
+  } else {
+    list.innerHTML = invoices.map(inv => `
+      <div class="portal-invoice">
+        <div>
+          <div class="portal-invoice-id">#${inv.number}</div>
+          <div class="portal-invoice-date">${inv.date}</div>
+        </div>
+        <div class="portal-invoice-amt">$${inv.total}</div>
+        <button class="portal-invoice-dl">⬇ PDF</button>
+      </div>
+    `).join('');
+  }
+}
+
+function handlePortalLogout() {
+  currentUser = null;
+  localStorage.removeItem('malinal_session');
+  document.getElementById('portal-dashboard').style.display = 'none';
+  document.querySelectorAll('.portal-tab').forEach(t => t.style.display = '');
+  switchPortalTab('login');
+  document.getElementById('login-email').value = '';
+  document.getElementById('login-password').value = '';
+}
+
+function downloadInvoice(id) {
+  alert('Descargando factura... (Esta función estará disponible cuando se conecte el sistema de facturación)');
+}
+
+// Also update nav Mi Cuenta button to scroll to portal
+function openLoginModal() {
+  document.getElementById('mi-cuenta').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Check if user already logged in
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('malinal_session');
+  if (saved) {
+    try {
+      const userData = JSON.parse(saved);
+      if (userData.email) {
+        currentUser = userData;
+        showDashboard(userData);
+      }
+    } catch(e) {}
+  }
+});
+</script>
+
+
+<!-- ═══════════════ CATEGORY PAGE & PRODUCT MODAL ═══════════════ -->
+<style>
+#cat-page{position:fixed;inset:0;background:#fff;z-index:9000;display:none;overflow-y:auto;}
+#cat-page.active{display:block;}
+.cat-page-header{background:#1a1a1a;color:#fff;padding:22px 8%;display:flex;align-items:center;gap:18px;position:sticky;top:0;z-index:9001;}
+.cat-page-back{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;padding:6px 10px;border-radius:6px;transition:.2s;}
+.cat-page-back:hover{background:rgba(255,255,255,.15);}
+.cat-page-title{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;margin:0;}
+.cat-page-body{padding:50px 8%;}
+.subcat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:40px;}
+.subcat-card{background:#1a1a1a;color:#fff;border-radius:12px;padding:28px 20px;cursor:pointer;transition:all .2s;border:2px solid transparent;}
+.subcat-card:hover{background:#a01f24;transform:translateY(-3px);box-shadow:0 8px 24px rgba(160,31,36,.3);}
+.subcat-name{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;margin:0 0 6px;}
+.subcat-desc{font-size:13px;color:rgba(255,255,255,.6);margin:0;}
+.cat-page-subtitle{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#a01f24;margin-bottom:24px;}
+.subcat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;margin-bottom:56px;}
+.subcat-card{border:1px solid #e5e5e5;border-radius:10px;overflow:hidden;cursor:pointer;transition:.25s;background:#fff;}
+.subcat-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.1);transform:translateY(-3px);border-color:#a01f24;}
+.subcat-img{width:100%;height:140px;object-fit:cover;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:40px;}
+.subcat-body{padding:14px 16px;}
+.subcat-name{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:#1a1a1a;margin:0 0 4px;}
+.subcat-desc{font-size:13px;color:#666;line-height:1.45;margin:0;}
+.subcat-prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
+.subcat-products-title{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#1a1a1a;margin:0 0 20px;}
+#prod-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9500;display:none;align-items:center;justify-content:center;padding:20px;}
+#prod-modal.active{display:flex;}
+.prod-modal-box{background:#fff;border-radius:14px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.prod-modal-img{width:100%;height:220px;object-fit:cover;border-radius:14px 14px 0 0;}
+.prod-modal-body{padding:28px 30px;}
+.prod-modal-cat{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#a01f24;margin:0 0 8px;}
+.prod-modal-name{font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:800;color:#1a1a1a;margin:0 0 10px;}
+.prod-modal-desc{font-size:15px;color:#444;line-height:1.6;margin:0 0 20px;}
+.prod-modal-price{font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:900;color:#1a1a1a;margin:0 0 22px;}
+.prod-modal-actions{display:flex;gap:12px;}
+.prod-modal-add{flex:1;background:#a01f24;color:#fff;border:none;border-radius:8px;padding:14px;font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;cursor:pointer;transition:.2s;}
+.prod-modal-add:hover{background:#c02228;}
+.prod-modal-wa{flex:1;background:#25D366;color:#fff;border:none;border-radius:8px;padding:14px;font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;transition:.2s;}
+.prod-modal-wa:hover{background:#1ebe5d;}
+.prod-modal-close{position:absolute;top:16px;right:16px;background:rgba(0,0,0,.5);border:none;color:#fff;width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.prod-modal-box-wrap{position:relative;max-width:560px;width:100%;}
+</style>
+<div id="cat-page">
+<div class="cat-page-header"><button class="cat-page-back" onclick="closeCategoryPage()">&#8592;</button><h2 class="cat-page-title" id="cat-page-title">Categoria</h2></div>
+<div class="cat-page-body" id="cat-page-body"></div>
+</div>
+<div id="prod-modal" onclick="if(event.target===this)closeProdModal()">
+<div class="prod-modal-box-wrap"><button class="prod-modal-close" onclick="closeProdModal()">&#10005;</button><div class="prod-modal-box" id="prod-modal-box"></div></div>
+</div>
+<script>
+var CAT_DATA={"herramientas":{"title":"Herramientas Manuales","type":"products","subcats":[{"name":"Martillos","type":"products","products":[{"sku":"15782","name":"Carbones Para Rotomartillo Electroneumatico ROEL-20N    15782","price":"$73.00"},{"sku":"15911","name":"Mango Para martillo de uña MOR-20, MOR-20F, MA-20 y MAR-20 13, 15911","price":"$44.00"},{"sku":"15921","name":"Mango para azadon lane y Oreja martillo, Truper 15921","price":"$205.00"},{"sku":"15910","name":"Mango para martillos de uña MO-16, MA-20 y MOR-16, 13  15910","price":"$42.00"},{"sku":"15909","name":"Mango para martillos de uña MO-7, MA-7 y MOR-10, 12, Truper  15909","price":"$33.00"},{"sku":"7501206632918","name":"Martillo 10oz Mango Comfort Grip Pretul 22291","price":"$109.00"},{"sku":"7501206650646","name":"Martillo 16 oz uña curva, mango fibra de vidrio, Truper 19710","price":"$195.00"},{"sku":"7501206676127","name":"Martillo Desabollador Punta Larga 11 Oz 16872","price":"$199.00"},{"sku":"7501206621509","name":"Martillo Ladrillero, 24 oz Mango 12, Truper 16861","price":"$279.00"},{"sku":"16903","name":"Martillo Pulido De Bola, 24 Oz 16903","price":"$325.00"},{"sku":"7501206624128","name":"Martillo Pulido Uña Curva 7 Oz  16750","price":"$99.00"},{"sku":"7501206620540","name":"Martillo Pulido Uña Recta 16 Oz  16754","price":"$129.00"},{"sku":"7501206620533","name":"Martillo Pulido, Uña Curva 20 Oz Mango Hickory   16656","price":"$269.00"},{"sku":"7501206625200","name":"Martillo Tubular Pulido, Uña Curva 16 Oz 22270","price":"$165.00"},{"sku":"19997","name":"Martillo antivibración 16 oz  19997","price":"$195.00"},{"sku":"10761","name":"Martillo de uña recta, 18 oz, mango fibra de vidrio  10761","price":"$269.00"},{"sku":"7501206676110","name":"Martillo desabollador punta tipo cincel 11 oz  16870","price":"$196.00"},{"sku":"22658","name":"Martillo pulido de bola 16 oz mango madera, Pretul    22658","price":"$155.00"},{"sku":"7501206621585","name":"Martillo tapicero 7 oz 16860","price":"$199.00"},{"sku":"10643","name":"Martillo tubular 16 oz uña California Ripper, cara fresada 10643","price":"$155.00"},{"sku":"10644","name":"Martillo tubular 20 oz uña California Ripper, cara fresada 10644","price":"$195.00"},{"sku":"10754","name":"Martillo tubular para cimbra 16 oz uña recta, mango acero 10754","price":"$369.00"},{"sku":"16702","name":"Martillo uña recta tubular 16 oz  16702","price":"$155.00"},{"sku":"7501206621561","name":"Martillo uña recta tubular 20 oz    16703","price":"$209.00"},{"sku":"103392","name":"Rotomartillo + Destornillador De impacto, 20V, TRUPER PRO 103392","price":"$4,950.00"},{"sku":"16666","name":"Rotomartillo 1/2 1200 W, industrial, Truper 16666","price":"$2,625.00"},{"sku":"11B6-0G0","name":"Rotomartillo 1/2 550W VVR 3100 RPM Bosch GSB 550 RE","price":"$1,527.00"},{"sku":"15679","name":"Rotomartillo 1/2 650W Truper Pro 15679","price":"$795.00"},{"sku":"19457","name":"Rotomartillo 1/2, industrial, 700 W Truper   19457","price":"$1,265.00"},{"sku":"10884","name":"Rotomartillo Combo 1/2 650 W, caja para herramienta y organizador 10884","price":"$1,085.00"}]},{"name":"Desarmadores","type":"products","products":[{"sku":"7501206664063","name":"Desarmador 1/4 X 4 Pulgadas Phillips 21474","price":"$38.00"},{"sku":"7501206664292","name":"Desarmador 1/4 X 8 Phillips Comfort Grip    21497","price":"$49.00"},{"sku":"7501206641781","name":"Desarmador 2 Puntas Dobles 2 Barras Caja Hexagonal    14200","price":"$97.00"},{"sku":"7501206664148","name":"Desarmador Plano 1/4 X 8  21482","price":"$49.00"},{"sku":"7501206663967","name":"Desarmador Plano Cabinet 1/8 X 4, Pretul 21464","price":"$22.00"},{"sku":"7506240660095","name":"Desarmador Plano cabinet 1/8 x 4-1/2 mango Comfort Grip, Truper 18549","price":"$38.00"},{"sku":"7501206663981","name":"Desarmador Plano cabinet 1/8 x 8 mango de PVC, Pretul 21466","price":"$25.00"},{"sku":"7501206614150","name":"Desarmador Punta Torx T 10 mango de acetato, Truper 15101","price":"$77.00"},{"sku":"7501206614204","name":"Desarmador Punta Torx T 30 mango de acetato 15106","price":"$77.00"},{"sku":"7501206623244","name":"Desarmador cabinet 1/4 x 12 mango de acetato, Truper 14047","price":"$102.00"},{"sku":"7501206663974","name":"Desarmador cabinet 1/8 x 6 mango de PVC, Pretul 21465","price":"$25.00"},{"sku":"7501206664018","name":"Desarmador cabinet 3/16 x 8 mango de PVC, Pretul  21469","price":"$36.00"},{"sku":"13221","name":"Desarmador de 7 para dados cuadro 1/4, Truper 13221","price":"$125.00"},{"sku":"14119","name":"Desarmador de Caja 3/16 mango de acetato, Truper  14119","price":"$78.00"},{"sku":"7501206623374","name":"Desarmador de Caja 5/16 mango de acetato, Truper  14125","price":"$97.00"},{"sku":"7501206623671","name":"Desarmador de Cruz 1/4 x 4 mango de acetato, Truper 14074","price":"$77.00"},{"sku":"7501206623688","name":"Desarmador de Cruz 1/4 x 6 mango de acetato, Truper 14077","price":"$79.00"},{"sku":"7501206623749","name":"Desarmador de caja 1/4 mango de acetato, Truper  14122","price":"$97.00"},{"sku":"14128","name":"Desarmador de caja 3/8 mango de acetato, Truper 14128","price":"$86.00"},{"sku":"7501206664070","name":"Desarmador de cruz 1/4 x 8 mango de PVC, Pretul  21475","price":"$49.00"},{"sku":"7501206623275","name":"Desarmador de cruz 1/4 x 8 mango de acetato, Truper 14080","price":"$77.00"},{"sku":"7506240680055","name":"Desarmador de cruz 1/8 x 4 mango de PVC, Pretul 28076","price":"$22.00"},{"sku":"7506240680062","name":"Desarmador de cruz 1/8 x 6 mango de PVC, Pretul 28077","price":"$22.00"},{"sku":"28078","name":"Desarmador de cruz 1/8 x 8 mango de PVC, Pretul  28078","price":"$24.00"},{"sku":"7501206664056","name":"Desarmador de cruz 3/16 x 4 mango de PVC, Pretul 21473","price":"$31.00"},{"sku":"21470","name":"Desarmador de cruz 5/16 x 6 mango de PVC, Pretul 21470","price":"$63.00"},{"sku":"7501206617939","name":"Desarmador de cruz comfort grip 1 1/2 #2    14073","price":"$44.00"},{"sku":"7501206621363","name":"Desarmador de cruz de golpe 1/4 x 4, Truper Expert 14146","price":"$129.00"},{"sku":"7501206621370","name":"Desarmador de cruz de golpe 1/4 x 6, Truper Expert 14149","price":"$149.00"},{"sku":"101176","name":"Desarmador de impacto con 4 puntas de acero S2 3/8, Expert 101176","price":"$669.00"}]},{"name":"Pinzas y Alicates","type":"products","products":[{"sku":"101-10","name":"Caiman Pinza Chica 10A 43M Rojo-Negro CAI-101-10","price":"$5.00"},{"sku":"CAI-106","name":"Caiman Pinza Chico R-N Proam CAI-106","price":"$9.00"},{"sku":"CAI-201","name":"Caiman Pinza Forrada Chica CAI-201","price":"$7.00"},{"sku":"CAI-202","name":"Caiman Pinza Forrada Mediana CAI-202","price":"$9.00"},{"sku":"18216","name":"Juego con 2 pinzas y 1 llave ajustable mango de PVC, Truper 18216","price":"$475.00"},{"sku":"22971","name":"Juego de 4 pinzas y 1 llave ajustable mango de vinil, Pretul 22971?","price":"$485.00"},{"sku":"22970","name":"Juego de 4 pinzas, mangos de PVC, Pretul 22970","price":"$317.00"},{"sku":"7501206624258","name":"Juego pinzas miniaturas, 3 piezas 18215","price":"$259.00"},{"sku":"7501206663097","name":"Juego pinzas miniaturas, 3 piezas, Pretul 20016","price":"$165.00"},{"sku":"7501206626849","name":"Mini pinza de punta redonda 5, Pretul 22666","price":"$66.00"},{"sku":"103352","name":"Pinza 6 pela cables, 30 a 20 AWG, TRUPER   103352","price":"$139.00"},{"sku":"7501206617984","name":"Pinza 8 pela cables automática 22 a 10 AWG TRUPER 17360","price":"$339.00"},{"sku":"7501206641279","name":"Pinza Corte Diagonal 5  17311","price":"$125.00"},{"sku":"38548028248","name":"Pinza De Chofer 8 Vise Grip","price":"$270.00"},{"sku":"12001","name":"Pinza De Compresion Para Conector Coazial","price":"$199.00"},{"sku":"38548028262","name":"Pinza De Extension 10 Vise Grip","price":"$390.00"},{"sku":"38548005041","name":"Pinza De Presion 10 Quijada Curva Vise Grip I6 10CR","price":"$376.00"},{"sku":"7501206642986","name":"Pinza De Presion 7 Mordaza Curva Pretul 22701","price":"$109.00"},{"sku":"38548003108","name":"Pinza De Presion Tipo C 9 Pulgadas Vise Grip I6 9sp","price":"$598.00"},{"sku":"38548001043","name":"Pinza De Presion Vise Grip 10 Mordaza Recta I6 10R","price":"$284.00"},{"sku":"7501206640258","name":"Pinza De extencion 10 Truper 17351","price":"$199.00"},{"sku":"7506240693932","name":"Pinza Electricista 9, Con Ponchador de Terminales, Expert 101963","price":"$315.00"},{"sku":"7501206641224","name":"Pinza Electricista 9, mango de PVC, Truper 17305","price":"$259.00"},{"sku":"14234","name":"Pinza Para Tierra 300 A  14234","price":"$135.00"},{"sku":"7501206600290","name":"Pinza Para Tierra 500 A   14235","price":"$175.00"},{"sku":"100286","name":"Pinza Porta Electrodo Con Cables 200A, 1/2, EXPERT 100286","price":"$1,050.00"},{"sku":"14348","name":"Pinza Porta Electrodo Con Cables 200A, 5/16, Truper 14348","price":"$1,695.00"},{"sku":"24349","name":"Pinza Porta Electrodo Con cables, Terminal De Ojillo, Pretul 24349","price":"$955.00"},{"sku":"7501206600269","name":"Pinza Porta Electrodo De 300A Truper 14232","price":"$355.00"},{"sku":"7506240621997","name":"Pinza Porta Electrodo, Pretul 300 A 24232","price":"$179.00"}]},{"name":"Llaves","type":"products","products":[{"sku":"44715012401","name":"Alambre De Acero Inox Para Llavero","price":"$8.00"},{"sku":"9CH","name":"Argolla Para Llavero Estrella","price":"$32.00"},{"sku":"14ARGOLL010CH","name":"Argolla Para Llavero Flor 10CH","price":"$32.00"},{"sku":"14ARGOLL012CH","name":"Argolla Para Llavero Raton 12CH","price":"$32.00"},{"sku":"7502309736794","name":"Broquero con llave, 1/2 con adaptador SDS Plus, Truper 102475","price":"$179.00"},{"sku":"7501206601983","name":"Broquero con llave, 3/8  16477","price":"$105.00"},{"sku":"43069","name":"Caja Guarda Llaves con 60 ganchos, Hermex 43069","price":"$545.00"},{"sku":"43068","name":"Caja Guardallaves con 36 ganchos, Hermex 43068","price":"$429.00"},{"sku":"7506240699873","name":"Caja guardallaves Con Codigo 12cm, Hermex 45328","price":"$545.00"},{"sku":"22526","name":"Candado 20mm Gancho Corto 2 Llaves, Hermex 22526","price":"$19.00"},{"sku":"23510","name":"Candado 40 mm llave tetra en blister, HERMEX 23510","price":"$165.00"},{"sku":"7501206651858","name":"Candado 50 mm llave tetra en blister, HERMEX BASIC 23511","price":"$199.00"},{"sku":"7506240639671","name":"Candado Antipalanca 50mm De Cortina Cuerpo De Hierro 22515","price":"$95.00"},{"sku":"7506240639688","name":"Candado Antipalanca 60mm De Cortina Cuerpo De Hierro 22516","price":"$110.00"},{"sku":"7506240639695","name":"Candado Antipalanca 80mm De Cortina Cuerpo De Hierro 22517","price":"$149.00"},{"sku":"7506240629207","name":"Candado Cable con llave, 12 mm X 1.0 m, Hermex  43923","price":"$139.00"},{"sku":"7501206658291","name":"Candado antipalanca 75 mm De Cortina cuerpo metálico, Hermex 23524","price":"$229.00"},{"sku":"43352","name":"Candado antipalanca, 80mm, De Cortina blindado, llave puntos, Hermex 43352?","price":"$689.00"},{"sku":"7506240609186","name":"Candado de acero, 109mm, gancho corto, llave de puntos 43365","price":"$355.00"},{"sku":"7506240629191","name":"Candado de cable con llave, 10 mm X 1.0 m, Hermex 43922","price":"$125.00"},{"sku":"7501206680872","name":"Candado de hierro 50 mm gancho protegido, llave anti-ganzúa 43340","price":"$175.00"},{"sku":"7506240654070","name":"Candado de hierro 70 mm con coraza, llave anti-ganzua 43003","price":"$235.00"},{"sku":"7501206672433","name":"Candado de latón, 50mm, gancho corto, llave tetra, 43421","price":"$339.00"},{"sku":"7501206681046","name":"Candado redondo, 65mm, gancho corto, llave de puntos 43336","price":"$285.00"},{"sku":"49052","name":"Cartucho cerámico para llave M-142, FOSET  49052","price":"$39.00"},{"sku":"7501206676608","name":"Cerradura De Barra, Llave Tetra, Derecha   43509","price":"$345.00"},{"sku":"43512","name":"Cerradura De Barra, Llave Tetra, Izquierda 43512","price":"$345.00"},{"sku":"7501206676493","name":"Cerradura De Barra, Llave Tradicional, Derecha 43505","price":"$259.00"},{"sku":"7501206676585","name":"Cerradura De Barra, Llave Tradicional, Izquierda 43507","price":"$259.00"},{"sku":"43024","name":"Cerradura Entrada Jaladera Con Gatillo Cromo Mate Llave De Puntos 43024?","price":"$1,115.00"}]},{"name":"Sierras Manuales","type":"products","products":[{"sku":"10221","name":"Arco calador 6 para segueta, Truper   10221","price":"$229.00"},{"sku":"20017","name":"Arco de solera con segueta 12 Pretul 20017","price":"$125.00"},{"sku":"7501206648599","name":"Arco junior 6 para segueta, Truper  10210","price":"$102.00"},{"sku":"7501206640517","name":"Arco tubular profesional con segueta 12, Truper 10234","price":"$199.00"},{"sku":"7506610204430","name":"Blister 5 seguetas T, 5-10 DPP BIM, corte recto uso general 103049","price":"$215.00"},{"sku":"7506240624745","name":"Blister con 2 seguetas sierra sable 12 10-14DPP uso general 10792","price":"$196.00"},{"sku":"7506240624721","name":"Blister con 2 seguetas sierra sable 6 10-14 DPP uso general  10790","price":"$102.00"},{"sku":"7506240624738","name":"Blister con 2 seguetas sierra sable 9 10-14 DPP uso general   10791","price":"$149.00"},{"sku":"18135","name":"Blister con 5 seguetas 10 DPP zanco U corte recto madera  18135","price":"$69.00"},{"sku":"7501206677681","name":"Blister con 5 seguetas 12 DPP zanco T corte curvo madera   18131","price":"$72.00"},{"sku":"7501206677711","name":"Blister con 5 seguetas 14 DPP zanco U corte curvo madera 18134","price":"$69.00"},{"sku":"7501206677636","name":"Blister con 5 seguetas 6 DPP zanco T corte recto madera 18126","price":"$95.00"},{"sku":"7501206677735","name":"Blister con 5 seguetas 6 DPP zanco U corte recto madera  18136","price":"$69.00"},{"sku":"7501206677643","name":"Blister con 5 seguetas 8 DPP zanco T corte recto madera  18127","price":"$95.00"},{"sku":"7501206677742","name":"Blister con 5 seguetas 8 DPP zanco U corte recto madera  18137","price":"$69.00"},{"sku":"7501206641446","name":"Blíster con 5 seguetas de repuesto para AJ-6, Truper 10220","price":"$86.00"},{"sku":"7501206696460","name":"Juego de 16 seguetas para caladora zanco T corte recto 16705","price":"$209.00"},{"sku":"16129","name":"Juego de 16 seguetas para caladora zanco U corte recto 16129","price":"$188.00"},{"sku":"7506240677185","name":"Juego de brocasierras, 12pzs, 2 mandriles y llave allen, Pretul 26037","price":"$289.00"},{"sku":"41918524866","name":"Llave Para Bujias De Motosierra","price":"$95.00"},{"sku":"7501206639818","name":"Segueta 18 DPP bimetalica En Blister 2pzs Truper Expert 19699?","price":"$65.00"},{"sku":"7506055126144","name":"Segueta 18DPP Hecort H2 04-1812","price":"$20.00"},{"sku":"82472123562","name":"Segueta 18DPP Lenox 0775-0025  L2 20116","price":"$30.00"},{"sku":"7501206642108","name":"Segueta 18DPP Truper 18100","price":"$25.00"},{"sku":"7506055126151","name":"Segueta 24DPP Hecort H2 04-2412","price":"$20.00"},{"sku":"82472123555","name":"Segueta 24DPP Lenox 0775-0026","price":"$32.00"},{"sku":"18101","name":"Segueta 24DPP Truper 18101","price":"$25.00"},{"sku":"12002","name":"Segueta De Campismo Acero Inoxidable 1mt","price":"$109.00"},{"sku":"7501206643143","name":"Segueta De Manguito Mini Arco De Aluminio Truper 10236","price":"$109.00"},{"sku":"7501206627495","name":"Segueta De Manguito Mini arco de plastico 12 Pretul 20002","price":"$62.00"}]},{"name":"Niveles y Metros","type":"products","products":[{"sku":"102874","name":"Bolsa con 100 anclas de 1 mm, para nivelación de azulejos   102874","price":"$102.00"},{"sku":"103614","name":"Bomba Para Inflar Bicicletas con manometro, 160 psi, EXPERT 103614","price":"$255.00"},{"sku":"10067","name":"Bomba extractora de aceites con manivela, Truper 10067","price":"$905.00"},{"sku":"7501316102165","name":"Cinta Tapagoteras 10metros Pensy","price":"$485.00"},{"sku":"7501316100147","name":"Cinta Tapagoteras 3metros Pensy","price":"$205.00"},{"sku":"48097","name":"Cubretaladro negro de 1-3/4, diametro 43 mm, Foset 48097","price":"$37.00"},{"sku":"710631915733","name":"Cuñas plasticas para nivelar sanitarios TB-A300","price":"$29.00"},{"sku":"15150","name":"Destapacaños de 15 m tipo barreno con manivela, Truper 15150","price":"$1,135.00"},{"sku":"734365240015","name":"Escalimetro Technic En Estuche","price":"$125.00"},{"sku":"101526","name":"Esmeriladora Angular Truper 4 1/2 700 W, 10 discos y flexometro 101526","price":"$915.00"},{"sku":"MGA5525","name":"Flexometro Cadena 5.5mts C8 MGA5525","price":"$212.00"},{"sku":"MGA9025","name":"Flexometro Cadena 9.0mts Doble Vista C8 MGA9025","price":"$387.00"},{"sku":"7897095043967","name":"Flexometro Irwin 3mt Profesional 3967","price":"$91.00"},{"sku":"45242502639","name":"Flexometro Milwaukee 3.5mt","price":"$225.00"},{"sku":"7501206605523","name":"Flexometro Pretul 3mt Colores Varios  21607","price":"$37.00"},{"sku":"7506240613596","name":"Flexometro Pretul 5.5m, cinta 19 mm, 21624","price":"$79.00"},{"sku":"7501206605530","name":"Flexometro Pretul 5mt PRO-5MEC 21608","price":"$55.00"},{"sku":"7506240653783","name":"Flexometro Pretul 8mt 25 mm  21625","price":"$109.00"},{"sku":"7501206681367","name":"Flexometro Truper 10mt contra impacto, cinta 32 mm 14582","price":"$435.00"},{"sku":"7506240639527","name":"Flexometro Truper 3mt Gripper Anti-Impacto 15387","price":"$77.00"},{"sku":"7506240673828","name":"Flexometro Truper 5.5mt Cinta Negra 11745","price":"$219.00"},{"sku":"14578","name":"Flexometro Truper 5mt Resiste Impactos 14578","price":"$125.00"},{"sku":"7506240645986","name":"Flexometro Truper 5mt con resorte de alta precision  12694","price":"$219.00"},{"sku":"11747","name":"Flexometro Truper 8mt Cinta Negra, 27 mm  11747","price":"$275.00"},{"sku":"7502309737081","name":"Flexometro Truper Cinta Negra, 5 m, cinta 19 mm 102598X","price":"$135.00"},{"sku":"15388","name":"Flexometro Truper Contra Impactos 5 M Cinta 19mm 15388","price":"$117.00"},{"sku":"5500706673331","name":"Flexometro Truper Gripper contra impactos 8 m cinta 25 mm 14579","price":"$215.00"},{"sku":"102332","name":"Flexometro Truper compacto 10 m con grip, cinta 25 mm 102332","price":"$275.00"},{"sku":"103057","name":"Flexometro contra impactos 10 m, Cinta Negra 32 mm, Truper 103057","price":"$465.00"},{"sku":"11720","name":"Flexometro contra impactos 3 m, Cinta Negra 13 mm, Truper 11720","price":"$117.00"}]}]},"electricas":{"title":"Herramientas Eléctricas","type":"products","subcats":[{"name":"Taladros","type":"products","products":[{"sku":"29968","name":"Bateria ion litio, 12 V para taladro TALI-12P, Pretul 29968","price":"$485.00"},{"sku":"7501206618059","name":"Bolsa con 2 carbones para rotomartillos y taladros Grupo 3    16581","price":"$39.00"},{"sku":"7506240680260","name":"Bomba autocebante para uso con taladro, Truper 100778","price":"$299.00"},{"sku":"18000","name":"Borla p/pulir de lana 6pulg Con Base Para Taladro 4PZS","price":"$180.00"},{"sku":"14673","name":"Carbones Para Taladro TAL-3/8A2    14673","price":"$49.00"},{"sku":"7501206600122","name":"Carda circular 2 alambre fino para taladro, Truper 11574","price":"$44.00"},{"sku":"7501206600214","name":"Carda de copa alambre grueso 1 para taladro   11595","price":"$49.00"},{"sku":"7501206600221","name":"Carda de copa alambre grueso 1-1/8 para taladro 11596","price":"$62.00"},{"sku":"7501206600191","name":"Carda de copa alambre grueso 3/4 para taladro 11593","price":"$40.70"},{"sku":"82583959623","name":"Codo Destornillador Para Taladro","price":"$83.00"},{"sku":"7506240616047","name":"Cubretaladro Cromo Acero Inox. 49595","price":"$25.00"},{"sku":"7506240630463","name":"Cubretaladro Satin Acero Inox. 49596","price":"$30.00"},{"sku":"12280","name":"Destapacaños de 7.6 m para taladro, con mango, Truper 12280","price":"$575.00"},{"sku":"27190","name":"Juego 11 accesorios de limpieza y pulido p/taladro, Pretul  27190","price":"$345.00"},{"sku":"7506240699231","name":"Juego 12 accesorios de limpieza y asentado p/taladro, Pretul   27191","price":"$395.00"},{"sku":"7506240656944","name":"Juego de 14 dados para taladro, Pretul  12844","price":"$135.00"},{"sku":"7506240680024","name":"Juego de 3 cepillos para taladro, Pretul 28152","price":"$129.00"},{"sku":"7501206643655","name":"Juego de cardas, 4 piezas para taladro 11577","price":"$229.00"},{"sku":"7506240693253","name":"Juego de dados magnéticos para taladro,14 pzas,Truper Expert  101961","price":"$245.00"},{"sku":"78824","name":"Kit De Almohadillas Para Taladro 11pzs 2 Pulgadas","price":"$231.00"},{"sku":"33458671348","name":"Kit De Lija Para Taladro 120pzs","price":"$235.00"},{"sku":"44743379928","name":"Kit Para Pulir Con Taladro","price":"$170.00"},{"sku":"103249","name":"Taladro Inalambrico 1/2 20V 1 bateria 2Ah TRUPER PRO 103249","price":"$2,325.00"},{"sku":"18153","name":"Taladro Inalambrico, 3/8 12V 1 bateria 2Ah PRO 18153","price":"$1,585.00"},{"sku":"16174","name":"Taladro de piso 1/2 x 8, 1/3 HP 16174 Malinal 2","price":"$3,250.00"},{"sku":"16714","name":"Taladro tipo espada Industrial 1/2, 1150 W 16714","price":"$3,125.00"},{"sku":"27120","name":"taladro inalambrico 3/8, En Kit, 12 V, y accesorios con estuche 27120","price":"$1,325.00"}]},{"name":"Esmeriles","type":"products","products":[{"sku":"7506427006579","name":"Brida para esmeriladoras angulares 5/8-11 2pzs Avante","price":"$68.00"},{"sku":"7506427006777","name":"Brida para esmeriladoras angulares M14 2pzs Avante","price":"$68.00"},{"sku":"7506240691112","name":"Brida para esmeriladoras angulares exterior, Truper 101767","price":"$65.00"},{"sku":"7506240691105","name":"Brida para esmeriladoras angulares interior, Truper 101766","price":"$59.00"},{"sku":"7506069008764","name":"Carda Circular Para Esmeril 6 x 5/8-11 Alambre Trenzado","price":"$162.00"},{"sku":"11523","name":"Carda Para Esmeril ondulada 6 x 13/16, Truper  11523","price":"$249.00"},{"sku":"11520","name":"Carda Para Esmeril ondulada 6 x 3/4, Truper  11520","price":"$259.00"},{"sku":"7506427001482","name":"Disco Sierra 4 1/2 Avante 24 Dientes Para Esmeril","price":"$94.00"},{"sku":"7506427001499","name":"Disco Sierra 4 1/2 Avante 40 Dientes Para Esmeril","price":"$105.00"},{"sku":"29994","name":"Esmeril de banco de 5 de 1/6 Hp Pretul 29994","price":"$999.00"},{"sku":"12786","name":"Esmeril de banco de 8 de 3/4 Hp 12786 Malinal 2","price":"$2,650.00"},{"sku":"103639","name":"Esmeriladora 4-1/2, 20V, int. paleta, 1 batería 4Ah, MAX   103639","price":"$4,195.00"},{"sku":"GWS700","name":"Esmeriladora Angular Bosch 4 1/2 - 5/8 GWS 700 B3 13A3-0G1","price":"$1,446.00"},{"sku":"102872","name":"Esmeriladora Angular Inalambrica 4-1/2, 20V, 1 bateria 4Ah, TRUPER PRO 102872","price":"$3,395.00"},{"sku":"102449","name":"Esmeriladora Angular Inalambrica Truper 4 1/2, 20V, sin carbones 102449?","price":"$4,050.00"},{"sku":"88381636445","name":"Esmeriladora Angular Makita 4 1/2 840W 10000rpm M14 9557HPG","price":"$1,785.00"},{"sku":"12873","name":"Esmeriladora Angular Truper 4 1/2 Industrial 1,250 W 9,5 A 12873","price":"$1,795.00"},{"sku":"14013","name":"Esmeriladora Angular Truper 4-1/2 700W 5,1 A Motor 14013","price":"$735.00"},{"sku":"13935","name":"Esmeriladora Angular Truper 4-1/2 950 W, ERGO-PRO, 13935","price":"$895.00"},{"sku":"13870","name":"Esmeriladora Angular Truper 4-1/2, Industrial 850 W 13870","price":"$1,265.00"},{"sku":"24035","name":"Esmeriladora angular 4-1/2, 700W, PRETUL 24035","price":"$665.00"},{"sku":"14012","name":"Esmeriladora angular Truper 7 2200 W, profesional, 14012","price":"$2,050.00"},{"sku":"16590","name":"Esmeriladora angular Truper 9 2350 W, industrial, 16590","price":"$3,150.00"},{"sku":"102496","name":"Esmeriladora interruptor de paleta 4-1/2, industrial, 850 W  102496","price":"$1,195.00"},{"sku":"16887","name":"Kit de mini esmeriladora 1/4 con estuche plástico, Truper  16887","price":"$965.00"},{"sku":"11603","name":"Lija De Esmeril Negra, Grano 120 11603","price":"$16.00"},{"sku":"11600","name":"Lija De Esmeril Negra, Grano 36  11600","price":"$24.00"},{"sku":"11602","name":"Lija De Esmeril Negra, Grano 80  11602","price":"$19.00"},{"sku":"11601","name":"Lija de esmeril Negra, Grano 50  11601","price":"$19.00"},{"sku":"11645","name":"Lija de esmeril roja, grano 100, Truper 11645","price":"$20.00"}]},{"name":"Sierras Eléctricas","type":"products","products":[{"sku":"M04326","name":"Sierra Caladora 450W 3100 CPM MAKITA M0 4326","price":"$2,077.00"},{"sku":"7506240607182","name":"Sierra Caladora 550 W 4.5A Motor Truper 15420","price":"$995.00"},{"sku":"100123","name":"Sierra Circular 4 1/2 420W Truper Pro 100123","price":"$1,650.00"},{"sku":"16B3-0G0","name":"Sierra Circular 7 1/4 Bosch 1500W 6000RPM GKS150 / B3 16B3-0G0","price":"$4,030.00"},{"sku":"M5801B","name":"Sierra Circular 7 1/4 Makita 1500W 4900RPM M0 M5801B","price":"$2,930.00"},{"sku":"29003","name":"Sierra caladora 400W, PRETUL 29003","price":"$735.00"},{"sku":"15423","name":"Sierra caladora 750 W 5.9 A velocidad variable, profesional 15423","price":"$1,265.00"},{"sku":"102859","name":"Sierra caladora inalambrica 20V, 1 bat. 2Ah, 1 carg. TRUPER PRO 102859","price":"$2,450.00"},{"sku":"28270","name":"Sierra caladora inalambrica, 20V, PRETUL 28270","price":"$1,795.00"},{"sku":"102480","name":"Sierra circular 6-1/2, 20V, inalambrica, sin carbones 102480","price":"$4,550.00"},{"sku":"11779","name":"Sierra circular 7-1/4 1800 W, industrial, Truper  11779","price":"$2,850.00"},{"sku":"103740","name":"Sierra circular 7-1/4 1900W, TRUPER INDUSTRIAL   103740","price":"$3,150.00"},{"sku":"11004","name":"Sierra circular 7-1/4, profesional, 1750 W 11004","price":"$1,995.00"}]},{"name":"Lijadoras","type":"products","products":[{"sku":"7502244716950","name":"Lijadora Manual Corona Para Extension 1252-0049","price":"$95.00"},{"sku":"743369003366","name":"Lijadora Manual Tortuga 0741-0004 G7 336","price":"$78.00"},{"sku":"7506240678465","name":"Lijadora Manual con mango y base metalica, 9, Truper 100436","price":"$219.00"},{"sku":"88381092715","name":"Lijadora Orbital Makita 5 12000rpm BO5030","price":"$2,077.00"},{"sku":"4053423243369","name":"Lijadora Roto Orbital Bosch Profesional 5 850W GEX 125 13A8-0G0","price":"$1,835.00"},{"sku":"13448","name":"Lijadora de banda 3 x 21 1010 W, profesional, Truper 13448","price":"$1,935.00"},{"sku":"100370","name":"Lijadora de banda 4 x 24, 1200W, TRUPER INDUSTRIAL 100370","price":"$3,650.00"},{"sku":"15090","name":"Lijadora orbital 1/2 hoja 360 W, industrial, Truper 15090","price":"$2,250.00"},{"sku":"102746","name":"Lijadora orbital 1/4 hoja, 240W, TRUPER PRO 102746","price":"$785.00"},{"sku":"101895","name":"Lijadora orbital neumatica industrial 6, Truper 101895","price":"$849.00"},{"sku":"103735","name":"Lijadora roto orbital 5 260W TRUPER INDUSTRIAL 103735","price":"$1,265.00"},{"sku":"103656","name":"Lijadora roto orbital 5 260W TRUPER PRO 103656","price":"$995.00"},{"sku":"102863","name":"Lijadora roto-orbital Inalambrica 5 20V, 1 bat. 2Ah, 1 carg. PRO 102863","price":"$2,450.00"},{"sku":"19389","name":"Pad de vinil para lijadora neumática TPN-861, Truper 19389","price":"$275.00"},{"sku":"19390","name":"Pad para lijadora neumática TPN-861, fijación hook and loop 19390","price":"$275.00"}]},{"name":"Compresores","type":"products","products":[{"sku":"7502309733076","name":"Aceite para compresor, mineral 946ml (32oz), Truper 102533","price":"$225.00"},{"sku":"19999","name":"Compresor de aire 12 V portatil, para auto, incluye maletin 19999","price":"$935.00"},{"sku":"13824","name":"Compresor de aire libre de aceite, 12 L, 1 HP (potencia máx) 13824","price":"$3,050.00"},{"sku":"13836","name":"Compresor de aire libre de aceite, 30 L, 3 HP 13836 Malinal2","price":"$3,795.00"},{"sku":"19358","name":"Compresor de aire, con banda, vertical 120L 4HP, 220V Truper 19358?","price":"$13,950.00"},{"sku":"101428","name":"Compresor libre de aceite 24 L, 2-2/3 HP, PIPI-420 y manguera 101428","price":"$4,050.00"},{"sku":"13847","name":"Compresor libre de aceite, 50L, 3HP, vertical, 127V, 13847?","price":"$4,750.00"},{"sku":"19360","name":"Compresor lubricado, 50L, 3-1/2HP, vertical, 127V, TRUPER 19360?","price":"$5,900.00"},{"sku":"7506240600305","name":"Filtro para compresor (aire) 25/50L, Truper  19325","price":"$86.00"},{"sku":"7501206619599","name":"Juego de 15 piezas para compresor de aire 19094","price":"$535.00"},{"sku":"7501206602324","name":"Juego de 17 piezas para compresor de aire, Truper 19022","price":"$525.00"},{"sku":"19079","name":"Juego de 18 piezas para compresor de aire 19079","price":"$525.00"},{"sku":"7501206619803","name":"Juego de 2 conectores y 2 coples para compresor de aire 19080","price":"$229.00"},{"sku":"27020","name":"Juego de 2 conectores y 2 coples para compresor, Pretul   27020","price":"$127.00"},{"sku":"7501206619827","name":"Juego de 4 conectores y 1 cople para compresor de aire  19081","price":"$165.00"},{"sku":"27030","name":"Juego de 4 conectores y 2 coples, compresor de aire, Pretul","price":"$145.00"},{"sku":"7506069016035","name":"Manguera Para Compresor 7.5m X 3/8 truepower","price":"$296.00"},{"sku":"19016","name":"Manguera para compresor 10m X 3/8 Truper 19016","price":"$515.00"},{"sku":"19017","name":"Manguera para compresor 15m X 3/8, Uso Rudo, Truper 19017","price":"$705.00"},{"sku":"10894","name":"Manguera para compresor 15m x 3/8, Uso General, Truper 10894","price":"$385.00"},{"sku":"19015","name":"Manguera para compresor 15mt x 1/4, Truper 19015","price":"$355.00"},{"sku":"5296","name":"Manguera para compresor 7.5mt X 1/4 Truepower","price":"$90.00"},{"sku":"19075","name":"Manguera para compresor Tipo Resorte 15.2m X 1/4 Truper 19075","price":"$219.00"},{"sku":"7506240693543","name":"Pata de Goma Para Compresores Grupo 7, Truper 102066","price":"$24.00"},{"sku":"7506240636502","name":"Valvula anti-retorno para compresor, 25/50/10L, Truper  11931","price":"$77.00"},{"sku":"19326","name":"Valvula de salida para compresores 25/50L, Truper  19326","price":"$149.00"},{"sku":"11932","name":"Valvula reguladora de salida para compresor, 10L, Truper  11932","price":"$149.00"},{"sku":"19327","name":"Valvula reguladora para compresor 25/50L, Truper  19327","price":"$245.00"},{"sku":"7501206602256","name":"manguera Para Compresor 5mt X 1/4 Truper 19013","price":"$175.00"},{"sku":"17080","name":"manguera Para compresor 10mts X 1/4 Truper 17080","price":"$450.00"}]},{"name":"Rotomartillos","type":"products","products":[{"sku":"7501206618059","name":"Bolsa con 2 carbones para rotomartillos y taladros Grupo 3    16581","price":"$39.00"}]}]},"pintura":{"title":"Pinturas y Acabados","type":"products","subcats":[{"name":"Pinturas","type":"products","products":[{"sku":"CPC","name":"Colador De Pintura Cono Esmaxx CPC","price":"$10.00"},{"sku":"743369003359","name":"Colador De Pintura Para Pistola 0204-0002","price":"$67.00"},{"sku":"TELA","name":"Colador De Pintura Tela De Cielo 1mt X 60 Cm","price":"$24.00"},{"sku":"PINTURAEPOX","name":"Pintura Epoxica Color Blanco 1 Galon","price":"$1,013.00"},{"sku":"ER02A3","name":"Pintura Esmalte 1 Amarillo Cromo ER02A3","price":"$227.00"},{"sku":"ER01A3","name":"Pintura Esmalte 1 Amarillo Trafico","price":"$253.00"},{"sku":"ALBERCA","name":"Pintura Esmalte 1 Azul Cielo Para Albercax","price":"$309.00"},{"sku":"ER09A3","name":"Pintura Esmalte 1 Azul Pavo ER09A3","price":"$219.00"},{"sku":"AU1","name":"Pintura Esmalte 1 Azul Ultramar","price":"$227.00"},{"sku":"ER00A3","name":"Pintura Esmalte 1 Blanco ER00A3","price":"$227.00"},{"sku":"ER00C3","name":"Pintura Esmalte 1 Blanco Mate ER00C3","price":"$241.00"},{"sku":"ER06A3","name":"Pintura Esmalte 1 Chocolate ER06A3","price":"$219.00"},{"sku":"ER32A3","name":"Pintura Esmalte 1 Gris Maquinaria","price":"$219.00"},{"sku":"ER31A3","name":"Pintura Esmalte 1 Gris Perla","price":"$219.00"},{"sku":"ER33A3","name":"Pintura Esmalte 1 Negro","price":"$197.00"},{"sku":"ER33C3","name":"Pintura Esmalte 1 Negro Mate","price":"$219.00"},{"sku":"EOROP1","name":"Pintura Esmalte 1 Oro Palido","price":"$254.00"},{"sku":"RB1","name":"Pintura Esmalte 1 Rojo Bermellon","price":"$227.00"},{"sku":"ER05A3","name":"Pintura Esmalte 1 Rojo Oxido","price":"$184.00"},{"sku":"ER19A3","name":"Pintura Esmalte 1 Tabaco ER19A3","price":"$219.00"},{"sku":"TURQUESA","name":"Pintura Esmalte 1 TurquesaX","price":"$219.00"},{"sku":"ER11A3","name":"Pintura Esmalte 1 Verde Cromo ER11A3","price":"$227.00"},{"sku":"ER22A3","name":"Pintura Esmalte 1 Verde LimonX","price":"$219.00"},{"sku":"ES01A2","name":"Pintura Esmalte 1/2 Amarillo Canario ES01A2","price":"$130.00"},{"sku":"ES02A2","name":"Pintura Esmalte 1/2 Amarillo Cromo ES02A2","price":"$114.00"},{"sku":"ES09A2","name":"Pintura Esmalte 1/2 Azul Pavo ES09A2","price":"$114.00"},{"sku":"ES10A2","name":"Pintura Esmalte 1/2 Azul Ultramar ES10A2","price":"$114.00"},{"sku":"ES00A2","name":"Pintura Esmalte 1/2 Blanco ES00A2","price":"$122.00"},{"sku":"ES00C2","name":"Pintura Esmalte 1/2 Blanco Mate ES00C2","price":"$129.00"},{"sku":"ES06A2","name":"Pintura Esmalte 1/2 Chocolate ES06A2","price":"$105.00"}]},{"name":"Lijas","type":"products","products":[{"sku":"15819","name":"banda de lija 3 x 21 p/madera grano 120 en paquete de 5 15819","price":"$37.00"},{"sku":"799592131468","name":"Bloque Lija Esponja Biselado 100 Fandeli 13146  0077-0002","price":"$40.00"},{"sku":"799592131284","name":"Bloque Lija Esponja Cuadrado 150 Fandeli 13128","price":"$23.00"},{"sku":"7506240640257","name":"Disco Desbaste Metal 4 1/2 Lija Grano 40 Pretul 22350","price":"$46.00"},{"sku":"7506240666721","name":"Disco Desbaste Metal 4 1/2 Lija Grano 40 Truper 15697","price":"$77.00"},{"sku":"7506240640271","name":"Disco Desbaste Metal 4 1/2 Lija Grano 80 Pretul 22352","price":"$46.00"},{"sku":"7501206639764","name":"Disco Desbaste Metal 4-1/2 Lija grano 120 Truper 11675","price":"$77.00"},{"sku":"7501206639740","name":"Disco Desbaste Metal 4-1/2 Lija grano 40 Truper 11673","price":"$77.00"},{"sku":"7501206639757","name":"Disco Desbaste Metal 4-1/2 Lija grano 60 Truper 11674","price":"$77.00"},{"sku":"15701","name":"Disco Desbaste Metal 4-1/2 Lija grano 60 Truper 15701","price":"$77.00"},{"sku":"7506240623366","name":"Disco Desbaste Metal 4-1/2 Lija grano 80 Truper 11688","price":"$77.00"},{"sku":"22353","name":"Disco Desbaste Metal 7pulg Lija grano 40 centro 7/8, Pretul 22353","price":"$102.00"},{"sku":"22354","name":"Disco Desbaste Metal 7pulg Lija grano 60 centro 7/8, Pretul 22354","price":"$102.00"},{"sku":"22355","name":"Disco Desbaste Metal 7pulg Lija grano 80 centro 7/8, Pretul 22355","price":"$102.00"},{"sku":"17506240674853","name":"Disco Lija 4 1/2 Con Respaldo De Fibra, Grano 80   100127","price":"$17.00"},{"sku":"17506240674860","name":"Disco Lija 4-1/2 con respaldo de fibra, grano 120   100128","price":"$17.00"},{"sku":"7506240674825","name":"Disco Lija 4-1/2 con respaldo de fibra, grano 24 100124","price":"$17.00"},{"sku":"100125","name":"Disco Lija 4-1/2 con respaldo de fibra, grano 36   100125","price":"$17.00"},{"sku":"100126","name":"Disco Lija 4-1/2 con respaldo de fibra, grano 50   100126","price":"$17.00"},{"sku":"100163","name":"Disco Lija 7 con respaldo de fibra, grano 120   100163","price":"$32.00"},{"sku":"100129","name":"Disco Lija 7 con respaldo de fibra, grano 24 100129","price":"$32.00"},{"sku":"100160","name":"Disco Lija 7 con respaldo de fibra, grano 36  100160","price":"$32.00"},{"sku":"100161","name":"Disco Lija 7 con respaldo de fibra, grano 50    100161","price":"$32.00"},{"sku":"100162","name":"Disco Lija 7 con respaldo de fibra, grano 80   100162","price":"$32.00"},{"sku":"F100","name":"Lija De Agua 100 Fandeli 0445-0028 F4 00052 F100","price":"$14.00"},{"sku":"F1000","name":"Lija De Agua 1000 Fandeli 0445-0041 F1000","price":"$22.00"},{"sku":"11620","name":"Lija De Agua 120 11620","price":"$11.00"},{"sku":"F120","name":"Lija De Agua 120 Fandeli 0445-0029 F4 00053","price":"$13.00"},{"sku":"F1200","name":"Lija De Agua 1200 Fandeli 00048","price":"$19.00"},{"sku":"F150","name":"Lija De Agua 150 Fandeli 0445-0030 F150","price":"$13.00"}]},{"name":"Impermeabilizantes","type":"products","products":[{"sku":"IMP1685","name":"Impermeabilizante 19lts 5 años Blanco Fibratado Masterproof 58509","price":"$1,185.00"},{"sku":"58516","name":"Impermeabilizante 19lts 5 años Terracota Fibratado Masterproof 58516","price":"$1,100.00"},{"sku":"IMP4B","name":"Impermeabilizante 4 Lts Blanco 5 Años Esmaxx","price":"$409.00"},{"sku":"58674","name":"Impermeabilizante 4 Lts Blanco 5 Años Fibratado Masterproof 58674","price":"$245.00"},{"sku":"IMP4R","name":"Impermeabilizante 4 lts Rojo 5 Años Esmaxx","price":"$367.00"}]},{"name":"Brochas y Rodillos","type":"products","products":[]}]},"seguridad":{"title":"Seguridad","type":"products","subcats":[{"name":"Cascos","type":"products","products":[{"sku":"7506240617808","name":"Barboquejo con barbilla para casco de seguridad industrial 12338","price":"$28.00"},{"sku":"10566","name":"Casco De Seguridad Ala Hancha Amarillo 10566","price":"$179.00"},{"sku":"10567","name":"Casco De Seguridad Ala Hancha Blanco 10567","price":"$179.00"},{"sku":"10564","name":"Casco De Seguridad Ala Hancha Naranja 10564","price":"$179.00"},{"sku":"10570","name":"Casco De Seguridad, Ala Ancha Azul 10570","price":"$155.00"},{"sku":"10573","name":"Casco De Seguridad, Ala Ancha Rojo 10573","price":"$155.00"},{"sku":"10572","name":"Casco De Seguridad, Ala Ancha Verde 10572","price":"$155.00"},{"sku":"25037","name":"Casco de Proteccion, amarillo, Pretul  25037","price":"$125.00"},{"sku":"25039","name":"Casco de proteccion Azul 25039","price":"$125.00"},{"sku":"25038","name":"Casco de proteccion Blanco 25038","price":"$117.00"},{"sku":"25036","name":"Casco de proteccion Naranja 25036","price":"$125.00"},{"sku":"25044","name":"Casco de proteccion Rojo 25044","price":"$117.00"},{"sku":"25045","name":"Casco de proteccion Verde 25045","price":"$117.00"},{"sku":"101259","name":"Casco de seguridad ventilado, ajuste de matraca, azul 101259","price":"$135.00"},{"sku":"10370","name":"Casco de seguridad, ajuste de matraca, blanco, Truper 10370","price":"$175.00"},{"sku":"7506240637721","name":"Cubrenuca Para Casco Con Reflejante  12355","price":"$46.00"},{"sku":"13165","name":"Cubrenuca Para Casco Con Reflejante Verde 13165","price":"$46.00"},{"sku":"100353","name":"Protector solar plegable para casco, naranja con reflejante  100353","price":"$135.00"},{"sku":"100354","name":"Protector solar plegable para casco, verde con reflejante  100354","price":"$135.00"},{"sku":"100145","name":"Suspension Casco Matraca  100145","price":"$77.00"},{"sku":"7506240672746","name":"Suspension Para Casco De Seguridad Pretul 20631","price":"$55.00"}]},{"name":"Guantes","type":"products","products":[{"sku":"7501206696248","name":"Guante Azul De Poliester Recubierto De Latex Talla G 15267","price":"$70.00"},{"sku":"7501206696231","name":"Guante Azul De Poliester Recubierto De Latex Talla M 15266","price":"$70.00"},{"sku":"7501206688106","name":"Guante Carnaza Para Electricista 14289","price":"$125.00"},{"sku":"7501206673096","name":"Guante De Algodon Recubierte De Latex  14248","price":"$109.00"},{"sku":"7506240639589","name":"Guante De Algodon Recubierto De Nitrilo  15245","price":"$155.00"},{"sku":"7506240658917","name":"Guante Refuerzo De Carnaza Pretul  29977","price":"$102.00"},{"sku":"103973","name":"Guantes Anticorte NV5 recubrimiento de poliuretano, CH, TRUPER 103973","price":"$117.00"},{"sku":"7506610220164","name":"Guantes Anticorte NV5 recubrimiento de poliuretano, G, TRUPER 103975","price":"$117.00"},{"sku":"103974","name":"Guantes Anticorte NV5 recubrimiento de poliuretano, M, TRUPER 103974","price":"$117.00"},{"sku":"7501206690635","name":"Guantes De Algodon Ambidiestro, Pretul 21830","price":"$33.00"},{"sku":"7506240658900","name":"Guantes De Carnaza, Pretul 29976","price":"$79.00"},{"sku":"7501206683071","name":"Guantes De Latex Industriales Talla M Puño Largo, Truper 14266","price":"$62.00"},{"sku":"7501206683064","name":"Guantes De Latex Para Pintor Grandes 14267","price":"$62.00"},{"sku":"7501206673133","name":"Guantes De carnaza y loneta, Puño Ajustado, Truper 14244","price":"$86.00"},{"sku":"14268","name":"Guantes Industriales de latex, M, TRUPER 14268","price":"$165.00"},{"sku":"7502224241168","name":"Guantes Negros De Latex M A3 100100073","price":"$4.00"},{"sku":"7503041930822","name":"Guantes Negros De Nitrilo Libre De Latex Para Alimentos 100pzs","price":"$215.00"},{"sku":"7501206688090","name":"Guantes Para Electricista de piel de cabra con dorso de carnaza, Truper   14288","price":"$139.00"},{"sku":"7501206688076","name":"Guantes Para Electricista de piel de cabra tipo operador 14286","price":"$149.00"},{"sku":"7506240666325","name":"Guantes Para Mecanico Anti-impacto, Expert 15158","price":"$415.00"},{"sku":"7501206655061","name":"Guantes Para Soldador Azul Carnaza Premium  15246","price":"$245.00"},{"sku":"7506240658887","name":"Guantes Para Soldadura Rojo  19458","price":"$179.00"},{"sku":"7501206682067","name":"Guantes Talla G Para Limpieza Domestica Latex 23261","price":"$31.00"},{"sku":"7501206682050","name":"Guantes Talla M Para Limpieza Domestica Latex 23260","price":"$31.00"},{"sku":"7501206682869","name":"Guantes de carnaza Amarillos Pretul 23262","price":"$79.00"},{"sku":"7501206673164","name":"Guantes de carnaza Y Loneta, Truper 14241","price":"$165.00"},{"sku":"7501206673119","name":"Guantes de carnaza y loneta, con refuerzo, unitalla, Truper 14246 Mandarina","price":"$149.00"},{"sku":"7501206673126","name":"Guantes de carnaza y loneta, unitalla, Truper 14245","price":"$135.00"},{"sku":"14242","name":"Guantes de carnaza, largos, unitalla, TRUPER   14242","price":"$175.00"},{"sku":"7501206673171","name":"Guantes de carnaza, usos generales, grandes, Truper 14240","price":"$125.00"}]},{"name":"Lentes y Goggles","type":"products","products":[{"sku":"26005","name":"Careta Para Soldar Con Lente Abatible Pretul 26005","price":"$189.00"},{"sku":"13729","name":"Careta Para Soldar Con Lente Abatible Truper 13729","price":"$245.00"},{"sku":"14306","name":"Cordon Para Lentes 14306","price":"$18.00"},{"sku":"7501206693261","name":"Goggles de seguridad, Pretul con ventilación directa 21538","price":"$46.00"},{"sku":"7506240658894","name":"Goggles de seguridad, ligeros, mica transparente 19952","price":"$196.00"},{"sku":"14279","name":"Lente De Repuesto Sombra 6 Para Lentes GASO","price":"$24.00"},{"sku":"7506240621515","name":"Lente De Seguridad Ambar 20403 E","price":"$31.00"},{"sku":"7501206671795","name":"Lente De Seguridad Gris Ajustable Classic, Truper 14213E","price":"$41.00"},{"sku":"7501206688854","name":"Lente De Seguridad Transparente Ajustable Clasicc, Truper 14284 E","price":"$39.00"},{"sku":"7501206690369","name":"Lente De Seguridad Transparente Ultralite 14293 E","price":"$39.00"},{"sku":"7501206628287","name":"Lente De Seguridad Transparente Vision 14301 E","price":"$66.00"},{"sku":"7506240660750","name":"Lente De Seguridad Transparentes Sport 15170?","price":"$102.00"},{"sku":"14280","name":"Lente Transparente Para Gafa De Soldar 14280","price":"$24.00"},{"sku":"7501206690475","name":"Lente de seguridad gris, Pretul 20402 E","price":"$31.00"},{"sku":"7501206628294","name":"Lente de seguridad grises, Truper Vision  14302X","price":"$66.00"},{"sku":"7506240657033","name":"Lente de seguridad para laser 10757","price":"$175.00"},{"sku":"7501206690468","name":"Lente de seguridad transparentes Pretul 20401 E","price":"$31.00"},{"sku":"7501206677513","name":"Lente de seguridad transparentes, Truper Safe 14252 E","price":"$39.00"},{"sku":"7501206677520","name":"Lente de seguridad, mica gris, Safe   14253","price":"$39.00"},{"sku":"15172","name":"Lentes seguridad grises antiempaño c/cordón ajustable, Sport 15172?","price":"$109.00"},{"sku":"468","name":"Repelente De Insectos 300ml S4 0468","price":"$69.00"}]},{"name":"Botas","type":"products","products":[{"sku":"17911","name":"Botas Industriales #25  17911","price":"$275.00"},{"sku":"17912","name":"Botas Industriales #26  17912","price":"$275.00"},{"sku":"17913","name":"Botas Industriales #27  17913","price":"$275.00"},{"sku":"17914","name":"Botas Industriales #28  17914","price":"$275.00"},{"sku":"17915","name":"Botas Industriales #29  17915","price":"$275.00"},{"sku":"17916","name":"Botas Industriales #30  17916","price":"$275.00"},{"sku":"17920","name":"Botas Jardineras #24 17920","price":"$215.00"},{"sku":"17921","name":"Botas Jardineras #25 17921","price":"$215.00"},{"sku":"17922","name":"Botas Jardineras #26 17922","price":"$215.00"},{"sku":"17923","name":"Botas Jardineras #27 17923","price":"$215.00"},{"sku":"17924","name":"Botas Jardineras #28 17924","price":"$215.00"},{"sku":"17925","name":"Botas Jardineras #29 17925","price":"$215.00"},{"sku":"17926","name":"Botas Jardineras #30 17926","price":"$215.00"},{"sku":"17930","name":"Botas Sanitarias #25 Blancas 17930","price":"$285.00"},{"sku":"17931","name":"Botas Sanitarias #26 Blancas 17931","price":"$285.00"},{"sku":"17932","name":"Botas Sanitarias #27 Blancas 17932","price":"$275.00"},{"sku":"17933","name":"Botas Sanitarias #28 Blancas 17933","price":"$275.00"},{"sku":"17935","name":"Botas sanitarias # 30, Blancas Truper 17935","price":"$275.00"},{"sku":"17934","name":"Botas sanitarias #29 Blancas 17934","price":"$275.00"}]},{"name":"Chalecos","type":"products","products":[{"sku":"7506240651659","name":"Chaleco Brigadista Azul Marino 14667?","price":"$325.00"},{"sku":"7506240651680","name":"Chaleco Brigadista Azul Rey 14670?","price":"$345.00"},{"sku":"14668","name":"Chaleco Brigadista Beige 14668","price":"$355.00"},{"sku":"14669","name":"Chaleco Brigadista Naranja 14669?","price":"$355.00"},{"sku":"14663","name":"Chaleco Brigadista Rojo   14663","price":"$325.00"},{"sku":"14664","name":"Chaleco Brigadista Verde 14664?","price":"$325.00"},{"sku":"7506240654476","name":"Chaleco De Seguridad Azul   21027","price":"$62.00"},{"sku":"7506240634881","name":"Chaleco De Seguridad Naranaja Reforzado M 13479?","price":"$325.00"},{"sku":"7506240611585","name":"Chaleco De Seguridad Naranja 21023","price":"$47.00"},{"sku":"7506240611622","name":"Chaleco De Seguridad Naranja Con Cierre Y Reflejante 13473","price":"$110.00"},{"sku":"7506240634898","name":"Chaleco De Seguridad Naranja Reforzado G  13480","price":"$305.00"},{"sku":"7506240654483","name":"Chaleco De Seguridad Rojo  21028","price":"$62.00"},{"sku":"14425","name":"Chaleco De Seguridad Verde Alta Visibilidad  14425","price":"$102.00"},{"sku":"62G","name":"Chaleco De Seguridad Verde G","price":"$221.00"},{"sku":"7506240634928","name":"Chaleco De Seguridad Verde Reforzado G  13483","price":"$335.00"},{"sku":"7506240634911","name":"Chaleco De Seguridad Verde Reforzado M  13482","price":"$355.00"},{"sku":"7506240611615","name":"Chaleco De Seguridad Verde, Truper 21026","price":"$63.00"},{"sku":"7506240611608","name":"Chaleco De seguridad Naranja  21025","price":"$66.00"},{"sku":"13481","name":"Chaleco De seguridad Naranja Reforzado XG  13481","price":"$335.00"},{"sku":"7506240666158","name":"Chaleco Elastico Tipo Arnes Naranja Con Reflejante 15565","price":"$165.00"},{"sku":"7506240653332","name":"Chaleco de seguridad azul alta visibilidad con cierre 15416","price":"$92.00"}]}]},"plomeria":{"title":"Plomería","type":"callus","subcats":[{"name":"Tubería y Conexiones","type":"callus"}]},"fijacion":{"title":"Fijaciones y Tornillería","type":"callus","subcats":[{"name":"Fijaciones y Tornillería","type":"callus"}]},"electrico":{"title":"Electricidad","type":"callus","subcats":[{"name":"Electricidad","type":"callus"}]},"cerrajeria":{"title":"Cerrajería","type":"callus","subcats":[{"name":"Cerrajería","type":"callus"}]},"construccion":{"title":"Construcción","type":"callus","subcats":[{"name":"Construcción","type":"callus"}]},"jardin":{"title":"Jardín y Exterior","type":"callus","subcats":[{"name":"Jardín y Exterior","type":"callus"}]},"aire":{"title":"Aire Acondicionado","type":"callus","subcats":[{"name":"Aire Acondicionado","type":"callus"}]},"limpieza":{"title":"Limpieza y Mantenimiento","type":"callus","subcats":[{"name":"Limpieza y Mantenimiento","type":"callus"}]},"aceites":{"title":"Aceites y Lubricantes","type":"callus","subcats":[{"name":"Aceites y Lubricantes","type":"callus"}]}};
+
+function openCategoryPage(k){
+  var d=CAT_DATA[k];
+  if(!d)return;
+  document.getElementById("cat-page-title").textContent=d.title;
+  var h="";
+  if(d.type==="callus"){
+    h+="<div style='text-align:center;padding:60px 20px;'>";
+    h+="<div style='font-size:60px;margin-bottom:20px;'>✓</div>";
+    h+="<h2 style='font-family:Barlow Condensed,sans-serif;font-size:28px;font-weight:800;margin:0 0 12px;'>Tenemos "+d.title+"</h2>";
+    h+="<p style='color:#666;font-size:16px;line-height:1.7;max-width:500px;margin:0 auto 32px;'>Contamos con una amplia variedad de productos en esta categoría. Visítanos en tienda o contáctanos para consultar disponibilidad y precios.</p>";
+    h+="<div style='display:flex;gap:16px;justify-content:center;flex-wrap:wrap;'>";
+    h+="<a href='https://wa.me/523223031895?text=Hola%21%20Busco%20productos%20de%20"+encodeURIComponent(d.title)+"' target='_blank' style='display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;'>💬 WhatsApp</a>";
+    h+="<a href='tel:+523223031895' style='display:inline-flex;align-items:center;gap:8px;background:#a01f24;color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;'>📞 +52 322 303 1895</a>";
+    h+="</div></div>";
+  } else {
+    h+="<p style='color:#888;font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-bottom:24px;font-weight:600;'>Explora por subcategoría</p>";
+    h+="<div class='subcat-grid'>";
+    d.subcats.forEach(function(s){
+      var count=s.products?s.products.length:0;
+      h+="<div class='subcat-card' onclick='openSubcatDetail(\""+k+"\",\""+s.name+"\")'>";
+      h+="<div class='subcat-body'>";
+      h+="<h3 class='subcat-name'>"+s.name+"</h3>";
+      if(count>0)h+="<p class='subcat-desc'>"+count+" productos disponibles</p>";
+      h+="</div></div>";
+    });
+    h+="</div>";
+  }
+  document.getElementById("cat-page-body").innerHTML=h;
+  var pg=document.getElementById("cat-page");
+  pg.classList.add("active");
+  document.body.style.overflow="hidden";
+  pg.scrollTop=0;
+}
+
+function openSubcatDetail(k,sn){
+  var d=CAT_DATA[k];
+  if(!d)return;
+  var sc=d.subcats.find(function(s){return s.name===sn;});
+  if(!sc)return;
+  var h="<button onclick='openCategoryPage(\""+k+"\")' style='background:none;border:1px solid #ddd;padding:8px 16px;border-radius:6px;cursor:pointer;margin-bottom:24px;font-size:14px;'>← Volver a "+d.title+"</button>";
+  h+="<h2 style='font-family:Barlow Condensed,sans-serif;font-size:28px;font-weight:800;margin:0 0 24px;'>"+sn+"</h2>";
+  if(sc.products&&sc.products.length>0){
+    h+="<div style='display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;'>";
+    sc.products.forEach(function(p){
+      h+="<div style='border:1px solid #eee;border-radius:10px;padding:16px;background:#fff;'>";
+      h+="<p style='font-size:12px;color:#999;margin:0 0 4px;font-family:monospace;'>SKU: "+p.sku+"</p>";
+      h+="<p style='font-size:15px;font-weight:600;margin:0 0 12px;line-height:1.4;color:#1a1a1a;'>"+p.name+"</p>";
+      h+="<div style='display:flex;align-items:center;justify-content:space-between;'>";
+      h+="<span style='font-size:20px;font-weight:800;color:#a01f24;font-family:Barlow Condensed,sans-serif;'>"+p.price+"</span>";
+      h+="<a href='https://wa.me/523223031895?text=Hola%21%20Busco%20"+encodeURIComponent(p.name)+"' target='_blank' style='font-size:12px;background:#25D366;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-weight:700;'>Preguntar</a>";
+      h+="</div></div>";
+    });
+    h+="</div>";
+    h+="<div style='margin-top:32px;padding:20px;background:#f8f8f8;border-radius:10px;text-align:center;'>";
+    h+="<p style='margin:0 0 12px;color:#666;'>¿No encuentras lo que buscas?</p>";
+    h+="<a href='https://wa.me/523223031895?text=Hola%21%20Busco%20"+encodeURIComponent(sn)+"' target='_blank' style='display:inline-block;background:#25D366;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:700;'>Preguntar por WhatsApp</a>";
+    h+="</div>";
+  } else {
+    h+="<div style='text-align:center;padding:40px 20px;'>";
+    h+="<p style='color:#666;font-size:16px;margin-bottom:24px;'>Contamos con productos en esta categoría. Contáctanos para más información.</p>";
+    h+="<a href='https://wa.me/523223031895?text=Hola%21%20Busco%20"+encodeURIComponent(sn)+"' target='_blank' style='display:inline-block;background:#25D366;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700;'>💬 Consultar por WhatsApp</a>";
+    h+="</div>";
+  }
+  document.getElementById("cat-page-body").innerHTML=h;
+  document.getElementById("cat-page").scrollTop=0;
+}
+
+function closeCategoryPage(){document.getElementById("cat-page").classList.remove("active");document.body.style.overflow="";}
+function openProdModal(name,cat,desc,price,imgSrc,badge){var h="";if(imgSrc)h+="<img class='prod-modal-img' src='"+imgSrc+"' alt='"+name+"'>";h+="<div class='prod-modal-body'>";if(badge)h+="<span style='background:#a01f24;color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;'>"+badge+"</span> ";h+="<p class='prod-modal-cat'>"+cat+"</p><h2 class='prod-modal-name'>"+name+"</h2><p class='prod-modal-desc'>"+desc+"</p><p class='prod-modal-price'>"+price+"</p>";h+="<div class='prod-modal-actions'><a class='prod-modal-wa' href='https://wa.me/523223031895?text=Hola%21%20Me%20interesa%3A%20"+encodeURIComponent(name)+"' target='_blank'>💬 Preguntar por WhatsApp</a></div></div>";document.getElementById("prod-modal-box").innerHTML=h;document.getElementById("prod-modal").classList.add("active");document.body.style.overflow="hidden";}
+
+(function(){
+  function setup(){
+    document.querySelectorAll(".cat-card").forEach(function(c){
+      var oc=c.getAttribute("onclick")||"";
+      var m=oc.match(/filterCat\([\'"](\S+)/);
+      if(m){c.setAttribute("onclick","openCategoryPage('"+m[1]+"')");c.style.cursor="pointer";}
+    });
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setup);
+  else setup();
+  setTimeout(setup,600);
+  setTimeout(setup,2000);
+})();
+
+</script>
+<!-- END CATEGORY PAGE & PRODUCT MODAL --></body>
+</html>
